@@ -12,13 +12,23 @@ import Entidades.Cuenta;
  */
 public class OperacionesDTO {
 
+    private int idCuenta;
     private String tipo, fecha;
     private float monto;
 
-    public OperacionesDTO(String tipo, String fecha, float monto) {
+    public OperacionesDTO(int idCuenta, String tipo, String fecha, float monto) {
+        this.idCuenta = idCuenta;
         this.tipo = tipo;
         this.fecha = fecha;
         this.monto = monto;
+    }
+
+    public int getIdCuenta() {
+        return idCuenta;
+    }
+
+    public void setIdCuenta(int idCuenta) {
+        this.idCuenta = idCuenta;
     }
 
     public String getTipo() {
@@ -47,8 +57,10 @@ public class OperacionesDTO {
 
     @Override
     public String toString() {
-        return "OperacionesDTO{" + "tipo=" + tipo + ", fecha=" + fecha + ", monto=" + monto + '}';
+        return "OperacionesDTO{" + "idCuenta=" + idCuenta + ", tipo=" + tipo + ", fecha=" + fecha + ", monto=" + monto + '}';
     }
+
+    
     
     
 

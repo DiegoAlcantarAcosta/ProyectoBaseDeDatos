@@ -11,18 +11,20 @@ import java.util.Objects;
  * @author lv1821
  */
 public class Operaciones {
-    private int idTransaccion;
+    private int idTransaccion, idCuenta;
     private String tipo, fecha;
     private float monto;
 
-    public Operaciones(int idTransaccion, String tipo, String fecha, float monto) {
+    public Operaciones(int idTransaccion, int idCuenta, String tipo, String fecha, float monto) {
         this.idTransaccion = idTransaccion;
+        this.idCuenta = idCuenta;
         this.tipo = tipo;
         this.fecha = fecha;
         this.monto = monto;
     }
 
-    public Operaciones(String tipo, String fecha, float monto) {
+    public Operaciones(int idCuenta, String tipo, String fecha, float monto) {
+        this.idCuenta = idCuenta;
         this.tipo = tipo;
         this.fecha = fecha;
         this.monto = monto;
@@ -30,6 +32,7 @@ public class Operaciones {
 
     public Operaciones() {
     }
+    
 
     public int getIdTransaccion() {
         return idTransaccion;
@@ -37,6 +40,14 @@ public class Operaciones {
 
     public void setIdTransaccion(int idTransaccion) {
         this.idTransaccion = idTransaccion;
+    }
+
+    public int getIdCuenta() {
+        return idCuenta;
+    }
+
+    public void setIdCuenta(int idCuenta) {
+        this.idCuenta = idCuenta;
     }
 
     public String getTipo() {
@@ -65,11 +76,12 @@ public class Operaciones {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 79 * hash + this.idTransaccion;
-        hash = 79 * hash + Objects.hashCode(this.tipo);
-        hash = 79 * hash + Objects.hashCode(this.fecha);
-        hash = 79 * hash + Float.floatToIntBits(this.monto);
+        int hash = 3;
+        hash = 53 * hash + this.idTransaccion;
+        hash = 53 * hash + this.idCuenta;
+        hash = 53 * hash + Objects.hashCode(this.tipo);
+        hash = 53 * hash + Objects.hashCode(this.fecha);
+        hash = 53 * hash + Float.floatToIntBits(this.monto);
         return hash;
     }
 
@@ -88,6 +100,9 @@ public class Operaciones {
         if (this.idTransaccion != other.idTransaccion) {
             return false;
         }
+        if (this.idCuenta != other.idCuenta) {
+            return false;
+        }
         if (Float.floatToIntBits(this.monto) != Float.floatToIntBits(other.monto)) {
             return false;
         }
@@ -99,8 +114,10 @@ public class Operaciones {
 
     @Override
     public String toString() {
-        return "Operaciones{" + "idTransaccion=" + idTransaccion + ", tipo=" + tipo + ", fecha=" + fecha + ", monto=" + monto + '}';
+        return "Operaciones{" + "idTransaccion=" + idTransaccion + ", idCuenta=" + idCuenta + ", tipo=" + tipo + ", fecha=" + fecha + ", monto=" + monto + '}';
     }
+
+    
 
     
     

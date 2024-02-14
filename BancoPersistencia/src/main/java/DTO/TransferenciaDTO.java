@@ -9,24 +9,14 @@ package DTO;
  * @author pc
  */
 public class TransferenciaDTO extends OperacionesDTO{
-    private int idCuentaOrigen;
     private int idCuentaDestino;
 
     // Constructor
-    public TransferenciaDTO(int idCuentaOrigen, int idCuentaDestino, String tipo, String fecha, float monto) {
-        super(tipo, fecha, monto);
-        this.idCuentaOrigen = idCuentaOrigen;
+    public TransferenciaDTO(int idCuenta, int idCuentaDestino, String tipo, String fecha, float monto) {
+        super(idCuenta,tipo, fecha, monto);
+        
         this.idCuentaDestino = idCuentaDestino;
     }
-
-    public int getIdCuentaOrigen() {
-        return idCuentaOrigen;
-    }
-
-    public void setIdCuentaOrigen(int idCuentaOrigen) {
-        this.idCuentaOrigen = idCuentaOrigen;
-    }
-
     public int getIdCuentaDestino() {
         return idCuentaDestino;
     }
@@ -37,7 +27,9 @@ public class TransferenciaDTO extends OperacionesDTO{
 
     @Override
     public String toString() {
-        return "TransferenciaDTO{" + "idCuentaOrigen=" + idCuentaOrigen + ", idCuentaDestino=" + idCuentaDestino + '}';
+        return "TransferenciaDTO{" + "idCuentaDestino=" + idCuentaDestino + '}';
     }
+    
+    
     
 }

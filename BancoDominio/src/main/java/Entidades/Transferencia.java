@@ -13,20 +13,17 @@ import java.util.Objects;
 public class Transferencia extends Operaciones{
     private int idTransferencia;
     private int cuentaDestino;
-    private int cuentaOrigen;
     
     // Constructor con llave primaria
-    public Transferencia(int idTransferencia, int idCuentaOrigen, int idCuentaDestino, String tipo, String fecha, float monto) {
-        super(tipo, fecha, monto);
+    public Transferencia(int idTransferencia,int idCuenta, int idCuentaDestino, String tipo, String fecha, float monto) {
+        super(idCuenta,tipo, fecha, monto);
         this.idTransferencia = idTransferencia;
-        this.cuentaOrigen = idCuentaOrigen;
         this.cuentaDestino = idCuentaDestino;
     }
 
     // Constructor con datos y sin llave primaria
-    public Transferencia(int idCuentaOrigen, int idCuentaDestino, String tipo, String fecha, float monto) {
-        super(tipo, fecha, monto);
-        this.cuentaOrigen = idCuentaOrigen;
+    public Transferencia(int idCuenta, int idCuentaDestino, String tipo, String fecha, float monto) {
+        super(idCuenta,tipo, fecha, monto);
         this.cuentaDestino = idCuentaDestino;
     }
 
@@ -51,20 +48,11 @@ public class Transferencia extends Operaciones{
         this.cuentaDestino = cuentaDestino;
     }
 
-    public int getCuentaOrigen() {
-        return cuentaOrigen;
-    }
-
-    public void setCuentaOrigen(int cuentaOrigen) {
-        this.cuentaOrigen = cuentaOrigen;
-    }
-
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 47 * hash + this.idTransferencia;
-        hash = 47 * hash + this.cuentaDestino;
-        hash = 47 * hash + this.cuentaOrigen;
+        hash = 23 * hash + this.idTransferencia;
+        hash = 23 * hash + this.cuentaDestino;
         return hash;
     }
 
@@ -83,16 +71,18 @@ public class Transferencia extends Operaciones{
         if (this.idTransferencia != other.idTransferencia) {
             return false;
         }
-        if (this.cuentaDestino != other.cuentaDestino) {
-            return false;
-        }
-        return this.cuentaOrigen == other.cuentaOrigen;
+        return this.cuentaDestino == other.cuentaDestino;
     }
 
     @Override
     public String toString() {
-        return "Transferencia{" + "idTransferencia=" + idTransferencia + ", cuentaDestino=" + cuentaDestino + ", cuentaOrigen=" + cuentaOrigen + '}';
+        return "Transferencia{" + "idTransferencia=" + idTransferencia + ", cuentaDestino=" + cuentaDestino + '}';
     }
+
+   
+
+    
+
     
     
     

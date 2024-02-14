@@ -4,6 +4,7 @@
  */
 package DAO;
 
+import DTO.RetiroSinDTO;
 import Entidades.SinCuenta;
 
 /**
@@ -11,7 +12,9 @@ import Entidades.SinCuenta;
  * @author pc
  */
 public interface IRetiroSinDAO {
-    boolean generarRetiroSinCuenta(int idCliente, double monto);
-    SinCuenta obtenerRetiroSinCuenta(int idCliente);
-    boolean actualizarEstadoRetiroSinCuenta(int idCliente, String estado);
+    public boolean autenticarCobro(String folio, int contraseña);
+    public SinCuenta generarSinCuenta(RetiroSinDTO sin);
+    public String generarFolio();
+    public int generarContraseña();
+    public boolean actualizarEstado();
 }

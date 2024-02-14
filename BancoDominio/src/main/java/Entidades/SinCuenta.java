@@ -15,8 +15,8 @@ public class SinCuenta extends Operaciones {
     private String folio, estado;
     private int contraseña;
 
-    public SinCuenta(int idRetiro, String folio, int contraseña, String tipo, String fecha, float monto, String estado) {
-        super(tipo, fecha, monto);
+    public SinCuenta(int idRetiro, int idCuenta, String folio, int contraseña, String tipo, String fecha, float monto, String estado) {
+        super(idCuenta, tipo, fecha, monto);
         this.idSinCuenta = idRetiro;
         this.folio = folio;
         this.contraseña = contraseña;
@@ -24,8 +24,8 @@ public class SinCuenta extends Operaciones {
     }
 
     // Constructor con datos y sin llave primaria
-    public SinCuenta(String folio, int contraseña, String tipo, String fecha, float monto, String estado) {
-        super(tipo, fecha, monto);
+    public SinCuenta(String folio,int idCuenta, int contraseña, String tipo, String fecha, float monto, String estado) {
+        super(idCuenta, tipo, fecha, monto);
         this.folio = folio;
         this.contraseña = contraseña;
         this.estado = estado;
@@ -33,7 +33,7 @@ public class SinCuenta extends Operaciones {
 
     // Constructor sin datos ni llave primaria
     public SinCuenta() {
-        super();
+       super();
     }
 
     public int getIdSinCuenta() {

@@ -13,8 +13,8 @@ public class RetiroSinDTO extends OperacionesDTO{
     private int contraseña;
 
     // Constructor
-    public RetiroSinDTO(String folio, int contraseña, String tipo, String fecha, float monto, String estado) {
-        super(tipo, fecha, monto);
+    public RetiroSinDTO(int idCuenta,String folio, int contraseña, String tipo, String fecha, float monto, String estado) {
+        super(idCuenta,tipo, fecha, monto);
         this.folio = folio;
         this.contraseña = contraseña;
         this.estado = estado;

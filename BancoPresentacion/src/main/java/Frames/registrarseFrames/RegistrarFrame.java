@@ -55,7 +55,6 @@ public class RegistrarFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 255));
-        jPanel1.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel1.setFont(new java.awt.Font("Bodoni MT", 0, 48)); // NOI18N
         jLabel1.setText("VVBA");
@@ -212,7 +211,7 @@ public class RegistrarFrame extends javax.swing.JFrame {
                             .addComponent(codigoPostalTextField)
                             .addComponent(calleTextField)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(232, 232, 232)
+                        .addGap(229, 229, 229)
                         .addComponent(jLabel11))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(206, 206, 206)
