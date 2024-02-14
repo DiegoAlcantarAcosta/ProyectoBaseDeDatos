@@ -4,6 +4,7 @@
  */
 package Entidades;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -13,20 +14,23 @@ import java.util.Objects;
 public class Cliente {
     private int idCliente;
     private String nombre, apellidoPaterno, apellidoMaterno, fechaNacimiento;
+    private List<Cuenta> cuentas;
 
-    public Cliente(int idCliente, String nombre, String apellidoPaterno, String apellidoMaterno, String fechaNacimiento) {
+    public Cliente(int idCliente, String nombre, String apellidoPaterno, String apellidoMaterno, String fechaNacimiento, List<Cuenta> cuentas) {
         this.idCliente = idCliente;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
         this.fechaNacimiento = fechaNacimiento;
+        this.cuentas = cuentas;
     }
 
-    public Cliente(String nombre, String apellidoPaterno, String apellidoMaterno, String fechaNacimiento) {
+    public Cliente(String nombre, String apellidoPaterno, String apellidoMaterno, String fechaNacimiento, List<Cuenta> cuentas) {
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
         this.fechaNacimiento = fechaNacimiento;
+        this.cuentas = cuentas;
     }
 
     public Cliente() {
@@ -72,14 +76,23 @@ public class Cliente {
         this.fechaNacimiento = fechaNacimiento;
     }
 
+    public List<Cuenta> getCuentas() {
+        return cuentas;
+    }
+
+    public void setCuentas(List<Cuenta> cuentas) {
+        this.cuentas = cuentas;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 43 * hash + this.idCliente;
-        hash = 43 * hash + Objects.hashCode(this.nombre);
-        hash = 43 * hash + Objects.hashCode(this.apellidoPaterno);
-        hash = 43 * hash + Objects.hashCode(this.apellidoMaterno);
-        hash = 43 * hash + Objects.hashCode(this.fechaNacimiento);
+        hash = 97 * hash + this.idCliente;
+        hash = 97 * hash + Objects.hashCode(this.nombre);
+        hash = 97 * hash + Objects.hashCode(this.apellidoPaterno);
+        hash = 97 * hash + Objects.hashCode(this.apellidoMaterno);
+        hash = 97 * hash + Objects.hashCode(this.fechaNacimiento);
+        hash = 97 * hash + Objects.hashCode(this.cuentas);
         return hash;
     }
 
@@ -107,13 +120,18 @@ public class Cliente {
         if (!Objects.equals(this.apellidoMaterno, other.apellidoMaterno)) {
             return false;
         }
-        return Objects.equals(this.fechaNacimiento, other.fechaNacimiento);
+        if (!Objects.equals(this.fechaNacimiento, other.fechaNacimiento)) {
+            return false;
+        }
+        return Objects.equals(this.cuentas, other.cuentas);
     }
 
     @Override
     public String toString() {
-        return "Cliente{" + "idCliente=" + idCliente + ", nombre=" + nombre + ", apellidoPaterno=" + apellidoPaterno + ", apellidoMaterno=" + apellidoMaterno + ", fechaNacimiento=" + fechaNacimiento + '}';
+        return "Cliente{" + "idCliente=" + idCliente + ", nombre=" + nombre + ", apellidoPaterno=" + apellidoPaterno + ", apellidoMaterno=" + apellidoMaterno + ", fechaNacimiento=" + fechaNacimiento + ", cuentas=" + cuentas + '}';
     }
+
+    
     
     
 

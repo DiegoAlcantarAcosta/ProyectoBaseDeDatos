@@ -6,6 +6,7 @@ package DTO;
 
 import Entidades.Cuenta;
 import Entidades.Direccion;
+import java.util.List;
 
 /**
  *
@@ -14,20 +15,16 @@ import Entidades.Direccion;
 public class ClienteDTO {
 
     private String nombre, apellidoPaterno, apellidoMaterno, fechaNacimiento;
-    private Cuenta cuenta;
-    private Direccion direccion;
+    private List<Cuenta> cuentas;
 
-    public ClienteDTO(String nombre, String apellidoPaterno, String apellidoMaterno, String fechaNacimiento, Cuenta cuenta, Direccion direccion) {
+    public ClienteDTO(String nombre, String apellidoPaterno, String apellidoMaterno, String fechaNacimiento, List<Cuenta> cuentas) {
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
         this.fechaNacimiento = fechaNacimiento;
-        this.cuenta = cuenta;
-        this.direccion = direccion;
+        this.cuentas = cuentas;
     }
 
-    
-    
     public String getNombre() {
         return nombre;
     }
@@ -60,21 +57,25 @@ public class ClienteDTO {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public Cuenta getCuenta() {
-        return cuenta;
+    public List<Cuenta> getCuentas() {
+        return cuentas;
     }
 
-    public void setCuenta(Cuenta cuenta) {
-        this.cuenta = cuenta;
+    public void setCuentas(List<Cuenta> cuentas) {
+        this.cuentas = cuentas;
     }
 
-    public Direccion getDireccion() {
-        return direccion;
+    @Override
+    public String toString() {
+        return "ClienteDTO{" + "nombre=" + nombre + ", apellidoPaterno=" + apellidoPaterno + ", apellidoMaterno=" + apellidoMaterno + ", fechaNacimiento=" + fechaNacimiento + ", cuentas=" + cuentas + '}';
     }
 
-    public void setDireccion(Direccion direccion) {
-        this.direccion = direccion;
-    }
+    
+    
+    
+    
+
+    
     
     
 }
