@@ -174,16 +174,19 @@ public class IniciarFrame extends javax.swing.JFrame {
     private void registrarseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarseButtonActionPerformed
         RegistrarFrame i = new RegistrarFrame();
         i.show();
+        dispose();
     }//GEN-LAST:event_registrarseButtonActionPerformed
 
     private void cobrarSinTarjetaButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cobrarSinTarjetaButton1ActionPerformed
         RetirarFrame i = new RetirarFrame();
         i.show();
+       
     }//GEN-LAST:event_cobrarSinTarjetaButton1ActionPerformed
 
     private void iniciarSesionButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarSesionButton1ActionPerformed
         SeleccionarCuentaFrame i = new SeleccionarCuentaFrame();
         i.show();
+        dispose();
     }//GEN-LAST:event_iniciarSesionButton1ActionPerformed
 
     /**
