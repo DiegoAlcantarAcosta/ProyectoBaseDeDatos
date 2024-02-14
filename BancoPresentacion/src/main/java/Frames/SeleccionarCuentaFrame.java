@@ -8,12 +8,12 @@ package Frames;
  *
  * @author lv1821
  */
-public class IniciarFrame extends javax.swing.JFrame {
+public class SeleccionarCuentaFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form IniciarFrame
      */
-    public IniciarFrame() {
+    public SeleccionarCuentaFrame() {
         initComponents();
     }
 
@@ -29,13 +29,10 @@ public class IniciarFrame extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        contraseñaTextField = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        usuarioTextField1 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        registrarseButton = new javax.swing.JButton();
-        cobrarSinTarjetaButton1 = new javax.swing.JButton();
-        iniciarSesionButton1 = new javax.swing.JButton();
+        salirButton = new javax.swing.JButton();
+        seleccionarButton = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,49 +57,28 @@ public class IniciarFrame extends javax.swing.JFrame {
         );
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel2.setText("Iniciar Sesion:");
-
-        contraseñaTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                contraseñaTextFieldActionPerformed(evt);
-            }
-        });
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel3.setText("Contraseña:");
-
-        usuarioTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                usuarioTextField1ActionPerformed(evt);
-            }
-        });
+        jLabel2.setText("Seleccionar cuenta");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel4.setText("Usuario:");
+        jLabel4.setText("Cuenta:");
 
-        registrarseButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        registrarseButton.setText("Registrarse");
-        registrarseButton.addActionListener(new java.awt.event.ActionListener() {
+        salirButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        salirButton.setText("Salir");
+        salirButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                registrarseButtonActionPerformed(evt);
+                salirButtonActionPerformed(evt);
             }
         });
 
-        cobrarSinTarjetaButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        cobrarSinTarjetaButton1.setText("Cobrar sin tarjeta");
-        cobrarSinTarjetaButton1.addActionListener(new java.awt.event.ActionListener() {
+        seleccionarButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        seleccionarButton.setText("Seleccionar");
+        seleccionarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cobrarSinTarjetaButton1ActionPerformed(evt);
+                seleccionarButtonActionPerformed(evt);
             }
         });
 
-        iniciarSesionButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        iniciarSesionButton1.setText("Iniciar sesion");
-        iniciarSesionButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                iniciarSesionButton1ActionPerformed(evt);
-            }
-        });
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -110,27 +86,22 @@ public class IniciarFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(48, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(cobrarSinTarjetaButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(registrarseButton)
-                        .addGap(18, 18, 18)
-                        .addComponent(iniciarSesionButton1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(contraseñaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(usuarioTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(52, 52, 52))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(87, 87, 87)
-                    .addComponent(jLabel4)
-                    .addContainerGap(414, Short.MAX_VALUE)))
+                .addContainerGap(107, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(133, 133, 133))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(salirButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(seleccionarButton))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(48, 48, 48)
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(100, 100, 100))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,47 +109,27 @@ public class IniciarFrame extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
-                .addGap(29, 29, 29)
-                .addComponent(usuarioTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGap(62, 62, 62)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(contraseñaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cobrarSinTarjetaButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(iniciarSesionButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(registrarseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(66, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(146, 146, 146)
                     .addComponent(jLabel4)
-                    .addContainerGap(200, Short.MAX_VALUE)))
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(66, 66, 66)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(salirButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seleccionarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void contraseñaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contraseñaTextFieldActionPerformed
+    private void salirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_contraseñaTextFieldActionPerformed
+    }//GEN-LAST:event_salirButtonActionPerformed
 
-    private void usuarioTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuarioTextField1ActionPerformed
+    private void seleccionarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seleccionarButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_usuarioTextField1ActionPerformed
-
-    private void registrarseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarseButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_registrarseButtonActionPerformed
-
-    private void cobrarSinTarjetaButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cobrarSinTarjetaButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cobrarSinTarjetaButton1ActionPerformed
-
-    private void iniciarSesionButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarSesionButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_iniciarSesionButton1ActionPerformed
+    }//GEN-LAST:event_seleccionarButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -186,15 +137,12 @@ public class IniciarFrame extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton cobrarSinTarjetaButton1;
-    private javax.swing.JTextField contraseñaTextField;
-    private javax.swing.JButton iniciarSesionButton1;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JButton registrarseButton;
-    private javax.swing.JTextField usuarioTextField1;
+    private javax.swing.JButton salirButton;
+    private javax.swing.JButton seleccionarButton;
     // End of variables declaration//GEN-END:variables
 }
