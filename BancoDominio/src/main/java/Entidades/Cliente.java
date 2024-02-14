@@ -13,26 +13,20 @@ import java.util.Objects;
 public class Cliente {
     private int idCliente;
     private String nombre, apellidoPaterno, apellidoMaterno, fechaNacimiento;
-    private Cuenta cuenta;
-    private Direccion direccion;
 
-    public Cliente(int idCliente, String nombre, String apellidoPaterno, String apellidoMaterno, String fechaNacimiento, Cuenta cuenta, Direccion direccion) {
+    public Cliente(int idCliente, String nombre, String apellidoPaterno, String apellidoMaterno, String fechaNacimiento) {
         this.idCliente = idCliente;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
         this.fechaNacimiento = fechaNacimiento;
-        this.cuenta = cuenta;
-        this.direccion = direccion;
     }
 
-    public Cliente(String nombre, String apellidoPaterno, String apellidoMaterno, String fechaNacimiento, Cuenta cuenta, Direccion direccion) {
+    public Cliente(String nombre, String apellidoPaterno, String apellidoMaterno, String fechaNacimiento) {
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
         this.fechaNacimiento = fechaNacimiento;
-        this.cuenta = cuenta;
-        this.direccion = direccion;
     }
 
     public Cliente() {
@@ -78,32 +72,14 @@ public class Cliente {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public Cuenta getCuenta() {
-        return cuenta;
-    }
-
-    public void setCuenta(Cuenta cuenta) {
-        this.cuenta = cuenta;
-    }
-
-    public Direccion getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(Direccion direccion) {
-        this.direccion = direccion;
-    }
-
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 79 * hash + this.idCliente;
-        hash = 79 * hash + Objects.hashCode(this.nombre);
-        hash = 79 * hash + Objects.hashCode(this.apellidoPaterno);
-        hash = 79 * hash + Objects.hashCode(this.apellidoMaterno);
-        hash = 79 * hash + Objects.hashCode(this.fechaNacimiento);
-        hash = 79 * hash + Objects.hashCode(this.cuenta);
-        hash = 79 * hash + Objects.hashCode(this.direccion);
+        hash = 47 * hash + this.idCliente;
+        hash = 47 * hash + Objects.hashCode(this.nombre);
+        hash = 47 * hash + Objects.hashCode(this.apellidoPaterno);
+        hash = 47 * hash + Objects.hashCode(this.apellidoMaterno);
+        hash = 47 * hash + Objects.hashCode(this.fechaNacimiento);
         return hash;
     }
 
@@ -131,17 +107,13 @@ public class Cliente {
         if (!Objects.equals(this.apellidoMaterno, other.apellidoMaterno)) {
             return false;
         }
-        if (!Objects.equals(this.fechaNacimiento, other.fechaNacimiento)) {
-            return false;
-        }
-        if (!Objects.equals(this.cuenta, other.cuenta)) {
-            return false;
-        }
-        return Objects.equals(this.direccion, other.direccion);
+        return Objects.equals(this.fechaNacimiento, other.fechaNacimiento);
     }
 
     @Override
     public String toString() {
-        return "Cliente{" + "idCliente=" + idCliente + ", nombre=" + nombre + ", apellidoPaterno=" + apellidoPaterno + ", apellidoMaterno=" + apellidoMaterno + ", fechaNacimiento=" + fechaNacimiento + ", cuenta=" + cuenta + ", direccion=" + direccion + '}';
+        return "Cliente{" + "idCliente=" + idCliente + ", nombre=" + nombre + ", apellidoPaterno=" + apellidoPaterno + ", apellidoMaterno=" + apellidoMaterno + ", fechaNacimiento=" + fechaNacimiento + '}';
     }
+
+    
 }

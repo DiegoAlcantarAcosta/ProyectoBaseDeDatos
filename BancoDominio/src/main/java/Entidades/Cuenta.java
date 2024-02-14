@@ -13,21 +13,17 @@ import java.util.Objects;
 public class Cuenta {
     private int numCuenta;
     private float saldo;
-    private String fechaApertura, contraseña, estado;
+    private String fechaApertura;
 
-    public Cuenta(int numCuenta, float saldo, String fechaApertura, String contraseña, String estado) {
+    public Cuenta(int numCuenta, float saldo, String fechaApertura) {
         this.numCuenta = numCuenta;
         this.saldo = saldo;
         this.fechaApertura = fechaApertura;
-        this.contraseña = contraseña;
-        this.estado = estado;
     }
 
-    public Cuenta(float saldo, String fechaApertura, String contraseña, String estado) {
+    public Cuenta(float saldo, String fechaApertura) {
         this.saldo = saldo;
         this.fechaApertura = fechaApertura;
-        this.contraseña = contraseña;
-        this.estado = estado;
     }
 
     public Cuenta() {
@@ -37,50 +33,20 @@ public class Cuenta {
         return numCuenta;
     }
 
-    public void setNumCuenta(int numCuenta) {
-        this.numCuenta = numCuenta;
-    }
-
     public float getSaldo() {
         return saldo;
-    }
-
-    public void setSaldo(float saldo) {
-        this.saldo = saldo;
     }
 
     public String getFechaApertura() {
         return fechaApertura;
     }
 
-    public void setFechaApertura(String fechaApertura) {
-        this.fechaApertura = fechaApertura;
-    }
-
-    public String getContraseña() {
-        return contraseña;
-    }
-
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 19 * hash + this.numCuenta;
-        hash = 19 * hash + Float.floatToIntBits(this.saldo);
-        hash = 19 * hash + Objects.hashCode(this.fechaApertura);
-        hash = 19 * hash + Objects.hashCode(this.contraseña);
-        hash = 19 * hash + Objects.hashCode(this.estado);
+        int hash = 7;
+        hash = 59 * hash + this.numCuenta;
+        hash = 59 * hash + Float.floatToIntBits(this.saldo);
+        hash = 59 * hash + Objects.hashCode(this.fechaApertura);
         return hash;
     }
 
@@ -102,19 +68,15 @@ public class Cuenta {
         if (Float.floatToIntBits(this.saldo) != Float.floatToIntBits(other.saldo)) {
             return false;
         }
-        if (!Objects.equals(this.fechaApertura, other.fechaApertura)) {
-            return false;
-        }
-        if (!Objects.equals(this.contraseña, other.contraseña)) {
-            return false;
-        }
-        return Objects.equals(this.estado, other.estado);
+        return Objects.equals(this.fechaApertura, other.fechaApertura);
     }
 
     @Override
     public String toString() {
-        return "Cuenta{" + "numCuenta=" + numCuenta + ", saldo=" + saldo + ", fechaApertura=" + fechaApertura + ", contrase\u00f1a=" + contraseña + ", estado=" + estado + '}';
+        return "Cuenta{" + "numCuenta=" + numCuenta + ", saldo=" + saldo + ", fechaApertura=" + fechaApertura + '}';
     }
+
+    
     
     
 }

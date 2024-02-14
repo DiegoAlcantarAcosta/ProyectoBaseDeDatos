@@ -12,25 +12,20 @@ import java.util.Objects;
  */
 public class Operaciones {
     private int idTransaccion;
-    private String tipo, fecha, folio;
+    private String tipo, fecha;
     private float monto;
-    private Cuenta cuenta;
 
-    public Operaciones(int idTransaccion, String tipo, String fecha, String folio, float monto, Cuenta cuenta) {
+    public Operaciones(int idTransaccion, String tipo, String fecha, float monto) {
         this.idTransaccion = idTransaccion;
         this.tipo = tipo;
         this.fecha = fecha;
-        this.folio = folio;
         this.monto = monto;
-        this.cuenta = cuenta;
     }
 
-    public Operaciones(String tipo, String fecha, String folio, float monto, Cuenta cuenta) {
+    public Operaciones(String tipo, String fecha, float monto) {
         this.tipo = tipo;
         this.fecha = fecha;
-        this.folio = folio;
         this.monto = monto;
-        this.cuenta = cuenta;
     }
 
     public Operaciones() {
@@ -60,14 +55,6 @@ public class Operaciones {
         this.fecha = fecha;
     }
 
-    public String getFolio() {
-        return folio;
-    }
-
-    public void setFolio(String folio) {
-        this.folio = folio;
-    }
-
     public float getMonto() {
         return monto;
     }
@@ -76,23 +63,13 @@ public class Operaciones {
         this.monto = monto;
     }
 
-    public Cuenta getCuenta() {
-        return cuenta;
-    }
-
-    public void setCuenta(Cuenta cuenta) {
-        this.cuenta = cuenta;
-    }
-
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 23 * hash + this.idTransaccion;
-        hash = 23 * hash + Objects.hashCode(this.tipo);
-        hash = 23 * hash + Objects.hashCode(this.fecha);
-        hash = 23 * hash + Objects.hashCode(this.folio);
-        hash = 23 * hash + Float.floatToIntBits(this.monto);
-        hash = 23 * hash + Objects.hashCode(this.cuenta);
+        int hash = 7;
+        hash = 79 * hash + this.idTransaccion;
+        hash = 79 * hash + Objects.hashCode(this.tipo);
+        hash = 79 * hash + Objects.hashCode(this.fecha);
+        hash = 79 * hash + Float.floatToIntBits(this.monto);
         return hash;
     }
 
@@ -117,19 +94,15 @@ public class Operaciones {
         if (!Objects.equals(this.tipo, other.tipo)) {
             return false;
         }
-        if (!Objects.equals(this.fecha, other.fecha)) {
-            return false;
-        }
-        if (!Objects.equals(this.folio, other.folio)) {
-            return false;
-        }
-        return Objects.equals(this.cuenta, other.cuenta);
+        return Objects.equals(this.fecha, other.fecha);
     }
 
     @Override
     public String toString() {
-        return "Operaciones{" + "idTransaccion=" + idTransaccion + ", tipo=" + tipo + ", fecha=" + fecha + ", folio=" + folio + ", monto=" + monto + ", cuenta=" + cuenta + '}';
+        return "Operaciones{" + "idTransaccion=" + idTransaccion + ", tipo=" + tipo + ", fecha=" + fecha + ", monto=" + monto + '}';
     }
+
+    
     
     
 }
