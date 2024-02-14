@@ -10,5 +10,4 @@ package Excepciones;
  */
 public class PersistenciaExcepcion {
     String hola;
-    int pruieba;
 }
