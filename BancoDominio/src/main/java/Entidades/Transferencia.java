@@ -11,13 +11,36 @@ import java.util.Objects;
  * @author pc
  */
 public class Transferencia extends Operaciones{
+    private int idTransferencia;
     private int cuentaDestino;
     private int cuentaOrigen;
     
-    public Transferencia(int idTransaccion, String tipo, String fecha, float monto, int idCuentaOrigen, int idCuentaDestino) {
-        super(idTransaccion, tipo, fecha, monto);
+    // Constructor con llave primaria
+    public Transferencia(int idTransferencia, int idCuentaOrigen, int idCuentaDestino, String tipo, String fecha, float monto) {
+        super(tipo, fecha, monto);
+        this.idTransferencia = idTransferencia;
         this.cuentaOrigen = idCuentaOrigen;
         this.cuentaDestino = idCuentaDestino;
+    }
+
+    // Constructor con datos y sin llave primaria
+    public Transferencia(int idCuentaOrigen, int idCuentaDestino, String tipo, String fecha, float monto) {
+        super(tipo, fecha, monto);
+        this.cuentaOrigen = idCuentaOrigen;
+        this.cuentaDestino = idCuentaDestino;
+    }
+
+    // Constructor sin datos ni llave primaria
+    public Transferencia() {
+        super();
+    }
+
+    public int getIdTransferencia() {
+        return idTransferencia;
+    }
+
+    public void setIdTransferencia(int idTransferencia) {
+        this.idTransferencia = idTransferencia;
     }
 
     public int getCuentaDestino() {
@@ -39,8 +62,9 @@ public class Transferencia extends Operaciones{
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 67 * hash + this.cuentaDestino;
-        hash = 67 * hash + this.cuentaOrigen;
+        hash = 47 * hash + this.idTransferencia;
+        hash = 47 * hash + this.cuentaDestino;
+        hash = 47 * hash + this.cuentaOrigen;
         return hash;
     }
 
@@ -56,6 +80,9 @@ public class Transferencia extends Operaciones{
             return false;
         }
         final Transferencia other = (Transferencia) obj;
+        if (this.idTransferencia != other.idTransferencia) {
+            return false;
+        }
         if (this.cuentaDestino != other.cuentaDestino) {
             return false;
         }
@@ -64,8 +91,10 @@ public class Transferencia extends Operaciones{
 
     @Override
     public String toString() {
-        return "Transferencia{" + "cuentaDestino=" + cuentaDestino + ", cuentaOrigen=" + cuentaOrigen + '}';
+        return "Transferencia{" + "idTransferencia=" + idTransferencia + ", cuentaDestino=" + cuentaDestino + ", cuentaOrigen=" + cuentaOrigen + '}';
     }
+    
+    
     
     
     

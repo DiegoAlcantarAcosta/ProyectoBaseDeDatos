@@ -11,14 +11,35 @@ import java.util.Objects;
  * @author pc
  */
 public class SinCuenta extends Operaciones {
-
+    private int idSinCuenta;
     private String folio;
     private int contraseña;
 
-    public SinCuenta(int idTransaccion, String tipo, String fecha, float monto, String folio, int contraseña) {
-        super(idTransaccion, tipo, fecha, monto);
+    public SinCuenta(int idRetiro, String folio, int contraseña, String tipo, String fecha, float monto) {
+        super(tipo, fecha, monto);
+        this.idSinCuenta = idRetiro;
         this.folio = folio;
         this.contraseña = contraseña;
+    }
+
+    // Constructor con datos y sin llave primaria
+    public SinCuenta(String folio, int contraseña, String tipo, String fecha, float monto) {
+        super(tipo, fecha, monto);
+        this.folio = folio;
+        this.contraseña = contraseña;
+    }
+
+    // Constructor sin datos ni llave primaria
+    public SinCuenta() {
+        super();
+    }
+
+    public int getIdSinCuenta() {
+        return idSinCuenta;
+    }
+
+    public void setIdSinCuenta(int idSinCuenta) {
+        this.idSinCuenta = idSinCuenta;
     }
 
     public String getFolio() {
@@ -39,9 +60,10 @@ public class SinCuenta extends Operaciones {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 97 * hash + Objects.hashCode(this.folio);
-        hash = 97 * hash + this.contraseña;
+        int hash = 7;
+        hash = 23 * hash + this.idSinCuenta;
+        hash = 23 * hash + Objects.hashCode(this.folio);
+        hash = 23 * hash + this.contraseña;
         return hash;
     }
 
@@ -57,6 +79,9 @@ public class SinCuenta extends Operaciones {
             return false;
         }
         final SinCuenta other = (SinCuenta) obj;
+        if (this.idSinCuenta != other.idSinCuenta) {
+            return false;
+        }
         if (this.contraseña != other.contraseña) {
             return false;
         }
@@ -65,7 +90,9 @@ public class SinCuenta extends Operaciones {
 
     @Override
     public String toString() {
-        return "SinCuenta{" + "folio=" + folio + ", contrase\u00f1a=" + contraseña + '}';
+        return "SinCuenta{" + "idSinCuenta=" + idSinCuenta + ", folio=" + folio + ", contrase\u00f1a=" + contraseña + '}';
     }
+    
+    
     
 }
