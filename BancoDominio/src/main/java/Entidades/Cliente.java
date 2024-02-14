@@ -13,20 +13,26 @@ import java.util.Objects;
 public class Cliente {
     private int idCliente;
     private String nombre, apellidoPaterno, apellidoMaterno, fechaNacimiento;
+    private Cuenta cuenta;
+    private Direccion direccion;
 
-    public Cliente(int idCliente, String nombre, String apellidoPaterno, String apellidoMaterno, String fechaNacimiento) {
+    public Cliente(int idCliente, String nombre, String apellidoPaterno, String apellidoMaterno, String fechaNacimiento, Cuenta cuenta, Direccion direccion) {
         this.idCliente = idCliente;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
         this.fechaNacimiento = fechaNacimiento;
+        this.cuenta = cuenta;
+        this.direccion = direccion;
     }
 
-    public Cliente(String nombre, String apellidoPaterno, String apellidoMaterno, String fechaNacimiento) {
+    public Cliente(String nombre, String apellidoPaterno, String apellidoMaterno, String fechaNacimiento, Cuenta cuenta, Direccion direccion) {
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
         this.fechaNacimiento = fechaNacimiento;
+        this.cuenta = cuenta;
+        this.direccion = direccion;
     }
 
     public Cliente() {

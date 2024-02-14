@@ -1,0 +1,30 @@
+diff a/BancoDominio/src/main/java/Entidades/Cliente.java b/BancoDominio/src/main/java/Entidades/Cliente.java	(rejected hunks)
+@@ -13,26 +13,20 @@
+ public class Cliente {
+     private int idCliente;
+     private String nombre, apellidoPaterno, apellidoMaterno, fechaNacimiento;
+-    private Cuenta cuenta;
+-    private Direccion direccion;
+ 
+-    public Cliente(int idCliente, String nombre, String apellidoPaterno, String apellidoMaterno, String fechaNacimiento, Cuenta cuenta, Direccion direccion) {
++    public Cliente(int idCliente, String nombre, String apellidoPaterno, String apellidoMaterno, String fechaNacimiento) {
+         this.idCliente = idCliente;
+         this.nombre = nombre;
+         this.apellidoPaterno = apellidoPaterno;
+         this.apellidoMaterno = apellidoMaterno;
+         this.fechaNacimiento = fechaNacimiento;
+-        this.cuenta = cuenta;
+-        this.direccion = direccion;
+     }
+ 
+-    public Cliente(String nombre, String apellidoPaterno, String apellidoMaterno, String fechaNacimiento, Cuenta cuenta, Direccion direccion) {
++    public Cliente(String nombre, String apellidoPaterno, String apellidoMaterno, String fechaNacimiento) {
+         this.nombre = nombre;
+         this.apellidoPaterno = apellidoPaterno;
+         this.apellidoMaterno = apellidoMaterno;
+         this.fechaNacimiento = fechaNacimiento;
+-        this.cuenta = cuenta;
+-        this.direccion = direccion;
+     }
+ 
+     public Cliente() {
