@@ -9,7 +9,5 @@ package Excepciones;
  * @author lv1821
  */
 public class PersistenciaExcepcion {
-    String hola;
-
-    int PULL;
+    
 }
