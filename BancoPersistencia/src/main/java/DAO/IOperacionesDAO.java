@@ -16,4 +16,5 @@ public interface IOperacionesDAO {
     boolean realizarDeposito(int numeroCuenta, double monto);
     boolean realizarRetiro(int numeroCuenta, double monto);
     List<Operaciones> obtenerHistorialOperaciones(int numeroCuenta, Date desde, Date hasta);
+    List<Operaciones> obtenerHistorialOperaciones(int numeroCuenta, String tipo);
 }

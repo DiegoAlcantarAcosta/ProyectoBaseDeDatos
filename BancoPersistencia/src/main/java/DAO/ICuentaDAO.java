@@ -12,6 +12,7 @@ import Entidades.Cuenta;
  */
 public interface ICuentaDAO {
     Cuenta obtenerCuenta(int numeroCuenta);
+    int numeroCuenta(Cuenta cuenta);
     boolean actualizarCuenta(Cuenta cuenta);
-    boolean crearCuenta(Cuenta cuenta);
+    Cuenta crearCuenta(Cuenta cuenta);
 }

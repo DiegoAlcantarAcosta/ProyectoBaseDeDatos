@@ -150,7 +150,7 @@ public class RetirarFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_contraseñaPasswordFieldActionPerformed
 
     private void cobrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cobrarButtonActionPerformed
-        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_cobrarButtonActionPerformed
 
     /**
