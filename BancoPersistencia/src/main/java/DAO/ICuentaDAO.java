@@ -11,8 +11,16 @@ import Entidades.Cuenta;
  * @author lv1821
  */
 public interface ICuentaDAO {
+
     Cuenta obtenerCuenta(int numeroCuenta);
+
     int numeroCuenta(Cuenta cuenta);
-    boolean actualizarCuenta(Cuenta cuenta);
+
+    boolean actualizarEstadoCuenta(int cuenta, int contraseña);
+
     Cuenta crearCuenta(Cuenta cuenta);
+    
+    Cuenta crearCuentaNueva(Cuenta cuenta, int contraseña);
+
+    void sumarMonto(int cuenta,float monto);
 }

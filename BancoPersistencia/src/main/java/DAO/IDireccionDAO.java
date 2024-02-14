@@ -4,6 +4,7 @@
  */
 package DAO;
 
+import DTO.DireccionDTO;
 import Entidades.Direccion;
 
 /**
@@ -12,6 +13,6 @@ import Entidades.Direccion;
  */
 public interface IDireccionDAO {
     Direccion obtenerDireccion(int idCliente);
-    boolean actualizarDireccion(Direccion direccion);
+    DireccionDTO actualizarDireccion(DireccionDTO direccion);
     boolean registrarDireccion(Direccion direccion);
 }

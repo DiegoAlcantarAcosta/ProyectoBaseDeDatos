@@ -4,15 +4,14 @@
  */
 package DAO;
 
-import Entidades.Transferencia;
-import java.sql.Date;
-import java.util.List;
+import DTO.TransferenciaDTO;
+
 
 /**
  *
  * @author pc
  */
 public interface ITransferenciaDAO {
-    boolean realizarTransferencia(int numeroCuentaOrigen, int numeroCuentaDestino, double monto);
-    List<Transferencia> obtenerHistorialTransferencias(int idCliente, Date desde, Date hasta);
+    TransferenciaDTO realizarTransferencia(TransferenciaDTO trans);
+    
 }

@@ -4,6 +4,7 @@
  */
 package DAO;
 
+import DTO.ClienteDTO;
 import Entidades.Cliente;
 import Entidades.Cuenta;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
  */
 public interface IClienteDAO {
     Cliente obtenerCliente(int idCliente);
-    boolean actualizarCliente(Cliente cliente);
+    ClienteDTO actualizarCliente(ClienteDTO cliente);
     boolean registrarCliente(Cliente cliente);
     List<Cuenta> obtenerCuentasCliente(int idCliente);
 }

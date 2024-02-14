@@ -4,6 +4,7 @@
  */
 package DAO;
 
+import DTO.UsuariosDTO;
 import Entidades.Usuario;
 
 /**
@@ -13,4 +14,5 @@ import Entidades.Usuario;
 public interface IUsuarioDAO {
     Usuario autenticarUsuario(String usuario, String contraseña);
     public boolean registrarUsuario(Usuario usuario);
+    UsuariosDTO actualizarUsuario(UsuariosDTO usuario);
 }
