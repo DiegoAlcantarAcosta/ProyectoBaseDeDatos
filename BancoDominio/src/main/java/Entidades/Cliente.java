@@ -76,14 +76,23 @@ public class Cliente {
         this.fechaNacimiento = fechaNacimiento;
     }
 
+    public Cuenta getCuenta() {
+        return cuenta;
+    }
+
+    public void setCuenta(Cuenta cuenta) {
+        this.cuenta = cuenta;
+    }
+
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 47 * hash + this.idCliente;
-        hash = 47 * hash + Objects.hashCode(this.nombre);
-        hash = 47 * hash + Objects.hashCode(this.apellidoPaterno);
-        hash = 47 * hash + Objects.hashCode(this.apellidoMaterno);
-        hash = 47 * hash + Objects.hashCode(this.fechaNacimiento);
+        hash = 71 * hash + this.idCliente;
+        hash = 71 * hash + Objects.hashCode(this.nombre);
+        hash = 71 * hash + Objects.hashCode(this.apellidoPaterno);
+        hash = 71 * hash + Objects.hashCode(this.apellidoMaterno);
+        hash = 71 * hash + Objects.hashCode(this.fechaNacimiento);
+        hash = 71 * hash + Objects.hashCode(this.cuenta);
         return hash;
     }
 
@@ -111,13 +120,19 @@ public class Cliente {
         if (!Objects.equals(this.apellidoMaterno, other.apellidoMaterno)) {
             return false;
         }
-        return Objects.equals(this.fechaNacimiento, other.fechaNacimiento);
+        if (!Objects.equals(this.fechaNacimiento, other.fechaNacimiento)) {
+            return false;
+        }
+        return Objects.equals(this.cuenta, other.cuenta);
     }
 
     @Override
     public String toString() {
-        return "Cliente{" + "idCliente=" + idCliente + ", nombre=" + nombre + ", apellidoPaterno=" + apellidoPaterno + ", apellidoMaterno=" + apellidoMaterno + ", fechaNacimiento=" + fechaNacimiento + '}';
+        return "Cliente{" + "idCliente=" + idCliente + ", nombre=" + nombre + ", apellidoPaterno=" + apellidoPaterno + ", apellidoMaterno=" + apellidoMaterno + ", fechaNacimiento=" + fechaNacimiento + ", cuenta=" + cuenta + '}';
     }
+    
+
+    
 
     
 }
