@@ -4,10 +4,14 @@
  */
 package DAO;
 
+import Entidades.Cliente;
+
 /**
  *
  * @author lv1821
  */
 public interface IClienteDAO {
-    
+    Cliente obtenerCliente(int idCliente);
+    boolean actualizarCliente(Cliente cliente);
+    boolean registrarCliente(Cliente cliente);
 }

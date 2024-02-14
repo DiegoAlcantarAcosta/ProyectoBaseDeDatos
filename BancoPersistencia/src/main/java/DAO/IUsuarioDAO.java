@@ -4,10 +4,12 @@
  */
 package DAO;
 
+import Entidades.Usuario;
+
 /**
  *
  * @author pc
  */
 public interface IUsuarioDAO {
-    
+    Usuario autenticarUsuario(String usuario, String contraseña);
 }

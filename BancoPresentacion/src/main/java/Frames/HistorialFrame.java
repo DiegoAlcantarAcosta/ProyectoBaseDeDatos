@@ -8,7 +8,7 @@ package Frames;
  *
  * @author lv1821
  */
-public class HistorialFrame extends javax.swing.JFrame {
+    public class HistorialFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form IniciarFrame

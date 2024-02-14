@@ -4,10 +4,14 @@
  */
 package DAO;
 
+import Entidades.SinCuenta;
+
 /**
  *
  * @author pc
  */
 public interface IRetiroSinDAO {
-    
+    boolean generarRetiroSinCuenta(int idCliente, double monto);
+    SinCuenta obtenerRetiroSinCuenta(int idCliente);
+    boolean actualizarEstadoRetiroSinCuenta(int idCliente, String estado);
 }

@@ -4,10 +4,14 @@
  */
 package DAO;
 
+import Entidades.Cuenta;
+
 /**
  *
  * @author lv1821
  */
 public interface ICuentaDAO {
-    
+    Cuenta obtenerCuenta(int numeroCuenta);
+    boolean actualizarCuenta(Cuenta cuenta);
+    boolean crearCuenta(Cuenta cuenta);
 }

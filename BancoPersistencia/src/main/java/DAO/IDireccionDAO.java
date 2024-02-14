@@ -4,10 +4,14 @@
  */
 package DAO;
 
+import Entidades.Direccion;
+
 /**
  *
  * @author lv1821
  */
 public interface IDireccionDAO {
-    
+    Direccion obtenerDireccion(int idCliente);
+    boolean actualizarDireccion(Direccion direccion);
+    boolean registrarDireccion(Direccion direccion);
 }
