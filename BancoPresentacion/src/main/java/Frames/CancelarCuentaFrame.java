@@ -132,7 +132,9 @@ package Frames;
     }//GEN-LAST:event_contraseñaTextFieldActionPerformed
 
     private void salirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirButtonActionPerformed
-        // TODO add your handling code here:
+        dispose();
+        MenuFrame m = new MenuFrame();
+        m.show();
     }//GEN-LAST:event_salirButtonActionPerformed
 
     private void cancelarCuentaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarCuentaButtonActionPerformed
