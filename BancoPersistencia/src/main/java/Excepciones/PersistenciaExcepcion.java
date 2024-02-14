@@ -8,6 +8,24 @@ package Excepciones;
  *
  * @author lv1821
  */
-public class PersistenciaExcepcion {
-    int papa;
+public class PersistenciaExcepcion extends Exception{
+
+    public PersistenciaExcepcion() {
+    }
+
+    public PersistenciaExcepcion(String message) {
+        super(message);
+    }
+
+    public PersistenciaExcepcion(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public PersistenciaExcepcion(Throwable cause) {
+        super(cause);
+    }
+
+    public PersistenciaExcepcion(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+        super(message, cause, enableSuppression, writableStackTrace);
+    }
 }

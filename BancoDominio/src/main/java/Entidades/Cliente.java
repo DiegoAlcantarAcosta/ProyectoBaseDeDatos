@@ -13,24 +13,20 @@ import java.util.Objects;
 public class Cliente {
     private int idCliente;
     private String nombre, apellidoPaterno, apellidoMaterno, fechaNacimiento;
-    private Cuenta cuenta;
 
-    public Cliente(int idCliente, String nombre, String apellidoPaterno, String apellidoMaterno, String fechaNacimiento, Cuenta cuenta) {
+    public Cliente(int idCliente, String nombre, String apellidoPaterno, String apellidoMaterno, String fechaNacimiento) {
         this.idCliente = idCliente;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
         this.fechaNacimiento = fechaNacimiento;
-        this.cuenta = cuenta;
     }
 
-    public Cliente(String nombre, String apellidoPaterno, String apellidoMaterno, String fechaNacimiento, Cuenta cuenta) {
+    public Cliente(String nombre, String apellidoPaterno, String apellidoMaterno, String fechaNacimiento) {
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
         this.fechaNacimiento = fechaNacimiento;
-        this.cuenta = cuenta;
-     
     }
 
     public Cliente() {
@@ -76,23 +72,14 @@ public class Cliente {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public Cuenta getCuenta() {
-        return cuenta;
-    }
-
-    public void setCuenta(Cuenta cuenta) {
-        this.cuenta = cuenta;
-    }
-
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 71 * hash + this.idCliente;
-        hash = 71 * hash + Objects.hashCode(this.nombre);
-        hash = 71 * hash + Objects.hashCode(this.apellidoPaterno);
-        hash = 71 * hash + Objects.hashCode(this.apellidoMaterno);
-        hash = 71 * hash + Objects.hashCode(this.fechaNacimiento);
-        hash = 71 * hash + Objects.hashCode(this.cuenta);
+        int hash = 7;
+        hash = 43 * hash + this.idCliente;
+        hash = 43 * hash + Objects.hashCode(this.nombre);
+        hash = 43 * hash + Objects.hashCode(this.apellidoPaterno);
+        hash = 43 * hash + Objects.hashCode(this.apellidoMaterno);
+        hash = 43 * hash + Objects.hashCode(this.fechaNacimiento);
         return hash;
     }
 
@@ -120,16 +107,17 @@ public class Cliente {
         if (!Objects.equals(this.apellidoMaterno, other.apellidoMaterno)) {
             return false;
         }
-        if (!Objects.equals(this.fechaNacimiento, other.fechaNacimiento)) {
-            return false;
-        }
-        return Objects.equals(this.cuenta, other.cuenta);
+        return Objects.equals(this.fechaNacimiento, other.fechaNacimiento);
     }
 
     @Override
     public String toString() {
-        return "Cliente{" + "idCliente=" + idCliente + ", nombre=" + nombre + ", apellidoPaterno=" + apellidoPaterno + ", apellidoMaterno=" + apellidoMaterno + ", fechaNacimiento=" + fechaNacimiento + ", cuenta=" + cuenta + '}';
+        return "Cliente{" + "idCliente=" + idCliente + ", nombre=" + nombre + ", apellidoPaterno=" + apellidoPaterno + ", apellidoMaterno=" + apellidoMaterno + ", fechaNacimiento=" + fechaNacimiento + '}';
     }
+    
+    
+
+    
     
 
     
