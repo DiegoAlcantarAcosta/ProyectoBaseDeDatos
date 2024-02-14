@@ -12,16 +12,13 @@ import Entidades.Cuenta;
  */
 public class OperacionesDTO {
 
-    private String tipo, fecha, folio;
+    private String tipo, fecha;
     private float monto;
-    private Cuenta cuenta;
 
-    public OperacionesDTO(String tipo, String fecha, String folio, float monto, Cuenta cuenta) {
+    public OperacionesDTO(String tipo, String fecha, float monto) {
         this.tipo = tipo;
         this.fecha = fecha;
-        this.folio = folio;
         this.monto = monto;
-        this.cuenta = cuenta;
     }
 
     public String getTipo() {
@@ -40,14 +37,6 @@ public class OperacionesDTO {
         this.fecha = fecha;
     }
 
-    public String getFolio() {
-        return folio;
-    }
-
-    public void setFolio(String folio) {
-        this.folio = folio;
-    }
-
     public float getMonto() {
         return monto;
     }
@@ -56,12 +45,13 @@ public class OperacionesDTO {
         this.monto = monto;
     }
 
-    public Cuenta getCuenta() {
-        return cuenta;
+    @Override
+    public String toString() {
+        return "OperacionesDTO{" + "tipo=" + tipo + ", fecha=" + fecha + ", monto=" + monto + '}';
     }
+    
+    
 
-    public void setCuenta(Cuenta cuenta) {
-        this.cuenta = cuenta;
-    }
+    
 
 }

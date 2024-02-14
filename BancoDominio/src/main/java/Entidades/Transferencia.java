@@ -10,55 +10,37 @@ import java.util.Objects;
  *
  * @author pc
  */
-public class Transferencia {
-    private int idTransferencia;
-    private Cuenta cuentaDeposito;
-    private Operaciones operacion;
-
-    public Transferencia(int idTransferencia, Cuenta cuentaDeposito, Operaciones operacion) {
-        this.idTransferencia = idTransferencia;
-        this.cuentaDeposito = cuentaDeposito;
-        this.operacion = operacion;
+public class Transferencia extends Operaciones{
+    private int cuentaDestino;
+    private int cuentaOrigen;
+    
+    public Transferencia(int idTransaccion, String tipo, String fecha, float monto, int idCuentaOrigen, int idCuentaDestino) {
+        super(idTransaccion, tipo, fecha, monto);
+        this.cuentaOrigen = idCuentaOrigen;
+        this.cuentaDestino = idCuentaDestino;
     }
 
-    public Transferencia(Cuenta cuentaDeposito, Operaciones operacion) {
-        this.cuentaDeposito = cuentaDeposito;
-        this.operacion = operacion;
+    public int getCuentaDestino() {
+        return cuentaDestino;
     }
 
-    public Transferencia() {
+    public void setCuentaDestino(int cuentaDestino) {
+        this.cuentaDestino = cuentaDestino;
     }
 
-    public int getIdTransferencia() {
-        return idTransferencia;
+    public int getCuentaOrigen() {
+        return cuentaOrigen;
     }
 
-    public void setIdTransferencia(int idTransferencia) {
-        this.idTransferencia = idTransferencia;
-    }
-
-    public Cuenta getCuentaDeposito() {
-        return cuentaDeposito;
-    }
-
-    public void setCuentaDeposito(Cuenta cuentaDeposito) {
-        this.cuentaDeposito = cuentaDeposito;
-    }
-
-    public Operaciones getOperacion() {
-        return operacion;
-    }
-
-    public void setOperacion(Operaciones operacion) {
-        this.operacion = operacion;
+    public void setCuentaOrigen(int cuentaOrigen) {
+        this.cuentaOrigen = cuentaOrigen;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 97 * hash + this.idTransferencia;
-        hash = 97 * hash + Objects.hashCode(this.cuentaDeposito);
-        hash = 97 * hash + Objects.hashCode(this.operacion);
+        int hash = 5;
+        hash = 67 * hash + this.cuentaDestino;
+        hash = 67 * hash + this.cuentaOrigen;
         return hash;
     }
 
@@ -74,19 +56,17 @@ public class Transferencia {
             return false;
         }
         final Transferencia other = (Transferencia) obj;
-        if (this.idTransferencia != other.idTransferencia) {
+        if (this.cuentaDestino != other.cuentaDestino) {
             return false;
         }
-        if (!Objects.equals(this.cuentaDeposito, other.cuentaDeposito)) {
-            return false;
-        }
-        return Objects.equals(this.operacion, other.operacion);
+        return this.cuentaOrigen == other.cuentaOrigen;
     }
 
     @Override
     public String toString() {
-        return "Transferencia{" + "idTransferencia=" + idTransferencia + ", cuentaDeposito=" + cuentaDeposito + ", operacion=" + operacion + '}';
+        return "Transferencia{" + "cuentaDestino=" + cuentaDestino + ", cuentaOrigen=" + cuentaOrigen + '}';
     }
+    
     
     
     
