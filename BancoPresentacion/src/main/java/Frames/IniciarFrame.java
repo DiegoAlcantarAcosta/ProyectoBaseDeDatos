@@ -97,7 +97,7 @@ public class IniciarFrame extends javax.swing.JFrame {
         });
 
         iniciarSesionButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        iniciarSesionButton1.setText("Cobrar sin tarjeta");
+        iniciarSesionButton1.setText("Iniciar sesion");
         iniciarSesionButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 iniciarSesionButton1ActionPerformed(evt);
