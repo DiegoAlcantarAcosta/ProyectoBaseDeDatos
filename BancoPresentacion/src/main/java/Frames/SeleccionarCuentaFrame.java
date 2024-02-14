@@ -124,11 +124,13 @@ public class SeleccionarCuentaFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void salirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirButtonActionPerformed
-        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_salirButtonActionPerformed
 
     private void seleccionarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seleccionarButtonActionPerformed
-        // TODO add your handling code here:
+        dispose();
+        MenuFrame menu = new MenuFrame();
+        menu.show();
     }//GEN-LAST:event_seleccionarButtonActionPerformed
 
     /**

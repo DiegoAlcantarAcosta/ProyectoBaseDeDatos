@@ -4,6 +4,8 @@
  */
 package Frames.sinCuenta;
 
+import Frames.MenuFrame;
+
 /**
  *
  * @author Diego
@@ -115,11 +117,14 @@ public class sinCuentaFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarButtonActionPerformed
-        // TODO add your handling code here:
+        infoSinCuentaFrame info = new infoSinCuentaFrame();
+        info.show();
     }//GEN-LAST:event_aceptarButtonActionPerformed
 
     private void aceptarButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarButton1ActionPerformed
-        // TODO add your handling code here:
+        dispose();
+        MenuFrame menu = new MenuFrame();
+        menu.show();
     }//GEN-LAST:event_aceptarButton1ActionPerformed
 
     /**

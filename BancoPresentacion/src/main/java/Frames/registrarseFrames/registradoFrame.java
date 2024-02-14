@@ -4,6 +4,8 @@
  */
 package Frames.registrarseFrames;
 
+import Frames.IniciarFrame;
+
 /**
  *
  * @author Diego
@@ -118,7 +120,9 @@ public class registradoFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarButtonActionPerformed
-        // TODO add your handling code here:
+        dispose();
+        IniciarFrame i = new IniciarFrame();
+        i.show();
     }//GEN-LAST:event_aceptarButtonActionPerformed
 
     /**

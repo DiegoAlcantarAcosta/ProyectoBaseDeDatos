@@ -311,7 +311,9 @@ public class RegistrarFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_codigoPostalTextFieldActionPerformed
 
     private void registrarseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarseButtonActionPerformed
-        // TODO add your handling code here:
+        dispose();
+        registradoFrame registrado = new registradoFrame();
+        registrado.show();
     }//GEN-LAST:event_registrarseButtonActionPerformed
 
     /**

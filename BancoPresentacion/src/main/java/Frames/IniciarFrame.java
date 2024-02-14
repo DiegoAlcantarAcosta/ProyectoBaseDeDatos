@@ -4,6 +4,9 @@
  */
 package Frames;
 
+import Frames.registrarseFrames.RegistrarFrame;
+import Frames.sinCuenta.RetirarFrame;
+
 /**
  *
  * @author lv1821
@@ -169,15 +172,18 @@ public class IniciarFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_usuarioTextField1ActionPerformed
 
     private void registrarseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarseButtonActionPerformed
-        // TODO add your handling code here:
+        RegistrarFrame i = new RegistrarFrame();
+        i.show();
     }//GEN-LAST:event_registrarseButtonActionPerformed
 
     private void cobrarSinTarjetaButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cobrarSinTarjetaButton1ActionPerformed
-        // TODO add your handling code here:
+        RetirarFrame i = new RetirarFrame();
+        i.show();
     }//GEN-LAST:event_cobrarSinTarjetaButton1ActionPerformed
 
     private void iniciarSesionButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarSesionButton1ActionPerformed
-        // TODO add your handling code here:
+        SeleccionarCuentaFrame i = new SeleccionarCuentaFrame();
+        i.show();
     }//GEN-LAST:event_iniciarSesionButton1ActionPerformed
 
     /**
