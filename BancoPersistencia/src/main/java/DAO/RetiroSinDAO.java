@@ -8,6 +8,6 @@ package DAO;
  *
  * @author pc
  */
-public interface RetiroSinDAO {
+public class RetiroSinDAO {
     
 }
