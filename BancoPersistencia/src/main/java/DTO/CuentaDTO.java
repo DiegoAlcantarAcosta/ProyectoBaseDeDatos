@@ -13,13 +13,12 @@ import Entidades.Cliente;
 public class CuentaDTO {
      private int numCuenta;
     private float saldo;
-    private String fechaApertura, contraseña, estado;
+    private String fechaApertura, estado;
 
-    public CuentaDTO(int numCuenta, float saldo, String fechaApertura, String contraseña, String estado) {
+    public CuentaDTO(int numCuenta, float saldo, String fechaApertura, String estado) {
         this.numCuenta = numCuenta;
         this.saldo = saldo;
         this.fechaApertura = fechaApertura;
-        this.contraseña = contraseña;
         this.estado = estado;
     }
 
@@ -47,13 +46,7 @@ public class CuentaDTO {
         this.fechaApertura = fechaApertura;
     }
 
-    public String getContraseña() {
-        return contraseña;
-    }
-
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
-    }
+  
 
     public String getEstado() {
         return estado;
@@ -65,7 +58,7 @@ public class CuentaDTO {
 
     @Override
     public String toString() {
-        return "CuentaDTO{" + "numCuenta=" + numCuenta + ", saldo=" + saldo + ", fechaApertura=" + fechaApertura + ", contrase\u00f1a=" + contraseña + ", estado=" + estado + '}';
+        return "CuentaDTO{" + "numCuenta=" + numCuenta + ", saldo=" + saldo + ", fechaApertura=" + fechaApertura  + ", estado=" + estado + '}';
     }
 
     

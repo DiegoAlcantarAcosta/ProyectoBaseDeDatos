@@ -5,8 +5,10 @@
 package DAO;
 
 import DTO.ClienteDTO;
+import DTO.CuentaDTO;
 import Entidades.Cliente;
 import Entidades.Cuenta;
+import Excepciones.PersistenciaExcepcion;
 import java.util.List;
 
 /**
@@ -14,8 +16,8 @@ import java.util.List;
  * @author lv1821
  */
 public interface IClienteDAO {
-    Cliente obtenerCliente(int idCliente);
-    ClienteDTO actualizarCliente(ClienteDTO cliente);
-    boolean registrarCliente(Cliente cliente);
-    List<Cuenta> obtenerCuentasCliente(int idCliente);
+    Cliente obtenerCliente(int idCliente)  throws PersistenciaExcepcion;
+    ClienteDTO actualizarCliente(ClienteDTO cliente)  throws PersistenciaExcepcion;
+    boolean registrarCliente(Cliente cliente)  throws PersistenciaExcepcion;
+    List<CuentaDTO> obtenerCuentasCliente(int idCliente) throws PersistenciaExcepcion;
 }
