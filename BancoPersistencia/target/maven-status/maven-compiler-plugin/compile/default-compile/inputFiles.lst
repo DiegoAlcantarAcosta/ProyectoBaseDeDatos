@@ -1,15 +1,15 @@
-C:\proyecto java\ProyectoBaseDeDatos\BancoPersistencia\src\main\java\DAO\IClienteDAO.java
-C:\proyecto java\ProyectoBaseDeDatos\BancoPersistencia\src\main\java\DAO\ICuentaDAO.java
-C:\proyecto java\ProyectoBaseDeDatos\BancoPersistencia\src\main\java\DAO\CuentaDAO.java
-C:\proyecto java\ProyectoBaseDeDatos\BancoPersistencia\src\main\java\DAO\ClienteDAO.java
-C:\proyecto java\ProyectoBaseDeDatos\BancoPersistencia\src\main\java\DTO\DireccionDTO.java
-C:\proyecto java\ProyectoBaseDeDatos\BancoPersistencia\src\main\java\Conexion\Conexion.java
-C:\proyecto java\ProyectoBaseDeDatos\BancoPersistencia\src\main\java\DTO\CuentaDTO.java
-C:\proyecto java\ProyectoBaseDeDatos\BancoPersistencia\src\main\java\Conexion\IConexion.java
-C:\proyecto java\ProyectoBaseDeDatos\BancoPersistencia\src\main\java\DAO\DireccionDAO.java
-C:\proyecto java\ProyectoBaseDeDatos\BancoPersistencia\src\main\java\DAO\IDireccionDAO.java
-C:\proyecto java\ProyectoBaseDeDatos\BancoPersistencia\src\main\java\DTO\ClienteDTO.java
-C:\proyecto java\ProyectoBaseDeDatos\BancoPersistencia\src\main\java\DTO\OperacionesDTO.java
-C:\proyecto java\ProyectoBaseDeDatos\BancoPersistencia\src\main\java\DAO\OperacionesDAO.java
-C:\proyecto java\ProyectoBaseDeDatos\BancoPersistencia\src\main\java\DAO\IOperacionesDAO.java
-C:\proyecto java\ProyectoBaseDeDatos\BancoPersistencia\src\main\java\Excepciones\PersistenciaExcepcion.java
+C:\Users\pc\OneDrive\Escritorio\bd2\BancoPersistencia\src\main\java\DTO\OperacionesDTO.java
+C:\Users\pc\OneDrive\Escritorio\bd2\BancoPersistencia\src\main\java\Conexion\IConexion.java
+C:\Users\pc\OneDrive\Escritorio\bd2\BancoPersistencia\src\main\java\DTO\DireccionDTO.java
+C:\Users\pc\OneDrive\Escritorio\bd2\BancoPersistencia\src\main\java\DTO\CuentaDTO.java
+C:\Users\pc\OneDrive\Escritorio\bd2\BancoPersistencia\src\main\java\DAO\ClienteDAO.java
+C:\Users\pc\OneDrive\Escritorio\bd2\BancoPersistencia\src\main\java\DAO\DireccionDAO.java
+C:\Users\pc\OneDrive\Escritorio\bd2\BancoPersistencia\src\main\java\DAO\IClienteDAO.java
+C:\Users\pc\OneDrive\Escritorio\bd2\BancoPersistencia\src\main\java\Excepciones\PersistenciaExcepcion.java
+C:\Users\pc\OneDrive\Escritorio\bd2\BancoPersistencia\src\main\java\DAO\OperacionesDAO.java
+C:\Users\pc\OneDrive\Escritorio\bd2\BancoPersistencia\src\main\java\DAO\ICuentaDAO.java
+C:\Users\pc\OneDrive\Escritorio\bd2\BancoPersistencia\src\main\java\DAO\IDireccionDAO.java
+C:\Users\pc\OneDrive\Escritorio\bd2\BancoPersistencia\src\main\java\DAO\CuentaDAO.java
+C:\Users\pc\OneDrive\Escritorio\bd2\BancoPersistencia\src\main\java\DAO\IOperacionesDAO.java
+C:\Users\pc\OneDrive\Escritorio\bd2\BancoPersistencia\src\main\java\DTO\ClienteDTO.java
+C:\Users\pc\OneDrive\Escritorio\bd2\BancoPersistencia\src\main\java\Conexion\Conexion.java
