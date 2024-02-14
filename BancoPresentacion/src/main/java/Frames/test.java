@@ -16,7 +16,7 @@ public class test {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-      IniciarFrame i = new IniciarFrame();
+      RegistrarFrame i = new RegistrarFrame();
               i.show();
     }
     
