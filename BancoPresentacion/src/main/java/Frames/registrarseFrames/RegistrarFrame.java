@@ -338,7 +338,7 @@ public class RegistrarFrame extends javax.swing.JFrame {
         Usuario usuario = new Usuario(usuarioTextField.getText(), contraseñaTextField.getText());
         Direccion direccion = new Direccion(calleTextField.getText(), coloniaTextField.getText(), numeroTextField.getText(), codigoPostalTextField.getText());
         List<Cuenta> cuentas = null;
-        Cliente cliente = new Cliente(nombreTextField.getText(), apellidoPaternoTextField.getText(), apellidoMaternoTextField.getText(), fechaNacimientoDateChooser.getDateFormatString(), cuentas);
+        Cliente cliente = new Cliente(nombreTextField.getText(), apellidoPaternoTextField.getText(), apellidoMaternoTextField.getText(),formatoFecha.format(fechaNacimientoDateChooser.getDate()) , cuentas);
          
         try {
             c.registrarCliente(cliente);

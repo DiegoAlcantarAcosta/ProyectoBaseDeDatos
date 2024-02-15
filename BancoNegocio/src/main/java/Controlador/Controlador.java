@@ -44,7 +44,7 @@ public class Controlador implements IControlador {
 
     String cadenaConexion = "jdbc:mysql://localhost:3306/banco";
     String usuario = "root";
-    String contrasenia = "2004";
+    String contrasenia = "2608jlml";
     IConexion conexionBD = new Conexion(cadenaConexion, usuario, contrasenia);
     IClienteDAO clienteDAO = new ClienteDAO(conexionBD);
     ICuentaDAO cuentaDAO = new CuentaDAO(conexionBD);
