@@ -123,9 +123,11 @@ public class Controlador implements IControlador {
     }
 
     @Override
-    public Cuenta crearCuenta(Cuenta cuenta) {
-        Cuenta c = crearCuenta(cuenta);
-        return c;
+    public boolean crearCuenta(Cuenta cuenta) {
+        if (cuentaDAO.crearCuenta(cuenta)) {
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -209,6 +211,30 @@ public class Controlador implements IControlador {
     public TransferenciaDTO realizarTransferencia(TransferenciaDTO trans) {
         TransferenciaDTO t = realizarTransferencia(trans);
         return t;
+    }
+
+    @Override
+    public int idCliente(String nombre, String Paterno) {
+        int idCliente = clienteDAO.idCliente(nombre, Paterno);
+        return idCliente;
+    }
+
+    @Override
+    public int idCuenta(String Fecha) {
+        int idCuenta = cuentaDAO.idCuenta(Fecha);
+        return idCuenta;
+    }
+
+    @Override
+    public int idDireccion(String calle, String colonia, String numero) {
+        int idDireccion = direccion.idDireccion(calle, colonia, numero);
+        return idDireccion;
+    }
+
+    @Override
+    public int idUsuario(String contraseña, String Usuario) {
+        int idUsuario = usuario2.idUsuario(contraseña, Usuario);
+        return idUsuario;
     }
 
 }

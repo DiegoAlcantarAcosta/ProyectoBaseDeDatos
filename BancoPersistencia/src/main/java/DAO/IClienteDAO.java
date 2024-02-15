@@ -20,4 +20,5 @@ public interface IClienteDAO {
     ClienteDTO actualizarCliente(ClienteDTO cliente)  throws PersistenciaExcepcion;
     boolean registrarCliente(Cliente cliente)  throws PersistenciaExcepcion;
     List<Cuenta> obtenerCuentasCliente(int idCliente) throws PersistenciaExcepcion;
+    int idCliente(String nombre, String Paterno);
 }

@@ -24,4 +24,5 @@ public interface ICuentaDAO {
     Cuenta crearCuentaNueva(Cuenta cuenta, int contraseña);
 
     void sumarMonto(int cuenta,float monto);
+    int idCuenta(String Fecha);
 }

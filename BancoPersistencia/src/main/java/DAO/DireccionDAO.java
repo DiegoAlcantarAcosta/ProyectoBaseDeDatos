@@ -85,5 +85,27 @@ public class DireccionDAO implements IDireccionDAO {
             return false;
         }
     }
+
+    @Override
+    public int idDireccion(String calle, String colonia, String numero) {
+        int idCliente = -1;
+        String sentenciaSQL = "SELECT idDireccion FROM Direcciones WHERE calle = ? and colonia = ? and numero = ?";
+        try ( Connection conexion = this.conexionBD.crearConexion();  PreparedStatement comandoSQL = conexion.prepareStatement(sentenciaSQL, Statement.RETURN_GENERATED_KEYS);) {
+            comandoSQL.setString(1, calle);
+            comandoSQL.setString(2, colonia);
+            comandoSQL.setString(3, numero);
+            try (ResultSet resultado = comandoSQL.executeQuery()) {
+                // Si se encontró el cliente, obtener su ID
+                if (resultado.next()) {
+                    idCliente = resultado.getInt("idDireccion");
+                }
+            }
+            
+        }catch(SQLException e) {
+            LOG.log(Level.SEVERE, "No se pudo crear la cuenta", e);
+            
+        }
+        return idCliente;
+    }
 }
    

@@ -38,7 +38,7 @@ public interface IControlador {
 
     boolean actualizarEstadoCuenta(int cuenta, int contraseña);
 
-    Cuenta crearCuenta(Cuenta cuenta);
+    boolean crearCuenta(Cuenta cuenta);
     
     Cuenta crearCuentaNueva(Cuenta cuenta, int contraseña);
 
@@ -54,4 +54,8 @@ public interface IControlador {
     public int generarContraseña();
     public boolean actualizarEstado(int numCuenta);
     TransferenciaDTO realizarTransferencia(TransferenciaDTO trans);
+    int idCliente(String nombre, String Paterno);
+    int idCuenta(String Fecha);
+    int idDireccion(String calle, String colonia, String numero);
+    int idUsuario(String contraseña, String Usuario);
 }

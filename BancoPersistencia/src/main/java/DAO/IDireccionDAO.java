@@ -15,4 +15,5 @@ public interface IDireccionDAO {
     DireccionDTO obtenerDireccion(int idDireccion);
     DireccionDTO actualizarDireccion(DireccionDTO direccion);
     boolean registrarDireccion(Direccion direccion);
+    int idDireccion(String calle, String colonia, String numero);
 }

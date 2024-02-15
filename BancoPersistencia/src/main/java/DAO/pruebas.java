@@ -29,7 +29,7 @@ public class pruebas {
 
         String cadenaConexion = "jdbc:mysql://localhost:3306/banco";
         String usuario = "root";
-        String contraseña = "2004";
+        String contraseña = "2608jlml";
 
         IConexion conexion = new Conexion(cadenaConexion, usuario, contraseña);
 
@@ -62,15 +62,20 @@ public class pruebas {
 
 //System.out.println(    c.obtenerCliente(1));
 // Crear un objeto GregorianCalendar
-        GregorianCalendar calendario = new GregorianCalendar();
+//        GregorianCalendar calendario = new GregorianCalendar();
+//
+//        // Obtener el formato deseado
+//        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy/MM/dd");
+//
+//        // Obtener la fecha formateada
+//        String fechaFormateada = formatoFecha.format(calendario.getTime());
+//
+//        // Imprimir la fecha formateada
+//        System.out.println("Fecha formateada: " + fechaFormateada);
 
-        // Obtener el formato deseado
-        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy/MM/dd");
-
-        // Obtener la fecha formateada
-        String fechaFormateada = formatoFecha.format(calendario.getTime());
-
-        // Imprimir la fecha formateada
-        System.out.println("Fecha formateada: " + fechaFormateada);
+           ICuentaDAO cuenta = new CuentaDAO(conexion);
+           System.out.println(usuarioTest.idUsuario("a", "a"));
+        
+    
     }
 }

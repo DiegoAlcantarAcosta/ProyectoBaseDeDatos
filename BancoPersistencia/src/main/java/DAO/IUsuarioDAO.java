@@ -15,4 +15,5 @@ public interface IUsuarioDAO {
     boolean autenticarUsuario(String usuario, String contraseña);
     public boolean registrarUsuario(Usuario usuario);
     UsuariosDTO actualizarUsuario(UsuariosDTO usuario);
+    int idUsuario(String contraseña, String Usuario);
 }

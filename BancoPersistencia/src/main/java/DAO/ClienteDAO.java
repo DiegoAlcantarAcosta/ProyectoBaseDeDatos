@@ -9,6 +9,7 @@ import DTO.ClienteDTO;
 import DTO.CuentaDTO;
 import Entidades.Cliente;
 import Entidades.Cuenta;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -50,6 +51,7 @@ public class ClienteDAO implements IClienteDAO {
                 
 
                 ClienteDTO cliente = new ClienteDTO(nombre, apellidoPaterno, apellidoMaterno, fechaNacimiento,obtenerCuentasCliente(id));
+                
                 return cliente;
             }
             LOG.log(Level.INFO, "Se consultaron {0}");
@@ -81,7 +83,13 @@ public class ClienteDAO implements IClienteDAO {
             ResultSet res = comandoSQL.getGeneratedKeys();
 
             res.next();
-
+            try (CallableStatement cstmt = conexion.prepareCall("{call calcularEdadCliente()}")) {
+                // Establecer el valor del parámetro de entrada
+                
+                
+                // Ejecutar el procedimiento almacenado
+                cstmt.execute();
+            }
             return true;
 
         } catch (SQLException e) {
@@ -118,5 +126,24 @@ public class ClienteDAO implements IClienteDAO {
             LOG.log(Level.SEVERE, sentencia, e);
             return null;
         }
+    }
+    public int idCliente(String nombre, String Paterno){
+        int idCliente = -1;
+        String sentenciaSQL = "SELECT idCliente FROM CLIENTES WHERE nombre = ? and apellidoPaterno = ?";
+        try ( Connection conexion = this.conexionBD.crearConexion();  PreparedStatement comandoSQL = conexion.prepareStatement(sentenciaSQL, Statement.RETURN_GENERATED_KEYS);) {
+            comandoSQL.setString(1, nombre);
+            comandoSQL.setString(2, Paterno);
+            try (ResultSet resultado = comandoSQL.executeQuery()) {
+                // Si se encontró el cliente, obtener su ID
+                if (resultado.next()) {
+                    idCliente = resultado.getInt("idCliente");
+                }
+            }
+            
+        }catch(SQLException e) {
+            LOG.log(Level.SEVERE, "No se pudo crear la cuenta", e);
+            
+        }
+        return idCliente;
     }
 }

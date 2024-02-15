@@ -102,4 +102,26 @@ public class UsuarioDAO implements IUsuarioDAO {
 //        }
         return null;
     }
+
+    @Override
+    public int idUsuario(String contraseña, String Usuario) {
+        int idCliente = -1;
+        String sentenciaSQL = "SELECT idUsuario FROM usuarios WHERE nombreUsuario = ? and contraseña = ?";
+        try ( Connection conexion = this.conexionBD.crearConexion();  PreparedStatement comandoSQL = conexion.prepareStatement(sentenciaSQL, Statement.RETURN_GENERATED_KEYS);) {
+            comandoSQL.setString(1, Usuario);
+            comandoSQL.setString(2, contraseña);
+            
+            try (ResultSet resultado = comandoSQL.executeQuery()) {
+                // Si se encontró el cliente, obtener su ID
+                if (resultado.next()) {
+                    idCliente = resultado.getInt("idUsuario");
+                }
+            }
+            
+        }catch(SQLException e) {
+            LOG.log(Level.SEVERE, "No se pudo crear la cuenta", e);
+            
+        }
+        return idCliente;
+    }
 }

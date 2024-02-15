@@ -11,7 +11,7 @@ import java.util.Objects;
  * @author lv1821
  */
 public class Cuenta {
-    private int numCuenta;
+    private int numCuenta, idCliente;
     private float saldo;
     private String fechaApertura;
 
@@ -20,7 +20,11 @@ public class Cuenta {
         this.saldo = saldo;
         this.fechaApertura = fechaApertura;
     }
-
+    public Cuenta(float saldo, String fechaApertura,int numCliente) {
+        this.idCliente = numCliente;
+        this.saldo = saldo;
+        this.fechaApertura = fechaApertura;
+    }
     public Cuenta(float saldo, String fechaApertura) {
         this.saldo = saldo;
         this.fechaApertura = fechaApertura;
@@ -28,7 +32,7 @@ public class Cuenta {
 
     public Cuenta() {
     }
-
+    
     public int getNumCuenta() {
         return numCuenta;
     }
@@ -44,9 +48,10 @@ public class Cuenta {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 59 * hash + this.numCuenta;
-        hash = 59 * hash + Float.floatToIntBits(this.saldo);
-        hash = 59 * hash + Objects.hashCode(this.fechaApertura);
+        hash = 23 * hash + this.numCuenta;
+        hash = 23 * hash + this.idCliente;
+        hash = 23 * hash + Float.floatToIntBits(this.saldo);
+        hash = 23 * hash + Objects.hashCode(this.fechaApertura);
         return hash;
     }
 
@@ -65,16 +70,29 @@ public class Cuenta {
         if (this.numCuenta != other.numCuenta) {
             return false;
         }
+        if (this.idCliente != other.idCliente) {
+            return false;
+        }
         if (Float.floatToIntBits(this.saldo) != Float.floatToIntBits(other.saldo)) {
             return false;
         }
         return Objects.equals(this.fechaApertura, other.fechaApertura);
     }
 
+    public int getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
+    }
+
     @Override
     public String toString() {
-        return "Cuenta{" + "numCuenta=" + numCuenta + ", saldo=" + saldo + ", fechaApertura=" + fechaApertura + '}';
+        return "Cuenta{" + "numCuenta=" + numCuenta + ", idCliente=" + idCliente + ", saldo=" + saldo + ", fechaApertura=" + fechaApertura + '}';
     }
+
+    
 
     
     
