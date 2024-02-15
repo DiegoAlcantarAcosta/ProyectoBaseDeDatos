@@ -4,6 +4,7 @@
  */
 package DAO;
 
+import DTO.CuentaDTO;
 import Entidades.Cuenta;
 
 /**
@@ -12,7 +13,7 @@ import Entidades.Cuenta;
  */
 public interface ICuentaDAO {
 
-    Cuenta obtenerCuenta(int numeroCuenta);
+    CuentaDTO obtenerCuenta(int numeroCuenta);
 
     int numeroCuenta(Cuenta cuenta);
 

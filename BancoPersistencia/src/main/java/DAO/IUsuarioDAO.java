@@ -12,7 +12,7 @@ import Entidades.Usuario;
  * @author pc
  */
 public interface IUsuarioDAO {
-    Usuario autenticarUsuario(String usuario, String contraseña);
+    boolean autenticarUsuario(String usuario, String contraseña);
     public boolean registrarUsuario(Usuario usuario);
     UsuariosDTO actualizarUsuario(UsuariosDTO usuario);
 }

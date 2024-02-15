@@ -36,8 +36,27 @@ public class ClienteDAO implements IClienteDAO {
     }
 
     @Override
-    public Cliente obtenerCliente(int idCliente) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public ClienteDTO obtenerCliente(int idCliente) {
+        String sentencia = "SELECT * FROM CLIENTES WHERE idCliente = ?";
+        try ( Connection conexion = this.conexionBD.crearConexion();  PreparedStatement comandoSQL = conexion.prepareCall(sentencia);) {
+            comandoSQL.setInt(1, idCliente);
+            ResultSet resultado = comandoSQL.executeQuery();
+            while (resultado.next()) {
+                int id = resultado.getInt("idCliente");
+                String nombre = resultado.getString("nombre");
+                String apellidoPaterno = resultado.getString("apellidoPaterno");
+                String apellidoMaterno = resultado.getString("apellidoMaterno");
+                String fechaNacimiento = resultado.getString("fechaNacimiento");
+                
+
+                ClienteDTO cliente = new ClienteDTO(nombre, apellidoPaterno, apellidoMaterno, fechaNacimiento,obtenerCuentasCliente(id));
+                return cliente;
+            }
+            LOG.log(Level.INFO, "Se consultaron {0}");
+        } catch (SQLException e) {
+            LOG.log(Level.SEVERE, sentencia, e);
+        }
+        return null;
     }
 
     @Override
@@ -73,9 +92,9 @@ public class ClienteDAO implements IClienteDAO {
     }
 
     @Override
-    public List<CuentaDTO> obtenerCuentasCliente(int idCliente) {
+    public List<Cuenta> obtenerCuentasCliente(int idCliente) {
         String sentencia = "SELECT * FROM CUENTAS WHERE idCliente = ?";
-        List<CuentaDTO> lista = new ArrayList<>();
+        List<Cuenta> lista = new ArrayList<>();
 
         try ( Connection conexion = this.conexionBD.crearConexion();  PreparedStatement comandoSQL = conexion.prepareCall(sentencia);) {
             comandoSQL.setInt(1, idCliente);
@@ -87,7 +106,7 @@ public class ClienteDAO implements IClienteDAO {
                 String estado = resultado.getString("estado");
                 int idClientela = resultado.getInt("idCliente");
 
-                CuentaDTO cuenta = new CuentaDTO(numCuenta, saldo, fechaApertura, estado);
+                Cuenta cuenta = new Cuenta(numCuenta, saldo, fechaApertura);
 
                 lista.add(cuenta);
             }

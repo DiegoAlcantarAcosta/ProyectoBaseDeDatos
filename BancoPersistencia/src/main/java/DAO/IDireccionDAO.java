@@ -12,7 +12,7 @@ import Entidades.Direccion;
  * @author lv1821
  */
 public interface IDireccionDAO {
-    Direccion obtenerDireccion(int idCliente);
+    DireccionDTO obtenerDireccion(int idDireccion);
     DireccionDTO actualizarDireccion(DireccionDTO direccion);
     boolean registrarDireccion(Direccion direccion);
 }

@@ -4,6 +4,7 @@
  */
 package DAO;
 
+import DTO.OperacionesDTO;
 import Entidades.Operaciones;
 import java.sql.Date;
 import java.util.List;
@@ -14,6 +15,6 @@ import java.util.List;
  */
 public interface IOperacionesDAO {
     
-    List<Operaciones> obtenerHistorialOperaciones(int numeroCuenta, Date desde, Date hasta);
-    List<Operaciones> obtenerHistorialOperaciones(int numeroCuenta, String tipo);
+    List<OperacionesDTO> obtenerHistorialOperaciones(int numeroCuenta, Date desde, Date hasta);
+    List<OperacionesDTO> obtenerHistorialOperaciones(int numeroCuenta, String tipo);
 }

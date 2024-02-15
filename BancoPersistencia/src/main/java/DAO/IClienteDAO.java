@@ -16,8 +16,8 @@ import java.util.List;
  * @author lv1821
  */
 public interface IClienteDAO {
-    Cliente obtenerCliente(int idCliente)  throws PersistenciaExcepcion;
+    ClienteDTO obtenerCliente(int idCliente)  throws PersistenciaExcepcion;
     ClienteDTO actualizarCliente(ClienteDTO cliente)  throws PersistenciaExcepcion;
     boolean registrarCliente(Cliente cliente)  throws PersistenciaExcepcion;
-    List<CuentaDTO> obtenerCuentasCliente(int idCliente) throws PersistenciaExcepcion;
+    List<Cuenta> obtenerCuentasCliente(int idCliente) throws PersistenciaExcepcion;
 }

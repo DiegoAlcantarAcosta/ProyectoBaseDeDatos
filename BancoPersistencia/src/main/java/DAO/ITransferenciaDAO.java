@@ -13,5 +13,5 @@ import DTO.TransferenciaDTO;
  */
 public interface ITransferenciaDAO {
     TransferenciaDTO realizarTransferencia(TransferenciaDTO trans);
-    
+        
 }
