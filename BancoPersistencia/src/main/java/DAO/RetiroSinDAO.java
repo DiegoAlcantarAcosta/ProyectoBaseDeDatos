@@ -4,9 +4,11 @@
  */
 package DAO;
 
+import Conexion.IConexion;
 import DTO.RetiroSinDTO;
 import Entidades.SinCuenta;
 import java.util.Random;
+import java.util.logging.Logger;
 
 /**
  *
@@ -14,6 +16,12 @@ import java.util.Random;
  */
 public class RetiroSinDAO implements IRetiroSinDAO {
 
+    IConexion conexionBD;
+    private static final Logger LOG = Logger.getLogger(ClienteDAO.class.getName());
+
+    public RetiroSinDAO(IConexion conexionBD) {
+        this.conexionBD = conexionBD;
+    }
     @Override
     public boolean autenticarCobro(String folio, int contraseña) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

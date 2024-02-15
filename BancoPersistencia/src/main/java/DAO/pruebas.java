@@ -50,7 +50,7 @@ public class pruebas {
 
 //        Direccion dire = new Direccion("Miguel Aleman", "Norte", "100", "4556");
 //        direccion.registrarDireccion(dire);
-        RetiroSinDAO retiro = new RetiroSinDAO();
+//        RetiroSinDAO retiro = new RetiroSinDAO();
 //        System.out.println(retiro.generarContraseña());
 //        System.out.println(retiro.generarFolio());
 
