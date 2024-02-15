@@ -19,7 +19,7 @@ public interface ICuentaDAO {
 
     boolean actualizarEstadoCuenta(int cuenta, int contraseña);
 
-    Cuenta crearCuenta(Cuenta cuenta);
+    boolean crearCuenta(Cuenta cuenta);
     
     Cuenta crearCuentaNueva(Cuenta cuenta, int contraseña);
 

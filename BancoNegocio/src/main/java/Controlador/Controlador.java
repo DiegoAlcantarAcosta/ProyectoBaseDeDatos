@@ -40,20 +40,20 @@ import java.util.List;
  *
  * @author lv1821
  */
-public class Controlador implements IControlador{
+public class Controlador implements IControlador {
 
-    String cadenaConexion = "jdbc:mysql://localhost:3306/Asignacion01";
+    String cadenaConexion = "jdbc:mysql://localhost:3306/banco";
     String usuario = "root";
-    String contrasenia = "2608jlml";
+    String contrasenia = "2004";
     IConexion conexionBD = new Conexion(cadenaConexion, usuario, contrasenia);
-    IClienteDAO cliente = new ClienteDAO(conexionBD);
-    ICuentaDAO cuenta = new CuentaDAO(conexionBD);
+    IClienteDAO clienteDAO = new ClienteDAO(conexionBD);
+    ICuentaDAO cuentaDAO = new CuentaDAO(conexionBD);
     IDireccionDAO direccion = new DireccionDAO(conexionBD);
     IOperacionesDAO operaciones = new OperacionesDAO(conexionBD);
     IRetiroSinDAO retiro = new RetiroSinDAO(conexionBD);
     ITransferenciaDAO transferencia = new TransferenciaDAO(conexionBD);
     IUsuarioDAO usuario2 = new UsuarioDAO(conexionBD);
-    
+
     @Override
     public boolean autenticarUsuario(String usuario, String contraseña) {
         if (usuario2.autenticarUsuario(usuario, contraseña)) {
@@ -64,117 +64,151 @@ public class Controlador implements IControlador{
 
     @Override
     public boolean registrarUsuario(Usuario usuario) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (usuario2.registrarUsuario(usuario)) {
+            return true;
+        }
+        return false;
     }
 
     @Override
     public UsuariosDTO actualizarUsuario(UsuariosDTO usuario) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        UsuariosDTO u = usuario2.actualizarUsuario(usuario);
+        return u;
     }
 
     @Override
     public ClienteDTO obtenerCliente(int idCliente) throws PersistenciaExcepcion {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ClienteDTO c = clienteDAO.obtenerCliente(idCliente);
+        return c;
     }
 
     @Override
     public ClienteDTO actualizarCliente(ClienteDTO cliente) throws PersistenciaExcepcion {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ClienteDTO c = actualizarCliente(cliente);
+        return c;
     }
 
     @Override
     public boolean registrarCliente(Cliente cliente) throws PersistenciaExcepcion {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (clienteDAO.registrarCliente(cliente)) {
+            return true;
+        }
+        return false;
     }
 
     @Override
     public List<Cuenta> obtenerCuentasCliente(int idCliente) throws PersistenciaExcepcion {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<Cuenta> c = obtenerCuentasCliente(idCliente);
+        return c;
     }
 
     @Override
     public CuentaDTO obtenerCuenta(int numeroCuenta) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        CuentaDTO c = obtenerCuenta(numeroCuenta);
+        return c;
     }
 
     @Override
     public int numeroCuenta(Cuenta cuenta) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        int c = numeroCuenta(cuenta);
+        return c;
     }
 
     @Override
     public boolean actualizarEstadoCuenta(int cuenta, int contraseña) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (cuentaDAO.actualizarEstadoCuenta(cuenta, contraseña)) {
+            return true;
+        }
+        return false;
     }
 
     @Override
     public Cuenta crearCuenta(Cuenta cuenta) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Cuenta c = crearCuenta(cuenta);
+        return c;
     }
 
     @Override
     public Cuenta crearCuentaNueva(Cuenta cuenta, int contraseña) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Cuenta c = crearCuentaNueva(cuenta, contraseña);
+        return c;
     }
 
     @Override
     public void sumarMonto(int cuenta, float monto) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        sumarMonto(cuenta, monto);
     }
 
     @Override
     public DireccionDTO obtenerDireccion(int idDireccion) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        DireccionDTO d = obtenerDireccion(idDireccion);
+        return d;
     }
 
     @Override
     public DireccionDTO actualizarDireccion(DireccionDTO direccion) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        DireccionDTO d = actualizarDireccion(direccion);
+        return d;
     }
 
     @Override
     public boolean registrarDireccion(Direccion direccion) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (this.direccion.registrarDireccion(direccion)) {
+            return true;
+        }
+        return false;
     }
 
     @Override
     public List<OperacionesDTO> obtenerHistorialOperaciones(int numeroCuenta, Date desde, Date hasta) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<OperacionesDTO> o = obtenerHistorialOperaciones(numeroCuenta, desde, hasta);
+        return o;
     }
 
     @Override
     public List<OperacionesDTO> obtenerHistorialOperaciones(int numeroCuenta, String tipo) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<OperacionesDTO> o = obtenerHistorialOperaciones(numeroCuenta, tipo);
+        return o;
     }
 
     @Override
     public boolean autenticarCobro(String folio, int contraseña) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (retiro.autenticarCobro(folio, contraseña)) {
+            return true;
+        }
+        return false;
     }
 
     @Override
     public SinCuenta generarSinCuenta(RetiroSinDTO sin) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        SinCuenta s = generarSinCuenta(sin);
+        return s;
     }
 
     @Override
     public String generarFolio() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String s = retiro.generarFolio();
+        return s;
     }
 
     @Override
     public int generarContraseña() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        int s = retiro.generarContraseña();
+        return s;
     }
 
     @Override
     public boolean actualizarEstado(int numCuenta) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (retiro.actualizarEstado(numCuenta)) {
+            return true;
+        }
+        return false;
     }
 
     @Override
     public TransferenciaDTO realizarTransferencia(TransferenciaDTO trans) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        TransferenciaDTO t = realizarTransferencia(trans);
+        return t;
     }
-    
+
 }

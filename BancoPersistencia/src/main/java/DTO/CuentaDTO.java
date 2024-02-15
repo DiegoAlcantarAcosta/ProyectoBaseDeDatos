@@ -11,24 +11,15 @@ import Entidades.Cliente;
  * @author lv1821
  */
 public class CuentaDTO {
-     private int numCuenta;
     private float saldo;
     private String fechaApertura, estado;
 
-    public CuentaDTO(int numCuenta, float saldo, String fechaApertura, String estado) {
-        this.numCuenta = numCuenta;
+    public CuentaDTO(float saldo, String fechaApertura, String estado) {
         this.saldo = saldo;
         this.fechaApertura = fechaApertura;
         this.estado = estado;
     }
 
-    public int getNumCuenta() {
-        return numCuenta;
-    }
-
-    public void setNumCuenta(int numCuenta) {
-        this.numCuenta = numCuenta;
-    }
 
     public float getSaldo() {
         return saldo;
@@ -58,7 +49,7 @@ public class CuentaDTO {
 
     @Override
     public String toString() {
-        return "CuentaDTO{" + "numCuenta=" + numCuenta + ", saldo=" + saldo + ", fechaApertura=" + fechaApertura  + ", estado=" + estado + '}';
+        return "CuentaDTO{" + ", saldo=" + saldo + ", fechaApertura=" + fechaApertura  + ", estado=" + estado + '}';
     }
 
     

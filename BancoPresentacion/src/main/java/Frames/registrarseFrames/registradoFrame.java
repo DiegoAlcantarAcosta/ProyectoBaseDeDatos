@@ -120,6 +120,7 @@ public class registradoFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarButtonActionPerformed
+        
         dispose();
         IniciarFrame i = new IniciarFrame();
         i.show();

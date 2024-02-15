@@ -66,7 +66,7 @@ public class ClienteDAO implements IClienteDAO {
 
     @Override
     public boolean registrarCliente(Cliente cliente) {
-        String sentenciaSQL = "INSERT INTO CLIENTES (nombre,apellidoPaterno,apellidoMaterno, fechaNacimiento, idUsuario, idDireccion) VALUES (?,?,?,?,?,?,?)";
+        String sentenciaSQL = "INSERT INTO CLIENTES (nombre,apellidoPaterno,apellidoMaterno, fechaNacimiento) VALUES (?,?,?,?)";
 
         try ( Connection conexion = this.conexionBD.crearConexion();  PreparedStatement comandoSQL = conexion.prepareStatement(sentenciaSQL, Statement.RETURN_GENERATED_KEYS);) {
             comandoSQL.setString(1, cliente.getNombre());

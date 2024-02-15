@@ -46,7 +46,7 @@ public class OperacionesDAO implements IOperacionesDAO {
                 String estado = resultado.getString("estado");
                 int idClientela = resultado.getInt("idCliente");
 
-                CuentaDTO cuenta = new CuentaDTO(numCuenta, saldo, fechaApertura, estado);
+                CuentaDTO cuenta = new CuentaDTO(saldo, fechaApertura, estado);
 
                 lista.add(cuenta);
             }

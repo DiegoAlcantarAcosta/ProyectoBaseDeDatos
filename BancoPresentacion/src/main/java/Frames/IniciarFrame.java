@@ -4,6 +4,7 @@
  */
 package Frames;
 
+import Controlador.Controlador;
 import Frames.registrarseFrames.RegistrarFrame;
 import Frames.sinCuenta.RetirarFrame;
 
@@ -13,6 +14,7 @@ import Frames.sinCuenta.RetirarFrame;
  */
 public class IniciarFrame extends javax.swing.JFrame {
 
+    Controlador c = new Controlador();
     /**
      * Creates new form IniciarFrame
      */
@@ -43,7 +45,6 @@ public class IniciarFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 255));
-        jPanel1.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel1.setFont(new java.awt.Font("Bodoni MT", 0, 48)); // NOI18N
         jLabel1.setText("VVBA");
@@ -184,9 +185,11 @@ public class IniciarFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_cobrarSinTarjetaButton1ActionPerformed
 
     private void iniciarSesionButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarSesionButton1ActionPerformed
-        SeleccionarCuentaFrame i = new SeleccionarCuentaFrame();
-        i.show();
-        dispose();
+        if (c.autenticarUsuario(usuarioTextField1.getText(), contraseñaTextField.getText())){
+            SeleccionarCuentaFrame i = new SeleccionarCuentaFrame();
+            i.show();
+            dispose();
+        }
     }//GEN-LAST:event_iniciarSesionButton1ActionPerformed
 
     /**

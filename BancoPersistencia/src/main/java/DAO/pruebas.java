@@ -12,6 +12,8 @@ import DTO.TransferenciaDTO;
 import Entidades.Direccion;
 import Entidades.Usuario;
 import Excepciones.PersistenciaExcepcion;
+import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
@@ -58,6 +60,17 @@ public class pruebas {
 //        TransferenciaDTO te = new TransferenciaDTO(123, 456, "TRANSFERENCIA", "2000-01-03",500);
 //        t.realizarTransferencia(te);
 
-System.out.println(    c.obtenerCliente(1));
+//System.out.println(    c.obtenerCliente(1));
+// Crear un objeto GregorianCalendar
+        GregorianCalendar calendario = new GregorianCalendar();
+
+        // Obtener el formato deseado
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy/MM/dd");
+
+        // Obtener la fecha formateada
+        String fechaFormateada = formatoFecha.format(calendario.getTime());
+
+        // Imprimir la fecha formateada
+        System.out.println("Fecha formateada: " + fechaFormateada);
     }
 }

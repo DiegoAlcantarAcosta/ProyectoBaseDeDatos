@@ -4,12 +4,15 @@
  */
 package Frames;
 
+import Controlador.Controlador;
+
 /**
  *
  * @author lv1821
  */
     public class CancelarCuentaFrame extends javax.swing.JFrame {
 
+        Controlador c = new Controlador();
     /**
      * Creates new form IniciarFrame
      */
@@ -138,7 +141,7 @@ package Frames;
     }//GEN-LAST:event_salirButtonActionPerformed
 
     private void cancelarCuentaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarCuentaButtonActionPerformed
-        // TODO add your handling code here:
+      
     }//GEN-LAST:event_cancelarCuentaButtonActionPerformed
 
     /**

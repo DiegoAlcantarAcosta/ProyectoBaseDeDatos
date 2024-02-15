@@ -4,11 +4,31 @@
  */
 package Frames.registrarseFrames;
 
+import Controlador.Controlador;
+import Controlador.IControlador;
+import DTO.ClienteDTO;
+import DTO.CuentaDTO;
+import DTO.DireccionDTO;
+import DTO.UsuariosDTO;
+import Entidades.Cliente;
+import Entidades.Cuenta;
+import Entidades.Direccion;
+import Entidades.Usuario;
+import Excepciones.PersistenciaExcepcion;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author lv1821
  */
 public class RegistrarFrame extends javax.swing.JFrame {
+
+    IControlador c = new Controlador();
 
     /**
      * Creates new form IniciarFrame
@@ -311,15 +331,33 @@ public class RegistrarFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_codigoPostalTextFieldActionPerformed
 
     private void registrarseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarseButtonActionPerformed
-        dispose();
+        GregorianCalendar calendario = new GregorianCalendar();
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy/MM/dd");
+        String fechaFormateada = formatoFecha.format(calendario.getTime());
+        
+        Usuario usuario = new Usuario(usuarioTextField.getText(), contraseñaTextField.getText());
+        Direccion direccion = new Direccion(calleTextField.getText(), coloniaTextField.getText(), numeroTextField.getText(), codigoPostalTextField.getText());
+        List<Cuenta> cuentas = null;
+        Cliente cliente = new Cliente(nombreTextField.getText(), apellidoPaternoTextField.getText(), apellidoMaternoTextField.getText(), fechaNacimientoDateChooser.getDateFormatString(), cuentas);
+         
+        try {
+            c.registrarCliente(cliente);
+            c.registrarDireccion(direccion);
+            c.registrarUsuario(usuario);
+        } catch (PersistenciaExcepcion ex) {
+            Logger.getLogger(RegistrarFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+
+   
         registradoFrame registrado = new registradoFrame();
         registrado.show();
+        
     }//GEN-LAST:event_registrarseButtonActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField apellidoMaternoTextField;

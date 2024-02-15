@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -41,7 +42,7 @@ public class CuentaDAO implements ICuentaDAO {
                 String estado = resultado.getString("estado");
                 int idCliente = resultado.getInt("idCliente");
 
-                CuentaDTO cuenta = new CuentaDTO(numCuenta, saldo, fechaApertura, estado);
+                CuentaDTO cuenta = new CuentaDTO(saldo, fechaApertura, estado);
                 return cuenta;
             }
             LOG.log(Level.INFO, "Se consultaron {0}");
@@ -62,8 +63,27 @@ public class CuentaDAO implements ICuentaDAO {
     }
 
     @Override
-    public Cuenta crearCuenta(Cuenta cuenta) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean crearCuenta(Cuenta cuenta) {
+        String sentenciaSQL = "INSERT INTO CUENTAS (saldo, fechaApertura, ) VALUES (?,?)";
+
+        try ( Connection conexion = this.conexionBD.crearConexion();  PreparedStatement comandoSQL = conexion.prepareStatement(sentenciaSQL, Statement.RETURN_GENERATED_KEYS);) {
+            comandoSQL.setFloat(1, cuenta.getSaldo());
+            comandoSQL.setString(2, cuenta.getFechaApertura());
+            int resultado = comandoSQL.executeUpdate();
+
+            LOG.log(Level.INFO, "se ha agregado {0}", resultado);
+
+            ResultSet res = comandoSQL.getGeneratedKeys();
+
+            res.next();
+
+            
+            return true;
+
+        } catch (SQLException e) {
+            LOG.log(Level.SEVERE, "No se pudo crear la cuenta", e);
+            return false;
+        }
     }
 
     @Override
