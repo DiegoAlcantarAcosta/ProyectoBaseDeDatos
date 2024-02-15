@@ -25,6 +25,15 @@ public class ClienteDTO {
         this.cuentas = cuentas;
     }
 
+    public ClienteDTO(String nombre, String apellidoPaterno, String apellidoMaterno, String fechaNacimiento) {
+        this.nombre = nombre;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+        this.fechaNacimiento = fechaNacimiento;
+    }
+    
+    
+
     public String getNombre() {
         return nombre;
     }

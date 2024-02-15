@@ -11,10 +11,15 @@ import Frames.sinCuenta.sinCuentaFrame;
  * @author lv1821
  */
 public class MenuFrame extends javax.swing.JFrame {
-
+    int num;
     /**
      * Creates new form IniciarFrame
      */
+    public MenuFrame(int numCuenta) {
+        this.num = numCuenta;
+        initComponents();
+    }
+
     public MenuFrame() {
         initComponents();
     }
@@ -173,7 +178,7 @@ public class MenuFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_sinCuentaItemActionPerformed
 
     private void transferirItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transferirItemActionPerformed
-       TransferirFrame i = new TransferirFrame();
+        TransferirFrame i = new TransferirFrame();
         i.show();
         dispose();
     }//GEN-LAST:event_transferirItemActionPerformed
@@ -185,9 +190,8 @@ public class MenuFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_depositoItemActionPerformed
 
     private void tusDatosItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tusDatosItemActionPerformed
-        TusDatosFrame i = new TusDatosFrame();
+        TusDatosFrame i = new TusDatosFrame(num);
         i.show();
-        dispose();
     }//GEN-LAST:event_tusDatosItemActionPerformed
 
     private void cancelarCuentaItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarCuentaItemActionPerformed
@@ -197,25 +201,24 @@ public class MenuFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelarCuentaItemActionPerformed
 
     private void crearCuentaItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearCuentaItemActionPerformed
-       CrearCuentaFrame i = new CrearCuentaFrame();
+        CrearCuentaFrame i = new CrearCuentaFrame();
         i.show();
         dispose();
     }//GEN-LAST:event_crearCuentaItemActionPerformed
 
     private void historialItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_historialItemActionPerformed
-         HistorialFrame i = new HistorialFrame();
+        HistorialFrame i = new HistorialFrame();
         i.show();
         dispose();
     }//GEN-LAST:event_historialItemActionPerformed
 
     private void salirItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirItemActionPerformed
-       dispose();
+        dispose();
     }//GEN-LAST:event_salirItemActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem cancelarCuentaItem;

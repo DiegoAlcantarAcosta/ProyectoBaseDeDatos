@@ -4,7 +4,21 @@
  */
 package Frames;
 
+import Controlador.Controlador;
+import Controlador.IControlador;
+import DTO.ClienteDTO;
+import DTO.DireccionDTO;
+import DTO.UsuariosDTO;
+import Entidades.Cliente;
+import Entidades.Cuenta;
+import Excepciones.PersistenciaExcepcion;
 import Frames.registrarseFrames.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -12,11 +26,18 @@ import Frames.registrarseFrames.*;
  */
 public class TusDatosFrame extends javax.swing.JFrame {
 
+    IControlador c = new Controlador();
+        int idCliente =0;
+        int num;
+
     /**
      * Creates new form IniciarFrame
      */
-    public TusDatosFrame() {
+    public TusDatosFrame(int numCuenta) {
+        this.num = numCuenta;
         initComponents();
+        String numero = ""+num;
+        numeroCuentaTextField.setText(numero);
     }
 
     /**
@@ -56,11 +77,11 @@ public class TusDatosFrame extends javax.swing.JFrame {
         salirButton = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
         numeroCuentaTextField = new javax.swing.JTextField();
+        aceptarButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 255));
-        jPanel1.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel1.setFont(new java.awt.Font("Bodoni MT", 0, 48)); // NOI18N
         jLabel1.setText("VVBA");
@@ -83,7 +104,7 @@ public class TusDatosFrame extends javax.swing.JFrame {
         );
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel2.setText("Registrarse");
+        jLabel2.setText("Tus datos");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel4.setText("Nombre:");
@@ -106,6 +127,7 @@ public class TusDatosFrame extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel6.setText("Calle:");
 
+        nombreTextField.setEditable(false);
         nombreTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nombreTextFieldActionPerformed(evt);
@@ -115,6 +137,7 @@ public class TusDatosFrame extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel7.setText("Apellido Paterno:");
 
+        apellidoPaternoTextField.setEditable(false);
         apellidoPaternoTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 apellidoPaternoTextFieldActionPerformed(evt);
@@ -124,9 +147,12 @@ public class TusDatosFrame extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel8.setText("Apellido Materno:");
 
+        fechaNacimientoDateChooser.setEnabled(false);
+
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel9.setText("Fecha de Nacimiento:");
 
+        apellidoMaternoTextField.setEditable(false);
         apellidoMaternoTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 apellidoMaternoTextFieldActionPerformed(evt);
@@ -139,12 +165,14 @@ public class TusDatosFrame extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel11.setText("Direccion");
 
+        calleTextField.setEditable(false);
         calleTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 calleTextFieldActionPerformed(evt);
             }
         });
 
+        coloniaTextField.setEditable(false);
         coloniaTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 coloniaTextFieldActionPerformed(evt);
@@ -157,12 +185,14 @@ public class TusDatosFrame extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel13.setText("Numero:");
 
+        numeroTextField.setEditable(false);
         numeroTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 numeroTextFieldActionPerformed(evt);
             }
         });
 
+        codigoPostalTextField.setEditable(false);
         codigoPostalTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 codigoPostalTextFieldActionPerformed(evt);
@@ -198,6 +228,14 @@ public class TusDatosFrame extends javax.swing.JFrame {
             }
         });
 
+        aceptarButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        aceptarButton.setText("Aceptar");
+        aceptarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aceptarButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -210,22 +248,27 @@ public class TusDatosFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel13)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(salirButton)
-                                .addComponent(jLabel14))
-                            .addComponent(jLabel15))
-                        .addGap(36, 36, 36)
+                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel12)
+                                    .addComponent(jLabel13)
+                                    .addComponent(jLabel14)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(salirButton)
+                                        .addComponent(jLabel15)))
+                                .addGap(36, 36, 36))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(aceptarButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(apellidoPaternoTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
                             .addComponent(contraseñaTextField)
@@ -244,7 +287,7 @@ public class TusDatosFrame extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(233, 233, 233)
                         .addComponent(jLabel11)))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -304,7 +347,8 @@ public class TusDatosFrame extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(actualizarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(salirButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(salirButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(aceptarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(30, 30, 30))))
         );
 
@@ -348,25 +392,72 @@ public class TusDatosFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_codigoPostalTextFieldActionPerformed
 
     private void actualizarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarButtonActionPerformed
-        // TODO add your handling code here:
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+        
+        ClienteDTO cliente = new ClienteDTO(nombreTextField.getText(), apellidoPaternoTextField.getText(), apellidoMaternoTextField.getText(), formatoFecha.format(fechaNacimientoDateChooser.getDate()));
+        DireccionDTO direccion = new DireccionDTO(calleTextField.getText(), coloniaTextField.getText(), numeroTextField.getText(), codigoPostalTextField.getText());
+        UsuariosDTO usuario = new UsuariosDTO(usuarioTextField.getText(), contraseñaTextField.getText());
+        try {
+            c.actualizarCliente(cliente, idCliente);
+            c.actualizarDireccion(direccion, idCliente);
+            c.actualizarUsuario(usuario, idCliente);
+        } catch (PersistenciaExcepcion ex) {
+            Logger.getLogger(TusDatosFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_actualizarButtonActionPerformed
 
     private void salirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirButtonActionPerformed
         dispose();
-        MenuFrame m = new MenuFrame();
-        m.show();
+        
     }//GEN-LAST:event_salirButtonActionPerformed
 
     private void numeroCuentaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numeroCuentaTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_numeroCuentaTextFieldActionPerformed
 
+    private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarButtonActionPerformed
+         idCliente = c.idClienteUsuario(c.idUsuario(contraseñaTextField.getText(), usuarioTextField.getText()));
+        try {
+            ClienteDTO cliente = c.obtenerCliente(idCliente);
+            nombreTextField.setText(cliente.getNombre());
+            apellidoPaternoTextField.setText(cliente.getApellidoPaterno());
+            apellidoMaternoTextField.setText(cliente.getApellidoMaterno());
+            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+            Date fecha;
+            try {
+                fecha = formato.parse(cliente.getFechaNacimiento());
+                fechaNacimientoDateChooser.setDate(fecha);
+            } catch (ParseException ex) {
+                Logger.getLogger(TusDatosFrame.class.getName()).log(Level.SEVERE, "ES AQUI", ex);
+            }
+
+            DireccionDTO direccion = c.obtenerDireccion(idCliente);
+            calleTextField.setText(direccion.getCalle());
+            coloniaTextField.setText(direccion.getColonia());
+            codigoPostalTextField.setText(direccion.getCodigoPostal());
+            numeroTextField.setText(direccion.getNumero());
+
+            nombreTextField.setEditable(true);
+            apellidoPaternoTextField.setEditable(true);
+            apellidoMaternoTextField.setEditable(true);
+            fechaNacimientoDateChooser.setEnabled(true);
+            calleTextField.setEditable(true);
+            coloniaTextField.setEditable(true);
+            codigoPostalTextField.setEditable(true);
+            numeroTextField.setEditable(true);
+        } catch (PersistenciaExcepcion ex) {
+            Logger.getLogger(TusDatosFrame.class.getName()).log(Level.SEVERE, "ES AQUI V2", ex);
+        }
+
+    }//GEN-LAST:event_aceptarButtonActionPerformed
+
+
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton aceptarButton;
     private javax.swing.JButton actualizarButton;
     private javax.swing.JTextField apellidoMaternoTextField;
     private javax.swing.JTextField apellidoPaternoTextField;

@@ -12,11 +12,19 @@ import Frames.IniciarFrame;
  */
 public class registradoFrame extends javax.swing.JFrame {
 
+    int id;
+    String contraseña;
+
     /**
      * Creates new form registradoFrame
      */
-    public registradoFrame() {
+    public registradoFrame(int id, String contraseña) {
+        this.id = id;
+        this.contraseña = contraseña;
+        String stringID = String.valueOf(id);
         initComponents();
+        numCuentaTextField.setText(stringID);
+        contraseñaTextField.setText(this.contraseña);
     }
 
     /**
@@ -39,7 +47,6 @@ public class registradoFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 255));
-        jPanel1.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel1.setFont(new java.awt.Font("Bodoni MT", 0, 48)); // NOI18N
         jLabel1.setText("VVBA");
@@ -62,6 +69,11 @@ public class registradoFrame extends javax.swing.JFrame {
         jLabel4.setText("Numero de cuenta:");
 
         numCuentaTextField.setEditable(false);
+        numCuentaTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                numCuentaTextFieldActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel5.setText("Contraseña:");
@@ -120,11 +132,15 @@ public class registradoFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarButtonActionPerformed
-        
+
         dispose();
         IniciarFrame i = new IniciarFrame();
         i.show();
     }//GEN-LAST:event_aceptarButtonActionPerformed
+
+    private void numCuentaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numCuentaTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_numCuentaTextFieldActionPerformed
 
     /**
      * @param args the command line arguments

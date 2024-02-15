@@ -45,9 +45,10 @@ public class DireccionDAO implements IDireccionDAO {
                 String codigoPostal = resultado.getString("codigoPostal");
 
                 DireccionDTO direccion = new DireccionDTO(calle, colonia, numero, codigoPostal);
+                LOG.log(Level.INFO, "Se consultaron {0}");
                 return direccion;
             }
-            LOG.log(Level.INFO, "Se consultaron {0}");
+
         } catch (SQLException e) {
             LOG.log(Level.SEVERE, sentencia, e);
         }
@@ -55,8 +56,30 @@ public class DireccionDAO implements IDireccionDAO {
     }
 
     @Override
-    public DireccionDTO actualizarDireccion(DireccionDTO direccion) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean actualizarDireccion(DireccionDTO direccion, int idDireccion) {
+        String sentenciaSQL = "UPDATE DIRECCIONES SET calle = ?, colonia = ?, numero = ?, codigoPostal = ? WHERE idDireccion = ?";
+
+        try ( Connection conexion = this.conexionBD.crearConexion();  PreparedStatement comandoSQL = conexion.prepareStatement(sentenciaSQL, Statement.RETURN_GENERATED_KEYS);) {
+            comandoSQL.setString(1, direccion.getCalle());
+            comandoSQL.setString(2, direccion.getColonia());
+            comandoSQL.setString(3, direccion.getNumero());
+            comandoSQL.setString(4, direccion.getCodigoPostal());
+            comandoSQL.setInt(5, idDireccion);
+      
+            int resultado = comandoSQL.executeUpdate();
+
+            LOG.log(Level.INFO, "Se ha actualizado {0}", resultado);
+
+            ResultSet res = comandoSQL.getGeneratedKeys();
+
+            res.next();
+
+            return true;
+
+        } catch (SQLException e) {
+            LOG.log(Level.SEVERE, "No se pudo actualizar la direccion");
+            return false;
+        }
     }
 
     @Override
@@ -94,18 +117,17 @@ public class DireccionDAO implements IDireccionDAO {
             comandoSQL.setString(1, calle);
             comandoSQL.setString(2, colonia);
             comandoSQL.setString(3, numero);
-            try (ResultSet resultado = comandoSQL.executeQuery()) {
+            try ( ResultSet resultado = comandoSQL.executeQuery()) {
                 // Si se encontró el cliente, obtener su ID
                 if (resultado.next()) {
                     idCliente = resultado.getInt("idDireccion");
                 }
             }
-            
-        }catch(SQLException e) {
+
+        } catch (SQLException e) {
             LOG.log(Level.SEVERE, "No se pudo crear la cuenta", e);
-            
+
         }
         return idCliente;
     }
 }
-   

@@ -27,9 +27,9 @@ import java.util.List;
 public interface IControlador {
     boolean autenticarUsuario(String usuario, String contraseña);
     public boolean registrarUsuario(Usuario usuario);
-    UsuariosDTO actualizarUsuario(UsuariosDTO usuario);
+    boolean actualizarUsuario(UsuariosDTO usuario, int idUsuario);
     ClienteDTO obtenerCliente(int idCliente)  throws PersistenciaExcepcion;
-    ClienteDTO actualizarCliente(ClienteDTO cliente)  throws PersistenciaExcepcion;
+    boolean actualizarCliente(ClienteDTO cliente, int idCliente)  throws PersistenciaExcepcion;
     boolean registrarCliente(Cliente cliente)  throws PersistenciaExcepcion;
     List<Cuenta> obtenerCuentasCliente(int idCliente) throws PersistenciaExcepcion;
     CuentaDTO obtenerCuenta(int numeroCuenta);
@@ -42,9 +42,12 @@ public interface IControlador {
     
     Cuenta crearCuentaNueva(Cuenta cuenta, int contraseña);
 
+    int idClienteUsuario(int idUsuario);
+    int idClienteDireccion(int idDireccion);
+    
     void sumarMonto(int cuenta,float monto);
     DireccionDTO obtenerDireccion(int idDireccion);
-    DireccionDTO actualizarDireccion(DireccionDTO direccion);
+    boolean actualizarDireccion(DireccionDTO direccion, int idDireccion);
     boolean registrarDireccion(Direccion direccion);
     List<OperacionesDTO> obtenerHistorialOperaciones(int numeroCuenta, Date desde, Date hasta);
     List<OperacionesDTO> obtenerHistorialOperaciones(int numeroCuenta, String tipo);

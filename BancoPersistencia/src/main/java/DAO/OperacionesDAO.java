@@ -9,7 +9,7 @@ import DTO.CuentaDTO;
 import DTO.OperacionesDTO;
 import Entidades.Operaciones;
 import java.sql.Connection;
-import java.sql.Date;
+import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,6 +29,11 @@ public class OperacionesDAO implements IOperacionesDAO {
 
     public OperacionesDAO(IConexion conexionBD) {
         this.conexionBD = conexionBD;
+    }
+
+    @Override
+    public List<OperacionesDTO> obtenerHistorialOperaciones(int numeroCuenta, String tipo) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
@@ -59,11 +64,6 @@ public class OperacionesDAO implements IOperacionesDAO {
             return null;
         }
     }
+
     
-
-    @Override
-    public List<OperacionesDTO> obtenerHistorialOperaciones(int numeroCuenta, String tipo) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
 }

@@ -6,7 +6,7 @@ package DAO;
 
 import DTO.OperacionesDTO;
 import Entidades.Operaciones;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 /**

@@ -29,7 +29,7 @@ public class pruebas {
 
         String cadenaConexion = "jdbc:mysql://localhost:3306/banco";
         String usuario = "root";
-        String contraseña = "2608jlml";
+        String contraseña = "2004";
 
         IConexion conexion = new Conexion(cadenaConexion, usuario, contraseña);
 
@@ -38,7 +38,7 @@ public class pruebas {
 //        List<CuentaDTO> c2 = c.obtenerCuentasCliente(1);
 //
 //        for (int i = 0; i < c2.size(); i++) {
-//            System.out.println(c2.get(i).getNumCuenta());
+//            System.out.println(c2.get(i).getSaldo());
 //
 //        }
         IUsuarioDAO usuarioTest = new UsuarioDAO(conexion);
@@ -74,8 +74,8 @@ public class pruebas {
 //        System.out.println("Fecha formateada: " + fechaFormateada);
 
            ICuentaDAO cuenta = new CuentaDAO(conexion);
-           System.out.println(usuarioTest.idUsuario("a", "a"));
+//           System.out.println(usuarioTest.idUsuario("a", "a"));
         
-    
+           System.out.println(c.idClienteDireccion(1));
     }
 }

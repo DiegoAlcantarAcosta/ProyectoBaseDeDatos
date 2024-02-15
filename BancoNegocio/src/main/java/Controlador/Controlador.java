@@ -44,12 +44,12 @@ public class Controlador implements IControlador {
 
     String cadenaConexion = "jdbc:mysql://localhost:3306/banco";
     String usuario = "root";
-    String contrasenia = "2608jlml";
+    String contrasenia = "2004";
     IConexion conexionBD = new Conexion(cadenaConexion, usuario, contrasenia);
     IClienteDAO clienteDAO = new ClienteDAO(conexionBD);
     ICuentaDAO cuentaDAO = new CuentaDAO(conexionBD);
     IDireccionDAO direccion = new DireccionDAO(conexionBD);
-    IOperacionesDAO operaciones = new OperacionesDAO(conexionBD);
+    IOperacionesDAO operacionesDAO = new OperacionesDAO(conexionBD);
     IRetiroSinDAO retiro = new RetiroSinDAO(conexionBD);
     ITransferenciaDAO transferencia = new TransferenciaDAO(conexionBD);
     IUsuarioDAO usuario2 = new UsuarioDAO(conexionBD);
@@ -71,9 +71,11 @@ public class Controlador implements IControlador {
     }
 
     @Override
-    public UsuariosDTO actualizarUsuario(UsuariosDTO usuario) {
-        UsuariosDTO u = usuario2.actualizarUsuario(usuario);
-        return u;
+    public boolean actualizarUsuario(UsuariosDTO usuario, int idUsuario) {
+        if(usuario2.actualizarUsuario(usuario, idUsuario)){
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -83,9 +85,11 @@ public class Controlador implements IControlador {
     }
 
     @Override
-    public ClienteDTO actualizarCliente(ClienteDTO cliente) throws PersistenciaExcepcion {
-        ClienteDTO c = actualizarCliente(cliente);
-        return c;
+    public boolean actualizarCliente(ClienteDTO cliente, int idCliente) throws PersistenciaExcepcion {
+        if(clienteDAO.actualizarCliente(cliente, idCliente)) {
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -98,19 +102,19 @@ public class Controlador implements IControlador {
 
     @Override
     public List<Cuenta> obtenerCuentasCliente(int idCliente) throws PersistenciaExcepcion {
-        List<Cuenta> c = obtenerCuentasCliente(idCliente);
+        List<Cuenta> c = clienteDAO.obtenerCuentasCliente(idCliente);
         return c;
     }
 
     @Override
     public CuentaDTO obtenerCuenta(int numeroCuenta) {
-        CuentaDTO c = obtenerCuenta(numeroCuenta);
+        CuentaDTO c = cuentaDAO.obtenerCuenta(numeroCuenta);
         return c;
     }
 
     @Override
     public int numeroCuenta(Cuenta cuenta) {
-        int c = numeroCuenta(cuenta);
+        int c = cuentaDAO.numeroCuenta(cuenta);
         return c;
     }
 
@@ -132,7 +136,7 @@ public class Controlador implements IControlador {
 
     @Override
     public Cuenta crearCuentaNueva(Cuenta cuenta, int contraseña) {
-        Cuenta c = crearCuentaNueva(cuenta, contraseña);
+        Cuenta c = cuentaDAO.crearCuentaNueva(cuenta, contraseña);
         return c;
     }
 
@@ -143,14 +147,16 @@ public class Controlador implements IControlador {
 
     @Override
     public DireccionDTO obtenerDireccion(int idDireccion) {
-        DireccionDTO d = obtenerDireccion(idDireccion);
+        DireccionDTO d = direccion.obtenerDireccion(idDireccion);
         return d;
     }
 
     @Override
-    public DireccionDTO actualizarDireccion(DireccionDTO direccion) {
-        DireccionDTO d = actualizarDireccion(direccion);
-        return d;
+    public boolean actualizarDireccion(DireccionDTO direccion, int idDireccion) {
+        if(this.direccion.actualizarDireccion(direccion, idDireccion)){
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -161,15 +167,11 @@ public class Controlador implements IControlador {
         return false;
     }
 
-    @Override
-    public List<OperacionesDTO> obtenerHistorialOperaciones(int numeroCuenta, Date desde, Date hasta) {
-        List<OperacionesDTO> o = obtenerHistorialOperaciones(numeroCuenta, desde, hasta);
-        return o;
-    }
+    
 
     @Override
     public List<OperacionesDTO> obtenerHistorialOperaciones(int numeroCuenta, String tipo) {
-        List<OperacionesDTO> o = obtenerHistorialOperaciones(numeroCuenta, tipo);
+        List<OperacionesDTO> o = operacionesDAO.obtenerHistorialOperaciones(numeroCuenta, tipo);
         return o;
     }
 
@@ -237,4 +239,21 @@ public class Controlador implements IControlador {
         return idUsuario;
     }
 
+    @Override
+    public int idClienteUsuario(int idUsuario) {
+        int idClienteUsuario = clienteDAO.idClienteUsuario(idUsuario);
+        return idClienteUsuario;
+    }
+
+    @Override
+    public int idClienteDireccion(int idDireccion) {
+        int idClienteDireccion = clienteDAO.idClienteDireccion(idDireccion);
+        return idClienteDireccion;
+    }
+
+    @Override
+    public List<OperacionesDTO> obtenerHistorialOperaciones(int numeroCuenta, Date desde, Date hasta) {
+        List<OperacionesDTO> o = operacionesDAO.obtenerHistorialOperaciones(numeroCuenta, desde, hasta);
+        return o;
+    }
 }

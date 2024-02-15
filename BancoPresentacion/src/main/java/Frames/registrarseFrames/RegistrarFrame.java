@@ -334,27 +334,26 @@ public class RegistrarFrame extends javax.swing.JFrame {
         GregorianCalendar calendario = new GregorianCalendar();
         SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
         String fechaFormateada = formatoFecha.format(calendario.getTime());
-        
+
         Usuario usuario = new Usuario(usuarioTextField.getText(), contraseñaTextField.getText());
         Direccion direccion = new Direccion(calleTextField.getText(), coloniaTextField.getText(), numeroTextField.getText(), codigoPostalTextField.getText());
-        List<Cuenta> cuentas = null;
-        Cliente cliente = new Cliente(nombreTextField.getText(), apellidoPaternoTextField.getText(), apellidoMaternoTextField.getText(),formatoFecha.format(fechaNacimientoDateChooser.getDate()) , cuentas);
-        
+        Cliente cliente = new Cliente(nombreTextField.getText(), apellidoPaternoTextField.getText(), apellidoMaternoTextField.getText(), formatoFecha.format(fechaNacimientoDateChooser.getDate()));
+
         try {
             c.registrarCliente(cliente);
             c.registrarDireccion(direccion);
             c.registrarUsuario(usuario);
-            Cuenta cuenta = new Cuenta(0, fechaFormateada, c.idCliente(nombreTextField.getText(),apellidoPaternoTextField.getText()));
+            Cuenta cuenta = new Cuenta(0, fechaFormateada, c.idCliente(nombreTextField.getText(), apellidoPaternoTextField.getText()));
             c.crearCuenta(cuenta);
+            int idCliente = c.idCliente(nombreTextField.getText(), apellidoPaternoTextField.getText());
+            registradoFrame registrado = new registradoFrame(idCliente, contraseñaTextField.getText());
+            registrado.show();
+            dispose();
         } catch (PersistenciaExcepcion ex) {
             Logger.getLogger(RegistrarFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
 
-   
-        registradoFrame registrado = new registradoFrame();
-        registrado.show();
-        
+
     }//GEN-LAST:event_registrarseButtonActionPerformed
 
     /**

@@ -4,17 +4,33 @@
  */
 package Frames;
 
+import Controlador.Controlador;
+import Controlador.IControlador;
+import DAO.ClienteDAO;
+import DTO.CuentaDTO;
+import Entidades.Cuenta;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
+
 /**
  *
  * @author lv1821
  */
 public class SeleccionarCuentaFrame extends javax.swing.JFrame {
 
+    IControlador c = new Controlador();
+    private static final Logger LOG = Logger.getLogger(SeleccionarCuentaFrame.class.getName());
+    int idUsuario;
+    
     /**
      * Creates new form IniciarFrame
      */
-    public SeleccionarCuentaFrame() {
+    public SeleccionarCuentaFrame(int id) {
+        this.idUsuario = id;
         initComponents();
+        añadirAlComboBox();
     }
 
     /**
@@ -32,12 +48,11 @@ public class SeleccionarCuentaFrame extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         salirButton = new javax.swing.JButton();
         seleccionarButton = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cuentassComboBoxModel = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 255));
-        jPanel1.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel1.setFont(new java.awt.Font("Bodoni MT", 0, 48)); // NOI18N
         jLabel1.setText("VVBA");
@@ -78,8 +93,6 @@ public class SeleccionarCuentaFrame extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -92,16 +105,15 @@ public class SeleccionarCuentaFrame extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addGap(133, 133, 133))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(salirButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(seleccionarButton))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(48, 48, 48)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(100, 100, 100))))
+                        .addComponent(salirButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(seleccionarButton)
+                        .addGap(100, 100, 100))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(26, 26, 26)
+                        .addComponent(cuentassComboBoxModel, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(54, 54, 54))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -110,10 +122,10 @@ public class SeleccionarCuentaFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addGap(62, 62, 62)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(66, 66, 66)
+                    .addComponent(cuentassComboBoxModel, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(61, 61, 61)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(salirButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(seleccionarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -127,19 +139,35 @@ public class SeleccionarCuentaFrame extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_salirButtonActionPerformed
 
+    public void añadirAlComboBox() {
+        try {
+            List<Cuenta> cuenta = c.obtenerCuentasCliente(idUsuario);
+            DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+            
+            for (int i = 0; i < cuenta.size(); i++) {
+                modelo.addElement(cuenta.get(i).getNumCuenta());
+            }
+
+            cuentassComboBoxModel.setModel(modelo);
+
+        } catch (Exception e) {
+            LOG.log(Level.SEVERE, "No se pudo mostrar el telefono");
+        }
+    }
+
     private void seleccionarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seleccionarButtonActionPerformed
         dispose();
-        MenuFrame menu = new MenuFrame();
+        int numCuenta = (int) cuentassComboBoxModel.getSelectedItem();
+        MenuFrame menu = new MenuFrame(numCuenta);
         menu.show();
     }//GEN-LAST:event_seleccionarButtonActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cuentassComboBoxModel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;

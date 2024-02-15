@@ -50,7 +50,7 @@ public class ClienteDAO implements IClienteDAO {
                 String fechaNacimiento = resultado.getString("fechaNacimiento");
                 
 
-                ClienteDTO cliente = new ClienteDTO(nombre, apellidoPaterno, apellidoMaterno, fechaNacimiento,obtenerCuentasCliente(id));
+                ClienteDTO cliente = new ClienteDTO(nombre, apellidoPaterno, apellidoMaterno, fechaNacimiento);
                 
                 return cliente;
             }
@@ -62,8 +62,30 @@ public class ClienteDAO implements IClienteDAO {
     }
 
     @Override
-    public ClienteDTO actualizarCliente(ClienteDTO cliente) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean actualizarCliente(ClienteDTO cliente, int idCliente) {
+        String sentenciaSQL = "UPDATE Clientes SET nombre = ?, apellidoPaterno = ?, apellidoMaterno = ?, fechaNacimiento = ? WHERE idCliente = ?";
+
+        try ( Connection conexion = this.conexionBD.crearConexion();  PreparedStatement comandoSQL = conexion.prepareStatement(sentenciaSQL, Statement.RETURN_GENERATED_KEYS);) {
+            comandoSQL.setString(1, cliente.getNombre());
+            comandoSQL.setString(2, cliente.getApellidoPaterno());
+            comandoSQL.setString(3, cliente.getApellidoMaterno());
+            comandoSQL.setString(4, cliente.getFechaNacimiento());
+            comandoSQL.setInt(5, idCliente);
+      
+            int resultado = comandoSQL.executeUpdate();
+
+            LOG.log(Level.INFO, "Se ha actualizado {0}", resultado);
+
+            ResultSet res = comandoSQL.getGeneratedKeys();
+
+            res.next();
+
+            return true;
+
+        } catch (SQLException e) {
+            LOG.log(Level.SEVERE, "No se pudo actualizar el cliente");
+            return false;
+        }
     }
 
     @Override
@@ -83,7 +105,7 @@ public class ClienteDAO implements IClienteDAO {
             ResultSet res = comandoSQL.getGeneratedKeys();
 
             res.next();
-            try (CallableStatement cstmt = conexion.prepareCall("{call calcularEdadCliente()}")) {
+           try (CallableStatement cstmt = conexion.prepareCall("{call calcularEdadCliente()}")) {
                 // Establecer el valor del parámetro de entrada
                 
                 
@@ -145,5 +167,47 @@ public class ClienteDAO implements IClienteDAO {
             
         }
         return idCliente;
+    }
+
+    @Override
+    public int idClienteUsuario(int idUsuario) {
+        int idCliente = -1;
+        String sentenciaSQL = "SELECT idCliente FROM CLIENTES WHERE idUsuario = ?";
+        try ( Connection conexion = this.conexionBD.crearConexion();  PreparedStatement comandoSQL = conexion.prepareStatement(sentenciaSQL, Statement.RETURN_GENERATED_KEYS);) {
+            comandoSQL.setInt(1, idUsuario);
+  
+            try (ResultSet resultado = comandoSQL.executeQuery()) {
+                // Si se encontró el cliente, obtener su ID
+                if (resultado.next()) {
+                    idCliente = resultado.getInt("idCliente");
+                }
+            }
+            
+        }catch(SQLException e) {
+            LOG.log(Level.SEVERE, "No se pudo crear la cuenta", e);
+            
+        }
+        return idCliente;
+    }
+
+    @Override
+    public int idClienteDireccion(int idCliente) {
+        int x = -1;
+        String sentenciaSQL = "SELECT idDireccion FROM CLIENTES WHERE idCliente = ?";
+        try ( Connection conexion = this.conexionBD.crearConexion();  PreparedStatement comandoSQL = conexion.prepareStatement(sentenciaSQL, Statement.RETURN_GENERATED_KEYS);) {
+            comandoSQL.setInt(1, idCliente);
+  
+            try (ResultSet resultado = comandoSQL.executeQuery()) {
+                // Si se encontró el cliente, obtener su ID
+                if (resultado.next()) {
+                    x = resultado.getInt("idDireccion");
+                }
+            }
+            
+        }catch(SQLException e) {
+            LOG.log(Level.SEVERE, "No se pudo crear la cuenta", e);
+            
+        }
+        return x;
     }
 }

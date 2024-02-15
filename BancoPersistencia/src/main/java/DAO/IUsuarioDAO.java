@@ -14,6 +14,6 @@ import Entidades.Usuario;
 public interface IUsuarioDAO {
     boolean autenticarUsuario(String usuario, String contraseña);
     public boolean registrarUsuario(Usuario usuario);
-    UsuariosDTO actualizarUsuario(UsuariosDTO usuario);
+    boolean actualizarUsuario(UsuariosDTO usuario, int idUsuario);
     int idUsuario(String contraseña, String Usuario);
 }

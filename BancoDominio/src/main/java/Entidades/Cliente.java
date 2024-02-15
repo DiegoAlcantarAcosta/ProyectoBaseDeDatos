@@ -33,6 +33,15 @@ public class Cliente {
         this.cuentas = cuentas;
     }
 
+    public Cliente(String nombre, String apellidoPaterno, String apellidoMaterno, String fechaNacimiento) {
+        this.nombre = nombre;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+        this.fechaNacimiento = fechaNacimiento;
+    }
+    
+    
+
     public Cliente() {
     }
 

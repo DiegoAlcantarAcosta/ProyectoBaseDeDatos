@@ -13,7 +13,8 @@ import Entidades.Direccion;
  */
 public interface IDireccionDAO {
     DireccionDTO obtenerDireccion(int idDireccion);
-    DireccionDTO actualizarDireccion(DireccionDTO direccion);
+    boolean actualizarDireccion(DireccionDTO direccion, int idDireccion);
     boolean registrarDireccion(Direccion direccion);
     int idDireccion(String calle, String colonia, String numero);
+    
 }

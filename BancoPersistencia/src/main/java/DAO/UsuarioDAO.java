@@ -74,33 +74,28 @@ public class UsuarioDAO implements IUsuarioDAO {
     }
 
     @Override
-    public UsuariosDTO actualizarUsuario(UsuariosDTO usuario) {
-//       String sentenciaSQL = "UPDATE USUARIOS SET nombre = ?, apellidoPaterno = ?, apellidoMaterno = ?, telefono = ?, fechaInicio = ? WHERE idUsuario = ?";
-//
-//        try ( Connection conexion = this.conexionBD.crearConexion();  PreparedStatement comandoSQL = conexion.prepareStatement(sentenciaSQL, Statement.RETURN_GENERATED_KEYS);) {
-//            comandoSQL.setString(1, activista.getNombre());
-//            comandoSQL.setString(2, activista.getApellidoPaterno());
-//            comandoSQL.setString(3, activista.getApellidoMaterno());
-//            comandoSQL.setString(4, activista.getTelefono());
-//            comandoSQL.setString(5, activista.getFechaInicio());
-//            comandoSQL.setInt(6, activista.getId());
-//            int resultado = comandoSQL.executeUpdate();
-//
-//            LOG.log(Level.INFO, "Se ha actualizado {0}", resultado);
-//
-//            ResultSet res = comandoSQL.getGeneratedKeys();
-//
-//            res.next();
-//
-//            Activista activistaGuardado = new Activista(res.getInt(1), activista.getNombre(), activista.getApellidoPaterno(), activista.getApellidoMaterno(), activista.getTelefono(), activista.getFechaInicio());
-//
-//            return true;
-//
-//        } catch (SQLException e) {
-//            LOG.log(Level.SEVERE, "No se pudo actualizar el activista");
-//            return false;
-//        }
-        return null;
+    public boolean actualizarUsuario(UsuariosDTO usuario, int idUsuario) {
+        String sentenciaSQL = "UPDATE USUARIOS SET nombreUsuario = ?, contraseña = ? WHERE idUsuario = ?";
+
+        try ( Connection conexion = this.conexionBD.crearConexion();  PreparedStatement comandoSQL = conexion.prepareStatement(sentenciaSQL, Statement.RETURN_GENERATED_KEYS);) {
+            comandoSQL.setString(1, usuario.getNombreUsuario());
+            comandoSQL.setString(2, usuario.getContraseña());
+            comandoSQL.setInt(3, idUsuario);
+      
+            int resultado = comandoSQL.executeUpdate();
+
+            LOG.log(Level.INFO, "Se ha actualizado {0}", resultado);
+
+            ResultSet res = comandoSQL.getGeneratedKeys();
+
+            res.next();
+
+            return true;
+
+        } catch (SQLException e) {
+            LOG.log(Level.SEVERE, "No se pudo actualizar el cliente");
+            return false;
+        }
     }
 
     @Override
