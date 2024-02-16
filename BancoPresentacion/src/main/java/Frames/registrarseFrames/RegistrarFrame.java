@@ -10,6 +10,7 @@ import DTO.ClienteDTO;
 import DTO.CuentaDTO;
 import DTO.DireccionDTO;
 import DTO.UsuariosDTO;
+import Encriptador.Encriptador;
 import Entidades.Cliente;
 import Entidades.Cuenta;
 import Entidades.Direccion;
@@ -27,6 +28,7 @@ import java.util.logging.Logger;
  * @author lv1821
  */
 public class RegistrarFrame extends javax.swing.JFrame {
+    Encriptador e = new Encriptador();
 
     IControlador c = new Controlador();
 
@@ -335,7 +337,7 @@ public class RegistrarFrame extends javax.swing.JFrame {
         SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
         String fechaFormateada = formatoFecha.format(calendario.getTime());
 
-        Usuario usuario = new Usuario(usuarioTextField.getText(), contraseñaTextField.getText());
+        Usuario usuario = new Usuario(usuarioTextField.getText(), e.encriptador(contraseñaTextField.getText()));
         Direccion direccion = new Direccion(calleTextField.getText(), coloniaTextField.getText(), numeroTextField.getText(), codigoPostalTextField.getText());
         Cliente cliente = new Cliente(nombreTextField.getText(), apellidoPaternoTextField.getText(), apellidoMaternoTextField.getText(), formatoFecha.format(fechaNacimientoDateChooser.getDate()));
 

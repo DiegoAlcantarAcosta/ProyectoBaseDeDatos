@@ -5,6 +5,7 @@
 package Frames;
 
 import Controlador.Controlador;
+import Encriptador.Encriptador;
 import Frames.registrarseFrames.RegistrarFrame;
 import Frames.sinCuenta.RetirarFrame;
 
@@ -13,7 +14,7 @@ import Frames.sinCuenta.RetirarFrame;
  * @author lv1821
  */
 public class IniciarFrame extends javax.swing.JFrame {
-
+    Encriptador e = new Encriptador();
     Controlador c = new Controlador();
     /**
      * Creates new form IniciarFrame
@@ -185,8 +186,8 @@ public class IniciarFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_cobrarSinTarjetaButton1ActionPerformed
 
     private void iniciarSesionButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarSesionButton1ActionPerformed
-       int idUsuario = c.idUsuario(contraseñaTextField.getText(), usuarioTextField1.getText());
-        if (c.autenticarUsuario(usuarioTextField1.getText(), contraseñaTextField.getText())){
+       int idUsuario = c.idUsuario(e.encriptador(contraseñaTextField.getText()), usuarioTextField1.getText());
+        if (c.autenticarUsuario(usuarioTextField1.getText(), e.encriptador(contraseñaTextField.getText()))){
             SeleccionarCuentaFrame i = new SeleccionarCuentaFrame(idUsuario);
             i.show();
             dispose();

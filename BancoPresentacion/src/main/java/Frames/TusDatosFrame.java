@@ -9,6 +9,7 @@ import Controlador.IControlador;
 import DTO.ClienteDTO;
 import DTO.DireccionDTO;
 import DTO.UsuariosDTO;
+import Encriptador.Encriptador;
 import Entidades.Cliente;
 import Entidades.Cuenta;
 import Excepciones.PersistenciaExcepcion;
@@ -25,7 +26,7 @@ import java.util.logging.Logger;
  * @author lv1821
  */
 public class TusDatosFrame extends javax.swing.JFrame {
-
+    Encriptador e = new Encriptador();
     IControlador c = new Controlador();
         int idCliente =0;
         int num;
@@ -396,7 +397,7 @@ public class TusDatosFrame extends javax.swing.JFrame {
         
         ClienteDTO cliente = new ClienteDTO(nombreTextField.getText(), apellidoPaternoTextField.getText(), apellidoMaternoTextField.getText(), formatoFecha.format(fechaNacimientoDateChooser.getDate()));
         DireccionDTO direccion = new DireccionDTO(calleTextField.getText(), coloniaTextField.getText(), numeroTextField.getText(), codigoPostalTextField.getText());
-        UsuariosDTO usuario = new UsuariosDTO(usuarioTextField.getText(), contraseñaTextField.getText());
+        UsuariosDTO usuario = new UsuariosDTO(usuarioTextField.getText(), e.encriptador(contraseñaTextField.getText()));
         try {
             c.actualizarCliente(cliente, idCliente);
             c.actualizarDireccion(direccion, idCliente);
@@ -416,7 +417,7 @@ public class TusDatosFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_numeroCuentaTextFieldActionPerformed
 
     private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarButtonActionPerformed
-         idCliente = c.idClienteUsuario(c.idUsuario(contraseñaTextField.getText(), usuarioTextField.getText()));
+         idCliente = c.idClienteUsuario(c.idUsuario(e.encriptador(contraseñaTextField.getText()), usuarioTextField.getText()));
         try {
             ClienteDTO cliente = c.obtenerCliente(idCliente);
             nombreTextField.setText(cliente.getNombre());

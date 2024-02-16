@@ -4,6 +4,7 @@
  */
 package Frames;
 
+import Encriptador.Encriptador;
 import Frames.registrarseFrames.RegistrarFrame;
 
 /**
@@ -18,6 +19,13 @@ public class test {
     public static void main(String[] args) {
       IniciarFrame i = new IniciarFrame();
               i.show();
+//        Encriptador e = new Encriptador();
+//        String contraseña = "HOLAYOHAN";
+//        System.out.println(contraseña);
+//        String encriptado = e.encriptador(contraseña);
+//        System.out.println(encriptado);
+//        String desencriptado = e.desencriptador(encriptado);
+//        System.out.println(desencriptado);
     }
-    
+
 }
