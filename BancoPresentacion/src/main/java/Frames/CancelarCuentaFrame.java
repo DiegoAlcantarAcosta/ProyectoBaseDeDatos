@@ -5,6 +5,7 @@
 package Frames;
 
 import Controlador.Controlador;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,10 +14,14 @@ import Controlador.Controlador;
     public class CancelarCuentaFrame extends javax.swing.JFrame {
 
         Controlador c = new Controlador();
+        int num;
+        String contra;
     /**
      * Creates new form IniciarFrame
      */
-    public CancelarCuentaFrame() {
+    public CancelarCuentaFrame(int numCuenta, String contraseña) {
+        this.contra = contraseña;
+        this.num = numCuenta;
         initComponents();
     }
 
@@ -136,12 +141,17 @@ import Controlador.Controlador;
 
     private void salirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirButtonActionPerformed
         dispose();
-        MenuFrame m = new MenuFrame();
-        m.show();
     }//GEN-LAST:event_salirButtonActionPerformed
 
     private void cancelarCuentaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarCuentaButtonActionPerformed
-      
+      if(contra.equals(contraseñaTextField.getText())){
+        c.actualizarEstadoCuenta(num);
+            System.out.println("Cancelada");
+        dispose();
+        } else {
+            JOptionPane j = new JOptionPane("No se pudo cancelar la cuenta");
+            System.out.println("No se pudo cancelr");
+        }
     }//GEN-LAST:event_cancelarCuentaButtonActionPerformed
 
     /**

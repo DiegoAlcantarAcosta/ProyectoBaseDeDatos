@@ -45,4 +45,23 @@ public class TransferenciaDAO implements ITransferenciaDAO {
             return null;
         }
     }
+
+    @Override
+    public boolean depositar(int cuenta, float monto) {
+        String sentenciaSQL = "CALL depositar_en_cuenta(?,?);";
+
+        try ( Connection conexion = this.conexionBD.crearConexion();  PreparedStatement comandoSQL = conexion.prepareCall(sentenciaSQL);) {
+            comandoSQL.setInt(1, cuenta);
+            comandoSQL.setFloat(2, monto);
+            ResultSet resultado = comandoSQL.executeQuery();
+
+//            TransferenciaDTO tra = new TransferenciaDTO(trans.getIdCuenta(), trans.getIdCuentaDestino(), "TRANSFERENCIA", trans.getFecha(),trans.getMonto());
+            LOG.log(Level.INFO, "Se transfirieron {0}");
+            return true;
+
+        } catch (SQLException e) {
+            LOG.log(Level.SEVERE, sentenciaSQL, e);
+            return false;
+        }
+    }
 }

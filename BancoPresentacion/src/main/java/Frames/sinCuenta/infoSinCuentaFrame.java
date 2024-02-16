@@ -4,17 +4,22 @@
  */
 package Frames.sinCuenta;
 
+import Controlador.Controlador;
+
 /**
  *
  * @author Diego
  */
 public class infoSinCuentaFrame extends javax.swing.JFrame {
-
+Controlador c = new Controlador();
     /**
      * Creates new form registradoFrame
      */
     public infoSinCuentaFrame() {
         initComponents();
+        folioTextField.setText(c.generarFolio());
+        String contra = ""+c.generarContraseña();
+        contraseñaTextField.setText(contra);
     }
 
     /**

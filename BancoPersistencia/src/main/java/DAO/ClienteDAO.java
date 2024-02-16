@@ -123,7 +123,7 @@ public class ClienteDAO implements IClienteDAO {
 
     @Override
     public List<Cuenta> obtenerCuentasCliente(int idCliente) {
-        String sentencia = "SELECT * FROM CUENTAS WHERE idCliente = ?";
+        String sentencia = "SELECT * FROM CUENTAS WHERE idCliente = ? and estado = 'ACTIVO'";
         List<Cuenta> lista = new ArrayList<>();
 
         try ( Connection conexion = this.conexionBD.crearConexion();  PreparedStatement comandoSQL = conexion.prepareCall(sentencia);) {
@@ -146,7 +146,7 @@ public class ClienteDAO implements IClienteDAO {
 
         } catch (SQLException e) {
             LOG.log(Level.SEVERE, sentencia, e);
-            return null;
+            return lista;
         }
     }
     public int idCliente(String nombre, String Paterno){

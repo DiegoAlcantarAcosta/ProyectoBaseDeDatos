@@ -4,6 +4,7 @@
  */
 package Frames.sinCuenta;
 
+import Controlador.Controlador;
 import Frames.MenuFrame;
 
 /**
@@ -11,7 +12,7 @@ import Frames.MenuFrame;
  * @author Diego
  */
 public class sinCuentaFrame extends javax.swing.JFrame {
-
+    Controlador c = new Controlador();
     /**
      * Creates new form registradoFrame
      */

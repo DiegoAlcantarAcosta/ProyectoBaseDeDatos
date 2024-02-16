@@ -13,5 +13,6 @@ import DTO.TransferenciaDTO;
  */
 public interface ITransferenciaDAO {
     TransferenciaDTO realizarTransferencia(TransferenciaDTO trans);
+    boolean depositar(int cuenta, float monto);
         
 }

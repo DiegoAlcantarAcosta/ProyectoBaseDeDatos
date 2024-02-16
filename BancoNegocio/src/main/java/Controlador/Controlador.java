@@ -119,8 +119,8 @@ public class Controlador implements IControlador {
     }
 
     @Override
-    public boolean actualizarEstadoCuenta(int cuenta, int contraseña) {
-        if (cuentaDAO.actualizarEstadoCuenta(cuenta, contraseña)) {
+    public boolean actualizarEstadoCuenta(int cuenta) {
+        if (cuentaDAO.actualizarEstadoCuenta(cuenta)) {
             return true;
         }
         return false;
@@ -255,5 +255,12 @@ public class Controlador implements IControlador {
     public List<OperacionesDTO> obtenerHistorialOperaciones(int numeroCuenta, Date desde, Date hasta) {
         List<OperacionesDTO> o = operacionesDAO.obtenerHistorialOperaciones(numeroCuenta, desde, hasta);
         return o;
+    }
+    
+    public boolean depositar(int cuenta, float monto) {
+        if(transferencia.depositar(cuenta, monto)) {
+            return true;
+        }
+        return false;
     }
 }

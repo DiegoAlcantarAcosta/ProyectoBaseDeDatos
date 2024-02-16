@@ -58,8 +58,28 @@ public class CuentaDAO implements ICuentaDAO {
     }
 
     @Override
-    public boolean actualizarEstadoCuenta(int cuenta, int contraseña) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean actualizarEstadoCuenta(int cuenta) {
+        String sentenciaSQL = "UPDATE CUENTAS SET estado = ? WHERE numCuenta = ?";
+
+        try ( Connection conexion = this.conexionBD.crearConexion();  PreparedStatement comandoSQL = conexion.prepareStatement(sentenciaSQL, Statement.RETURN_GENERATED_KEYS);) {
+            comandoSQL.setString(1, "CANCELADA");
+            comandoSQL.setInt(2, cuenta);
+
+      
+            int resultado = comandoSQL.executeUpdate();
+
+            LOG.log(Level.INFO, "Se ha actualizado {0}", resultado);
+
+            ResultSet res = comandoSQL.getGeneratedKeys();
+
+            res.next();
+
+            return true;
+
+        } catch (SQLException e) {
+            LOG.log(Level.SEVERE, "No se pudo actualizar el cliente");
+            return false;
+        }
     }
 
     @Override

@@ -23,16 +23,23 @@ public class SeleccionarCuentaFrame extends javax.swing.JFrame {
     IControlador c = new Controlador();
     private static final Logger LOG = Logger.getLogger(SeleccionarCuentaFrame.class.getName());
     int idUsuario;
-    
+    String contra;
     /**
      * Creates new form IniciarFrame
      */
-    public SeleccionarCuentaFrame(int id) {
+    public SeleccionarCuentaFrame(int id, String contraseña) {
+        this.contra = contraseña;
         this.idUsuario = id;
         initComponents();
         añadirAlComboBox();
     }
 
+    public SeleccionarCuentaFrame(int id) {
+        this.idUsuario = id;
+        initComponents();
+        añadirAlComboBox();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -158,7 +165,7 @@ public class SeleccionarCuentaFrame extends javax.swing.JFrame {
     private void seleccionarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seleccionarButtonActionPerformed
         dispose();
         int numCuenta = (int) cuentassComboBoxModel.getSelectedItem();
-        MenuFrame menu = new MenuFrame(numCuenta);
+        MenuFrame menu = new MenuFrame(numCuenta, contra);
         menu.show();
     }//GEN-LAST:event_seleccionarButtonActionPerformed
 

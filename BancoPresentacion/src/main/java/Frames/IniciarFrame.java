@@ -188,7 +188,7 @@ public class IniciarFrame extends javax.swing.JFrame {
     private void iniciarSesionButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarSesionButton1ActionPerformed
        int idUsuario = c.idUsuario(e.encriptador(contraseñaTextField.getText()), usuarioTextField1.getText());
         if (c.autenticarUsuario(usuarioTextField1.getText(), e.encriptador(contraseñaTextField.getText()))){
-            SeleccionarCuentaFrame i = new SeleccionarCuentaFrame(idUsuario);
+            SeleccionarCuentaFrame i = new SeleccionarCuentaFrame(idUsuario, contraseñaTextField.getText());
             i.show();
             dispose();
         }

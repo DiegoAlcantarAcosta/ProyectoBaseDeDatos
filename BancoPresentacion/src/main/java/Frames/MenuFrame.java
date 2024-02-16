@@ -12,14 +12,21 @@ import Frames.sinCuenta.sinCuentaFrame;
  */
 public class MenuFrame extends javax.swing.JFrame {
     int num;
+    String contra;
     /**
      * Creates new form IniciarFrame
      */
-    public MenuFrame(int numCuenta) {
+    public MenuFrame(int numCuenta, String contraseña) {
+        this.contra = contraseña;
         this.num = numCuenta;
         initComponents();
     }
 
+    public MenuFrame(int numCuenta) {
+        this.num = numCuenta;
+        initComponents();
+    }
+    
     public MenuFrame() {
         initComponents();
     }
@@ -174,19 +181,16 @@ public class MenuFrame extends javax.swing.JFrame {
     private void sinCuentaItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sinCuentaItemActionPerformed
         sinCuentaFrame i = new sinCuentaFrame();
         i.show();
-        dispose();
     }//GEN-LAST:event_sinCuentaItemActionPerformed
 
     private void transferirItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transferirItemActionPerformed
         TransferirFrame i = new TransferirFrame(num);
         i.show();
-        
     }//GEN-LAST:event_transferirItemActionPerformed
 
     private void depositoItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depositoItemActionPerformed
-        DepositoFrame i = new DepositoFrame();
+        DepositoFrame i = new DepositoFrame(num);
         i.show();
-        dispose();
     }//GEN-LAST:event_depositoItemActionPerformed
 
     private void tusDatosItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tusDatosItemActionPerformed
@@ -195,24 +199,23 @@ public class MenuFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_tusDatosItemActionPerformed
 
     private void cancelarCuentaItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarCuentaItemActionPerformed
-        CancelarCuentaFrame i = new CancelarCuentaFrame();
+        CancelarCuentaFrame i = new CancelarCuentaFrame(num, contra);
         i.show();
-        dispose();
     }//GEN-LAST:event_cancelarCuentaItemActionPerformed
 
     private void crearCuentaItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearCuentaItemActionPerformed
         CrearCuentaFrame i = new CrearCuentaFrame();
         i.show();
-        dispose();
     }//GEN-LAST:event_crearCuentaItemActionPerformed
 
     private void historialItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_historialItemActionPerformed
         HistorialFrame i = new HistorialFrame();
         i.show();
-        dispose();
     }//GEN-LAST:event_historialItemActionPerformed
 
     private void salirItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirItemActionPerformed
+        IniciarFrame i = new IniciarFrame();
+        i.show();
         dispose();
     }//GEN-LAST:event_salirItemActionPerformed
 

@@ -4,16 +4,20 @@
  */
 package Frames;
 
+import Controlador.Controlador;
+
 /**
  *
  * @author lv1821
  */
 public class DepositoFrame extends javax.swing.JFrame {
-
+    Controlador c = new Controlador();
+    int num;
     /**
      * Creates new form IniciarFrame
      */
-    public DepositoFrame() {
+    public DepositoFrame(int id) {
+        this.num = id;
         initComponents();
     }
 
@@ -37,7 +41,6 @@ public class DepositoFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 255));
-        jPanel1.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel1.setFont(new java.awt.Font("Bodoni MT", 0, 48)); // NOI18N
         jLabel1.setText("VVBA");
@@ -90,12 +93,6 @@ public class DepositoFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(111, 111, 111)
-                .addComponent(salirButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(depositarButton)
-                .addGap(90, 90, 90))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(131, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -105,7 +102,12 @@ public class DepositoFrame extends javax.swing.JFrame {
                         .addComponent(jLabel4)
                         .addGap(248, 248, 248))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(montoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(salirButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(depositarButton))
+                            .addComponent(montoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(112, 112, 112))))
         );
         layout.setVerticalGroup(
@@ -118,10 +120,11 @@ public class DepositoFrame extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addGap(27, 27, 27)
                 .addComponent(montoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(salirButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(depositarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(depositarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(salirButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35))
         );
 
         pack();
@@ -133,14 +136,12 @@ public class DepositoFrame extends javax.swing.JFrame {
 
     private void salirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirButtonActionPerformed
         dispose();
-        MenuFrame m = new MenuFrame();
-        m.show();
     }//GEN-LAST:event_salirButtonActionPerformed
 
     private void depositarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depositarButtonActionPerformed
+       float monto = Float.parseFloat(montoTextField.getText());
+        c.depositar(num, monto);
         dispose();
-        MenuFrame m = new MenuFrame();
-        m.show();
     }//GEN-LAST:event_depositarButtonActionPerformed
 
     /**

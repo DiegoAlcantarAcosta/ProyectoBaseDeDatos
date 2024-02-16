@@ -17,7 +17,7 @@ public interface ICuentaDAO {
 
     int numeroCuenta(Cuenta cuenta);
 
-    boolean actualizarEstadoCuenta(int cuenta, int contraseña);
+    boolean actualizarEstadoCuenta(int cuenta);
 
     boolean crearCuenta(Cuenta cuenta);
     
