@@ -21,7 +21,7 @@ public interface ICuentaDAO {
 
     boolean crearCuenta(Cuenta cuenta);
     
-    Cuenta crearCuentaNueva(Cuenta cuenta, int contraseña);
+    boolean crearCuentaNueva(Cuenta cuenta, int id);
 
     void sumarMonto(int cuenta,float monto);
     int idCuenta(String Fecha);

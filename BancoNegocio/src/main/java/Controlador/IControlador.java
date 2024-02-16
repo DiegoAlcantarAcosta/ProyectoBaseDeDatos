@@ -40,7 +40,7 @@ public interface IControlador {
 
     boolean crearCuenta(Cuenta cuenta);
     
-    Cuenta crearCuentaNueva(Cuenta cuenta, int contraseña);
+    boolean crearCuentaNueva(Cuenta cuenta, int id);
 
     int idClienteUsuario(int idUsuario);
     int idClienteDireccion(int idDireccion);

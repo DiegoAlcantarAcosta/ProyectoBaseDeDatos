@@ -4,16 +4,30 @@
  */
 package Frames;
 
+import Controlador.Controlador;
+import DTO.CuentaDTO;
+import Entidades.Cuenta;
+import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author lv1821
  */
 public class CrearCuentaFrame extends javax.swing.JFrame {
 
+    Controlador c = new Controlador();
+    GregorianCalendar calendario = new GregorianCalendar();
+    int num;
+    String contra;
+
     /**
      * Creates new form IniciarFrame
      */
-    public CrearCuentaFrame() {
+    public CrearCuentaFrame(int numCuenta, String contraseña) {
+        this.contra = contraseña;
+        this.num = numCuenta;
         initComponents();
     }
 
@@ -138,13 +152,18 @@ public class CrearCuentaFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_salirButtonActionPerformed
 
     private void crearCuentaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearCuentaButtonActionPerformed
-        // TODO add your handling code here:
+        if (contra.equals(contraseñaTextField.getText())) {
+            SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+            Cuenta cuenta = new Cuenta(num, 0, formatoFecha.format(calendario.getTime()));
+            c.crearCuentaNueva(cuenta,num);
+        } else {
+            JOptionPane o = new JOptionPane("No se pudo crear la cuenta");
+        }
     }//GEN-LAST:event_crearCuentaButtonActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField contraseñaTextField;

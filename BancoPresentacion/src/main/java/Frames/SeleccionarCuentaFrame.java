@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -24,6 +25,7 @@ public class SeleccionarCuentaFrame extends javax.swing.JFrame {
     private static final Logger LOG = Logger.getLogger(SeleccionarCuentaFrame.class.getName());
     int idUsuario;
     String contra;
+
     /**
      * Creates new form IniciarFrame
      */
@@ -39,7 +41,7 @@ public class SeleccionarCuentaFrame extends javax.swing.JFrame {
         initComponents();
         añadirAlComboBox();
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -144,13 +146,15 @@ public class SeleccionarCuentaFrame extends javax.swing.JFrame {
 
     private void salirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirButtonActionPerformed
         dispose();
+        IniciarFrame i = new IniciarFrame();
+        i.show();
     }//GEN-LAST:event_salirButtonActionPerformed
 
     public void añadirAlComboBox() {
         try {
             List<Cuenta> cuenta = c.obtenerCuentasCliente(idUsuario);
             DefaultComboBoxModel modelo = new DefaultComboBoxModel();
-            
+
             for (int i = 0; i < cuenta.size(); i++) {
                 modelo.addElement(cuenta.get(i).getNumCuenta());
             }
@@ -163,10 +167,14 @@ public class SeleccionarCuentaFrame extends javax.swing.JFrame {
     }
 
     private void seleccionarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seleccionarButtonActionPerformed
-        dispose();
         int numCuenta = (int) cuentassComboBoxModel.getSelectedItem();
-        MenuFrame menu = new MenuFrame(numCuenta, contra);
-        menu.show();
+        if (numCuenta != 0) {
+            MenuFrame menu = new MenuFrame(numCuenta, contra);
+            menu.show();
+            dispose();
+        } else {
+            JOptionPane o = new JOptionPane("No existe esa cuenta");
+        }
     }//GEN-LAST:event_seleccionarButtonActionPerformed
 
     /**

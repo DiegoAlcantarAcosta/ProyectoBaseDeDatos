@@ -204,7 +204,7 @@ public class MenuFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelarCuentaItemActionPerformed
 
     private void crearCuentaItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearCuentaItemActionPerformed
-        CrearCuentaFrame i = new CrearCuentaFrame();
+        CrearCuentaFrame i = new CrearCuentaFrame(num, contra);
         i.show();
     }//GEN-LAST:event_crearCuentaItemActionPerformed
 

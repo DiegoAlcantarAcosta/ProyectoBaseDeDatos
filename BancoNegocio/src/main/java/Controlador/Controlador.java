@@ -135,9 +135,11 @@ public class Controlador implements IControlador {
     }
 
     @Override
-    public Cuenta crearCuentaNueva(Cuenta cuenta, int contraseña) {
-        Cuenta c = cuentaDAO.crearCuentaNueva(cuenta, contraseña);
-        return c;
+    public boolean crearCuentaNueva(Cuenta cuenta, int id) {
+        if(cuentaDAO.crearCuentaNueva(cuenta, id)){
+            return true;
+        }
+        return false;
     }
 
     @Override

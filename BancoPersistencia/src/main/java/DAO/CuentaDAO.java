@@ -108,8 +108,28 @@ public class CuentaDAO implements ICuentaDAO {
     }
 
     @Override
-    public Cuenta crearCuentaNueva(Cuenta cuenta, int contraseña) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean crearCuentaNueva(Cuenta cuenta, int id) {
+        String sentenciaSQL = "INSERT INTO CUENTAS (numCuenta,saldo,fechaApertura,idCliente) VALUES (?,?,?,?)";
+        try ( Connection conexion = this.conexionBD.crearConexion();  PreparedStatement comandoSQL = conexion.prepareStatement(sentenciaSQL, Statement.RETURN_GENERATED_KEYS);) {
+            comandoSQL.setFloat(1, id);
+            comandoSQL.setFloat(2, cuenta.getSaldo());
+            comandoSQL.setString(3, cuenta.getFechaApertura());
+            comandoSQL.setInt(4, cuenta.getIdCliente());
+            int resultado = comandoSQL.executeUpdate();
+
+            LOG.log(Level.INFO, "se ha agregado {0}", resultado);
+
+            ResultSet res = comandoSQL.getGeneratedKeys();
+
+            res.next();
+
+            
+            return true;
+
+        } catch (SQLException e) {
+            LOG.log(Level.SEVERE, "No se pudo crear la cuenta", e);
+            return false;
+        }
     }
 
     @Override
