@@ -178,9 +178,9 @@ public class MenuFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_sinCuentaItemActionPerformed
 
     private void transferirItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transferirItemActionPerformed
-        TransferirFrame i = new TransferirFrame();
+        TransferirFrame i = new TransferirFrame(num);
         i.show();
-        dispose();
+        
     }//GEN-LAST:event_transferirItemActionPerformed
 
     private void depositoItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depositoItemActionPerformed

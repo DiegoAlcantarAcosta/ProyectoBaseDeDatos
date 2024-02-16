@@ -4,16 +4,26 @@
  */
 package Frames;
 
+import Controlador.Controlador;
+import DTO.TransferenciaDTO;
+import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
+
 /**
  *
  * @author lv1821
  */
 public class TransferirFrame extends javax.swing.JFrame {
 
+    Controlador c = new Controlador();
+    GregorianCalendar g = new GregorianCalendar();
+    int idCliente;
+
     /**
      * Creates new form IniciarFrame
      */
-    public TransferirFrame() {
+    public TransferirFrame(int numCuenta) {
+        this.idCliente = numCuenta;
         initComponents();
     }
 
@@ -156,20 +166,22 @@ public class TransferirFrame extends javax.swing.JFrame {
 
     private void salirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirButtonActionPerformed
         dispose();
-        MenuFrame m = new MenuFrame();
-        m.show();
     }//GEN-LAST:event_salirButtonActionPerformed
 
     private void transferirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transferirButtonActionPerformed
+        float numeroFloat = Float.parseFloat(montoTextField.getText());
+        int numeroInt = Integer.parseInt(numCuentaTextField.getText());
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+        String fechaPerrona = formatoFecha.format(g.getTime());
+        TransferenciaDTO t = new TransferenciaDTO(idCliente, numeroInt, "TRANSFERENCIA", fechaPerrona, numeroFloat);
+        c.realizarTransferencia(t);
         dispose();
-        MenuFrame m = new MenuFrame();
-        m.show();
+        
     }//GEN-LAST:event_transferirButtonActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

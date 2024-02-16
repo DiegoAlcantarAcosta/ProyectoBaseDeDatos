@@ -26,6 +26,10 @@ public class Transferencia extends Operaciones{
         super(idCuenta,tipo, fecha, monto);
         this.cuentaDestino = idCuentaDestino;
     }
+    
+    public Transferencia(int idCuenta, int idCuentaDestino, float monto){
+        
+    }
 
     // Constructor sin datos ni llave primaria
     public Transferencia() {

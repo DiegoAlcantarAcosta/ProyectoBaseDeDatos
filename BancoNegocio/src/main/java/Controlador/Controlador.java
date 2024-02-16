@@ -185,7 +185,7 @@ public class Controlador implements IControlador {
 
     @Override
     public SinCuenta generarSinCuenta(RetiroSinDTO sin) {
-        SinCuenta s = generarSinCuenta(sin);
+        SinCuenta s = retiro.generarSinCuenta(sin);
         return s;
     }
 
@@ -211,7 +211,7 @@ public class Controlador implements IControlador {
 
     @Override
     public TransferenciaDTO realizarTransferencia(TransferenciaDTO trans) {
-        TransferenciaDTO t = realizarTransferencia(trans);
+        TransferenciaDTO t = transferencia.realizarTransferencia(trans);
         return t;
     }
 
