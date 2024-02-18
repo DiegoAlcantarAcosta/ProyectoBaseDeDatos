@@ -130,13 +130,14 @@ public class ClienteDAO implements IClienteDAO {
             comandoSQL.setInt(1, idCliente);
             ResultSet resultado = comandoSQL.executeQuery();
             while (resultado.next()) {
+                int idCuenta = resultado.getInt("idCuenta");
                 int numCuenta = resultado.getInt("numCuenta");
                 float saldo = resultado.getFloat("saldo");
                 String fechaApertura = resultado.getString("fechaApertura");
                 String estado = resultado.getString("estado");
                 int idClientela = resultado.getInt("idCliente");
 
-                Cuenta cuenta = new Cuenta(numCuenta, saldo, fechaApertura);
+                Cuenta cuenta = new Cuenta(idCuenta,numCuenta, idCliente, saldo, fechaApertura);
 
                 lista.add(cuenta);
             }

@@ -45,7 +45,7 @@ public class OperacionesDAO implements IOperacionesDAO {
             comandoSQL.setInt(1, numeroCuenta);
             ResultSet resultado = comandoSQL.executeQuery();
             while (resultado.next()) {
-                int numCuenta = resultado.getInt("numCuenta");
+                int numCuenta = resultado.getInt("idCuenta");
                 float saldo = resultado.getFloat("saldo");
                 String fechaApertura = resultado.getString("fechaApertura");
                 String estado = resultado.getString("estado");

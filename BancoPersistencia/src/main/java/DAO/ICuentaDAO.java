@@ -19,9 +19,9 @@ public interface ICuentaDAO {
 
     boolean actualizarEstadoCuenta(int cuenta);
 
-    boolean crearCuenta(Cuenta cuenta);
+    boolean crearCuenta(Cuenta cuenta,int num);
     
-    boolean crearCuentaNueva(Cuenta cuenta, int id);
+    boolean crearCuentaNueva(Cuenta cuenta, int id, int numCuenta);
 
     void sumarMonto(int cuenta,float monto);
     int idCuenta(String Fecha);

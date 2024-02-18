@@ -83,13 +83,15 @@ public class CuentaDAO implements ICuentaDAO {
     }
 
     @Override
-    public boolean crearCuenta(Cuenta cuenta) {
-        String sentenciaSQL = "INSERT INTO CUENTAS (saldo,fechaApertura,idCliente) VALUES (?,?,?)";
-
+    public boolean crearCuenta(Cuenta cuenta,int num) {
+        String sentenciaSQL = "INSERT INTO CUENTAS (numCuenta,saldo,fechaApertura,idCliente) VALUES (?,?,?,?)";
+cuenta.setNumCuenta(num);
         try ( Connection conexion = this.conexionBD.crearConexion();  PreparedStatement comandoSQL = conexion.prepareStatement(sentenciaSQL, Statement.RETURN_GENERATED_KEYS);) {
-            comandoSQL.setFloat(1, cuenta.getSaldo());
-            comandoSQL.setString(2, cuenta.getFechaApertura());
-            comandoSQL.setInt(3, cuenta.getIdCliente());
+            
+            comandoSQL.setInt(1, num);
+            comandoSQL.setFloat(2, cuenta.getSaldo());
+            comandoSQL.setString(3, cuenta.getFechaApertura());
+            comandoSQL.setInt(4, cuenta.getIdCliente());
             int resultado = comandoSQL.executeUpdate();
 
             LOG.log(Level.INFO, "se ha agregado {0}", resultado);
@@ -108,13 +110,14 @@ public class CuentaDAO implements ICuentaDAO {
     }
 
     @Override
-    public boolean crearCuentaNueva(Cuenta cuenta, int id) {
+    public boolean crearCuentaNueva(Cuenta cuenta, int id, int numCuenta) {
         String sentenciaSQL = "INSERT INTO CUENTAS (numCuenta,saldo,fechaApertura,idCliente) VALUES (?,?,?,?)";
         try ( Connection conexion = this.conexionBD.crearConexion();  PreparedStatement comandoSQL = conexion.prepareStatement(sentenciaSQL, Statement.RETURN_GENERATED_KEYS);) {
-            comandoSQL.setFloat(1, id);
+            cuenta.setNumCuenta(numCuenta);
+            comandoSQL.setInt(1, numCuenta);
             comandoSQL.setFloat(2, cuenta.getSaldo());
             comandoSQL.setString(3, cuenta.getFechaApertura());
-            comandoSQL.setInt(4, cuenta.getIdCliente());
+            comandoSQL.setInt(4, id);
             int resultado = comandoSQL.executeUpdate();
 
             LOG.log(Level.INFO, "se ha agregado {0}", resultado);
@@ -140,7 +143,7 @@ public class CuentaDAO implements ICuentaDAO {
     @Override
     public int idCuenta(String Fecha) {
         int idCliente = -1;
-        String sentenciaSQL = "SELECT numCuenta FROM Cuentas WHERE fechaApertura = ?";
+        String sentenciaSQL = "SELECT idCuenta FROM Cuentas WHERE fechaApertura = ?";
         try ( Connection conexion = this.conexionBD.crearConexion();  PreparedStatement comandoSQL = conexion.prepareStatement(sentenciaSQL, Statement.RETURN_GENERATED_KEYS);) {
             comandoSQL.setString(1, Fecha);
             try (ResultSet resultado = comandoSQL.executeQuery()) {

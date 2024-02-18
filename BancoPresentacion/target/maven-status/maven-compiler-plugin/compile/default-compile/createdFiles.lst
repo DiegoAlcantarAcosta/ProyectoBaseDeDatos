@@ -6,6 +6,7 @@ Frames\TransferirFrame$2.class
 Frames\TusDatosFrame$11.class
 Frames\HistorialFrame.class
 Frames\registrarseFrames\RegistrarFrame$1.class
+Frames\registrarseFrames\registradoFrame$2.class
 Frames\TusDatosFrame$6.class
 Frames\MenuFrame$6.class
 Frames\CrearCuentaFrame.class
@@ -50,11 +51,13 @@ Frames\IniciarFrame$4.class
 Frames\TusDatosFrame.class
 Frames\CancelarCuentaFrame$3.class
 Frames\DepositoFrame$3.class
+Frames\SeleccionarCuentaFrame$3.class
 Frames\registrarseFrames\registradoFrame$1.class
 Frames\registrarseFrames\RegistrarFrame$3.class
 Frames\IniciarFrame.class
 Frames\TusDatosFrame$8.class
 Frames\TransferirFrame$3.class
+Frames\CrearCuentaFrame$4.class
 Frames\HistorialFrame$1.class
 Frames\TusDatosFrame$5.class
 Frames\MenuFrame$4.class

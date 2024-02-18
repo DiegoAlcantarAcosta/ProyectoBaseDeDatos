@@ -20,6 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,6 +29,7 @@ import java.util.logging.Logger;
  * @author lv1821
  */
 public class RegistrarFrame extends javax.swing.JFrame {
+
     Encriptador e = new Encriptador();
 
     IControlador c = new Controlador();
@@ -345,10 +347,14 @@ public class RegistrarFrame extends javax.swing.JFrame {
             c.registrarCliente(cliente);
             c.registrarDireccion(direccion);
             c.registrarUsuario(usuario);
-            Cuenta cuenta = new Cuenta(0, fechaFormateada, c.idCliente(nombreTextField.getText(), apellidoPaternoTextField.getText()));
-            c.crearCuenta(cuenta);
+            int maxDigits = 1000000; // Máximo valor de 6 dígitos
+            int minDigits = 100000; // Mínimo valor de 6 dígitos
+            Random random = new Random();
+            int idCuenta = random.nextInt(maxDigits - minDigits + 1) + minDigits;   
+            Cuenta cuenta = new Cuenta(idCuenta,c.idCliente(nombreTextField.getText(), apellidoPaternoTextField.getText()),0, fechaFormateada);
+            c.crearCuenta(cuenta,idCuenta);
             int idCliente = c.idCliente(nombreTextField.getText(), apellidoPaternoTextField.getText());
-            registradoFrame registrado = new registradoFrame(idCliente, contraseñaTextField.getText());
+            registradoFrame registrado = new registradoFrame(idCuenta, contraseñaTextField.getText());
             registrado.show();
             dispose();
         } catch (PersistenciaExcepcion ex) {

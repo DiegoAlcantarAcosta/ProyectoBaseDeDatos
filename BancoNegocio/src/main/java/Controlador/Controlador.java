@@ -44,7 +44,7 @@ public class Controlador implements IControlador {
 
     String cadenaConexion = "jdbc:mysql://localhost:3306/banco";
     String usuario = "root";
-    String contrasenia = "2004";
+    String contrasenia = "2608jlml";
     IConexion conexionBD = new Conexion(cadenaConexion, usuario, contrasenia);
     IClienteDAO clienteDAO = new ClienteDAO(conexionBD);
     ICuentaDAO cuentaDAO = new CuentaDAO(conexionBD);
@@ -127,16 +127,16 @@ public class Controlador implements IControlador {
     }
 
     @Override
-    public boolean crearCuenta(Cuenta cuenta) {
-        if (cuentaDAO.crearCuenta(cuenta)) {
+    public boolean crearCuenta(Cuenta cuenta,int num) {
+        if (cuentaDAO.crearCuenta(cuenta,num)) {
             return true;
         }
         return false;
     }
 
     @Override
-    public boolean crearCuentaNueva(Cuenta cuenta, int id) {
-        if(cuentaDAO.crearCuentaNueva(cuenta, id)){
+    public boolean crearCuentaNueva(Cuenta cuenta, int id, int num) {
+        if(cuentaDAO.crearCuentaNueva(cuenta, id,num)){
             return true;
         }
         return false;

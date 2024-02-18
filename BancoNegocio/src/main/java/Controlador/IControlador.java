@@ -38,9 +38,9 @@ public interface IControlador {
 
     boolean actualizarEstadoCuenta(int cuenta);
 
-    boolean crearCuenta(Cuenta cuenta);
+    boolean crearCuenta(Cuenta cuenta, int num);
     
-    boolean crearCuentaNueva(Cuenta cuenta, int id);
+    boolean crearCuentaNueva(Cuenta cuenta, int id,int num);
 
     int idClienteUsuario(int idUsuario);
     int idClienteDireccion(int idDireccion);

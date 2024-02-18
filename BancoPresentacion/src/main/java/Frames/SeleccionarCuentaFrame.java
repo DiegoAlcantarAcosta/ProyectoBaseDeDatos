@@ -102,6 +102,12 @@ public class SeleccionarCuentaFrame extends javax.swing.JFrame {
             }
         });
 
+        cuentassComboBoxModel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cuentassComboBoxModelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -162,7 +168,7 @@ public class SeleccionarCuentaFrame extends javax.swing.JFrame {
             cuentassComboBoxModel.setModel(modelo);
 
         } catch (Exception e) {
-            LOG.log(Level.SEVERE, "No se pudo mostrar el telefono");
+            LOG.log(Level.SEVERE, "No se pudo mostrar el id");
         }
     }
 
@@ -176,6 +182,10 @@ public class SeleccionarCuentaFrame extends javax.swing.JFrame {
             JOptionPane o = new JOptionPane("No existe esa cuenta");
         }
     }//GEN-LAST:event_seleccionarButtonActionPerformed
+
+    private void cuentassComboBoxModelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cuentassComboBoxModelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cuentassComboBoxModelActionPerformed
 
     /**
      * @param args the command line arguments

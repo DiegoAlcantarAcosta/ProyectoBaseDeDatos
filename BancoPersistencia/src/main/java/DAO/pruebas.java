@@ -15,6 +15,7 @@ import Excepciones.PersistenciaExcepcion;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Random;
 
 /**
  *
@@ -29,7 +30,7 @@ public class pruebas {
 
         String cadenaConexion = "jdbc:mysql://localhost:3306/banco";
         String usuario = "root";
-        String contraseña = "2004";
+        String contraseña = "2608jlml";
 
         IConexion conexion = new Conexion(cadenaConexion, usuario, contraseña);
 
@@ -76,6 +77,11 @@ public class pruebas {
            ICuentaDAO cuenta = new CuentaDAO(conexion);
 //           System.out.println(usuarioTest.idUsuario("a", "a"));
         
-           System.out.println(c.idClienteDireccion(1));
+//           System.out.println(c.idClienteDireccion(1));
+int maxDigits = 1000000; // Máximo valor de 6 dígitos
+        int minDigits = 100000; // Mínimo valor de 6 dígitos
+        Random random = new Random();
+        int idCuenta = random.nextInt(maxDigits - minDigits + 1) + minDigits;
+        System.out.println("ID de cuenta generado: " + idCuenta);
     }
 }

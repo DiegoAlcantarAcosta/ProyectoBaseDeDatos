@@ -11,47 +11,76 @@ import java.util.Objects;
  * @author lv1821
  */
 public class Cuenta {
-    private int numCuenta, idCliente;
+    private int idCuenta,numCuenta, idCliente;
     private float saldo;
     private String fechaApertura;
 
-    public Cuenta(int numCuenta, float saldo, String fechaApertura) {
+    public Cuenta(int idCuenta, int numCuenta, int idCliente, float saldo, String fechaApertura) {
+        this.idCuenta = idCuenta;
         this.numCuenta = numCuenta;
+        this.idCliente = idCliente;
         this.saldo = saldo;
         this.fechaApertura = fechaApertura;
     }
-    public Cuenta(float saldo, String fechaApertura,int numCliente) {
-        this.idCliente = numCliente;
-        this.saldo = saldo;
-        this.fechaApertura = fechaApertura;
-    }
-    public Cuenta(float saldo, String fechaApertura) {
+
+    public Cuenta(int numCuenta, int idCliente, float saldo, String fechaApertura) {
+        this.numCuenta = numCuenta;
+        this.idCliente = idCliente;
         this.saldo = saldo;
         this.fechaApertura = fechaApertura;
     }
 
     public Cuenta() {
     }
-    
+
+    public int getIdCuenta() {
+        return idCuenta;
+    }
+
+    public void setIdCuenta(int idCuenta) {
+        this.idCuenta = idCuenta;
+    }
+
     public int getNumCuenta() {
         return numCuenta;
+    }
+
+    public void setNumCuenta(int numCuenta) {
+        this.numCuenta = numCuenta;
+    }
+
+    public int getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
     }
 
     public float getSaldo() {
         return saldo;
     }
 
+    public void setSaldo(float saldo) {
+        this.saldo = saldo;
+    }
+
     public String getFechaApertura() {
         return fechaApertura;
+    }
+
+    public void setFechaApertura(String fechaApertura) {
+        this.fechaApertura = fechaApertura;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 23 * hash + this.numCuenta;
-        hash = 23 * hash + this.idCliente;
-        hash = 23 * hash + Float.floatToIntBits(this.saldo);
-        hash = 23 * hash + Objects.hashCode(this.fechaApertura);
+        hash = 31 * hash + this.idCuenta;
+        hash = 31 * hash + this.numCuenta;
+        hash = 31 * hash + this.idCliente;
+        hash = 31 * hash + Float.floatToIntBits(this.saldo);
+        hash = 31 * hash + Objects.hashCode(this.fechaApertura);
         return hash;
     }
 
@@ -67,6 +96,9 @@ public class Cuenta {
             return false;
         }
         final Cuenta other = (Cuenta) obj;
+        if (this.idCuenta != other.idCuenta) {
+            return false;
+        }
         if (this.numCuenta != other.numCuenta) {
             return false;
         }
@@ -79,18 +111,12 @@ public class Cuenta {
         return Objects.equals(this.fechaApertura, other.fechaApertura);
     }
 
-    public int getIdCliente() {
-        return idCliente;
-    }
-
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
-    }
-
     @Override
     public String toString() {
-        return "Cuenta{" + "numCuenta=" + numCuenta + ", idCliente=" + idCliente + ", saldo=" + saldo + ", fechaApertura=" + fechaApertura + '}';
+        return "Cuenta{" + "idCuenta=" + idCuenta + ", numCuenta=" + numCuenta + ", idCliente=" + idCliente + ", saldo=" + saldo + ", fechaApertura=" + fechaApertura + '}';
     }
+
+    
 
     
 

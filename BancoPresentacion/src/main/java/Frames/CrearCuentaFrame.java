@@ -6,9 +6,11 @@ package Frames;
 
 import Controlador.Controlador;
 import DTO.CuentaDTO;
+import Encriptador.Encriptador;
 import Entidades.Cuenta;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
+import java.util.Random;
 import javax.swing.JOptionPane;
 
 /**
@@ -47,11 +49,12 @@ public class CrearCuentaFrame extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         salirButton = new javax.swing.JButton();
         crearCuentaButton = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        usuarioTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 255));
-        jPanel1.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel1.setFont(new java.awt.Font("Bodoni MT", 0, 48)); // NOI18N
         jLabel1.setText("VVBA");
@@ -80,7 +83,7 @@ public class CrearCuentaFrame extends javax.swing.JFrame {
         });
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel4.setText("Contraseña:");
+        jLabel4.setText("Usuario:");
 
         salirButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         salirButton.setText("Salir");
@@ -98,6 +101,15 @@ public class CrearCuentaFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel5.setText("Contraseña:");
+
+        usuarioTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usuarioTextField1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -110,16 +122,23 @@ public class CrearCuentaFrame extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addGap(184, 184, 184))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(222, 222, 222))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(salirButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(142, 142, 142)
                                 .addComponent(crearCuentaButton))
-                            .addComponent(contraseñaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(contraseñaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(usuarioTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(107, 107, 107))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(69, 69, 69)
+                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(229, 229, 229))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(71, 71, 71)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGap(391, 391, 391)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,15 +146,22 @@ public class CrearCuentaFrame extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                .addComponent(jLabel4)
-                .addGap(18, 18, 18)
-                .addComponent(contraseñaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(usuarioTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(25, 25, 25)
+                .addComponent(contraseñaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(59, 59, 59)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(salirButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(crearCuentaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(237, 237, 237)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGap(114, 114, 114)))
         );
 
         pack();
@@ -153,13 +179,25 @@ public class CrearCuentaFrame extends javax.swing.JFrame {
 
     private void crearCuentaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearCuentaButtonActionPerformed
         if (contra.equals(contraseñaTextField.getText())) {
+            Encriptador e = new Encriptador();
             SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
-            Cuenta cuenta = new Cuenta(num, 0, formatoFecha.format(calendario.getTime()));
-            c.crearCuentaNueva(cuenta,num);
+            int maxDigits = 1000000; // Máximo valor de 6 dígitos
+            int minDigits = 100000; // Mínimo valor de 6 dígitos
+            Random random = new Random();
+            int idCuenta = random.nextInt(maxDigits - minDigits + 1) + minDigits;
+            Cuenta cuenta = new Cuenta(idCuenta,c.idUsuario(e.desencriptador(contraseñaTextField.getText()), usuarioTextField1.getText()), 0, formatoFecha.format(calendario.getTime()));
+            c.crearCuentaNueva(cuenta,c.idUsuario(e.desencriptador(contraseñaTextField.getText()), usuarioTextField1.getText()), idCuenta);
+            MenuFrame menu = new MenuFrame();
+            menu.show();
+            dispose();
         } else {
             JOptionPane o = new JOptionPane("No se pudo crear la cuenta");
         }
     }//GEN-LAST:event_crearCuentaButtonActionPerformed
+
+    private void usuarioTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuarioTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_usuarioTextField1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -171,7 +209,9 @@ public class CrearCuentaFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton salirButton;
+    private javax.swing.JTextField usuarioTextField1;
     // End of variables declaration//GEN-END:variables
 }
