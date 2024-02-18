@@ -30,6 +30,7 @@ import DTO.UsuariosDTO;
 import Entidades.Cliente;
 import Entidades.Cuenta;
 import Entidades.Direccion;
+import Entidades.Operaciones;
 import Entidades.SinCuenta;
 import Entidades.Usuario;
 import Excepciones.PersistenciaExcepcion;
@@ -186,9 +187,11 @@ public class Controlador implements IControlador {
     }
 
     @Override
-    public SinCuenta generarSinCuenta(RetiroSinDTO sin) {
-        SinCuenta s = retiro.generarSinCuenta(sin);
-        return s;
+    public boolean generarSinCuenta(RetiroSinDTO sin,int num) {
+        if (retiro.generarSinCuenta(sin,num)) {
+            return true;
+        }
+        return false;
     }
 
 
@@ -265,5 +268,20 @@ public class Controlador implements IControlador {
     public int idCuenta(int numCuenta) {
         int id = cuentaDAO.idCuenta(numCuenta);
         return id;
+    }
+
+    @Override
+    public void agregarOperacion(Operaciones op) {
+        operacionesDAO.agregarOperacion(op);
+    }
+
+    @Override
+    public int idOperacion(String Fecha) {
+        int numero = operacionesDAO.idOperacion(Fecha);
+        return numero;
+    }
+    public int obtenerFolio(){
+        int num = retiro.obtenerFolio();
+        return num;
     }
 }

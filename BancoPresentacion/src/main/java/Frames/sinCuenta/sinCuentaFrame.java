@@ -5,19 +5,29 @@
 package Frames.sinCuenta;
 
 import Controlador.Controlador;
+import DTO.RetiroSinDTO;
+import Entidades.Operaciones;
 import Frames.MenuFrame;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
  * @author Diego
  */
 public class sinCuentaFrame extends javax.swing.JFrame {
+
     Controlador c = new Controlador();
     /**
      * Creates new form registradoFrame
+     *
      */
-    public sinCuentaFrame() {
+    int idCuenta;
+
+    public sinCuentaFrame(int num) {
+        this.idCuenta = num;
         initComponents();
+        
     }
 
     /**
@@ -116,8 +126,19 @@ public class sinCuentaFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarButtonActionPerformed
-        infoSinCuentaFrame info = new infoSinCuentaFrame();
+        int contra = 0;
+        contra = c.generarContraseña();
+        LocalDateTime fechaHora = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String fechaHoraString = fechaHora.format(formatter);
+        Operaciones operacion = new Operaciones(c.idCuenta(idCuenta), "RETIRO SIN CUENTA", fechaHoraString, Float.parseFloat(montoTextField.getText()) );
+        RetiroSinDTO retiro = new RetiroSinDTO(c.idCuenta(idCuenta), 1000, contra, "Procesando", fechaHoraString, Float.parseFloat(montoTextField.getText()), "RETIRO SIN CUENTA");
+        c.agregarOperacion(operacion);
+        c.generarSinCuenta(retiro,c.idOperacion(fechaHoraString));
+        
+        infoSinCuentaFrame info = new infoSinCuentaFrame(c.obtenerFolio(),contra);
         info.show();
+        dispose();
     }//GEN-LAST:event_aceptarButtonActionPerformed
 
     private void aceptarButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarButton1ActionPerformed

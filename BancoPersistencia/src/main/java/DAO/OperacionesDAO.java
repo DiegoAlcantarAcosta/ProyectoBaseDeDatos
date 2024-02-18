@@ -13,6 +13,7 @@ import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -63,6 +64,49 @@ public class OperacionesDAO implements IOperacionesDAO {
             LOG.log(Level.SEVERE, sentencia, e);
             return null;
         }
+    }
+    
+    public void agregarOperacion(Operaciones op){
+        String sentenciaSQL = "INSERT INTO Operaciones (idCuenta_origen,tipo,fecha,monto) VALUES (?,?,?,?)";
+
+        try ( Connection conexion = this.conexionBD.crearConexion();  PreparedStatement comandoSQL = conexion.prepareStatement(sentenciaSQL, Statement.RETURN_GENERATED_KEYS);) {
+            comandoSQL.setInt(1, op.getIdCuenta());
+            comandoSQL.setString(2, op.getTipo());
+            comandoSQL.setString(3, op.getFecha());
+            comandoSQL.setFloat(4, op.getMonto());
+            int resultado = comandoSQL.executeUpdate();
+
+            LOG.log(Level.INFO, "se ha agregado {0}", resultado);
+
+            ResultSet res = comandoSQL.getGeneratedKeys();
+
+            res.next();
+
+        } catch (SQLException e) {
+            LOG.log(Level.SEVERE, "No se pudo agregar la operacion", e);
+        }
+        
+        
+    }
+    public int idOperacion (String Fecha){
+        
+        int idCliente = -1;
+        String sentenciaSQL = "SELECT idTransaccion FROM Operaciones WHERE fecha= ?";
+        try ( Connection conexion = this.conexionBD.crearConexion();  PreparedStatement comandoSQL = conexion.prepareStatement(sentenciaSQL, Statement.RETURN_GENERATED_KEYS);) {
+            comandoSQL.setString(1, Fecha);
+            
+            try (ResultSet resultado = comandoSQL.executeQuery()) {
+                // Si se encontró el cliente, obtener su ID
+                if (resultado.next()) {
+                    idCliente = resultado.getInt("idTransaccion");
+                }
+            }
+            
+        }catch(SQLException e) {
+            LOG.log(Level.SEVERE, "No se pudo crear la cuenta", e);
+            
+        }
+        return idCliente;
     }
 
     

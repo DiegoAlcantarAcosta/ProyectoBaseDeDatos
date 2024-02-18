@@ -8,11 +8,15 @@ import Conexion.Conexion;
 import Conexion.IConexion;
 import DTO.CuentaDTO;
 import DTO.DireccionDTO;
+import DTO.RetiroSinDTO;
 import DTO.TransferenciaDTO;
 import Entidades.Direccion;
+import Entidades.Operaciones;
 import Entidades.Usuario;
 import Excepciones.PersistenciaExcepcion;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Random;
@@ -78,10 +82,22 @@ public class pruebas {
 //           System.out.println(usuarioTest.idUsuario("a", "a"));
         
 //           System.out.println(c.idClienteDireccion(1));
-int maxDigits = 1000000; // Máximo valor de 6 dígitos
-        int minDigits = 100000; // Mínimo valor de 6 dígitos
-        Random random = new Random();
-        int idCuenta = random.nextInt(maxDigits - minDigits + 1) + minDigits;
-        System.out.println("ID de cuenta generado: " + idCuenta);
-    }
+//int maxDigits = 1000000; // Máximo valor de 6 dígitos
+//        int minDigits = 100000; // Mínimo valor de 6 dígitos
+//        Random random = new Random();
+//        int idCuenta = random.nextInt(maxDigits - minDigits + 1) + minDigits;
+//        System.out.println("ID de cuenta generado: " + idCuenta);
+//    }
+//    LocalDateTime fechaHora = LocalDateTime.now();
+//    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+//    String fechaHoraString = fechaHora.format(formatter);
+    IOperacionesDAO o = new OperacionesDAO(conexion);
+//    Operaciones op = new Operaciones(1, "RETIRO SIN CUENTA", fechaHoraString, 50);
+//    o.agregarOperacion(op);
+    IRetiroSinDAO retiro = new RetiroSinDAO(conexion);
+//    RetiroSinDTO r = new RetiroSinDTO(1,1000,retiro.generarContraseña(),"RETIRO SIN CUENTA",fechaHoraString,50,"Procesando");
+//    int num = o.idOperacion(fechaHoraString);
+//    retiro.generarSinCuenta(r,num);
+    System.out.println(retiro.obtenerFolio());
+}
 }

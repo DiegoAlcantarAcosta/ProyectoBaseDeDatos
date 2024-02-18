@@ -179,7 +179,7 @@ public class MenuFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void sinCuentaItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sinCuentaItemActionPerformed
-        sinCuentaFrame i = new sinCuentaFrame();
+        sinCuentaFrame i = new sinCuentaFrame(num);
         i.show();
     }//GEN-LAST:event_sinCuentaItemActionPerformed
 

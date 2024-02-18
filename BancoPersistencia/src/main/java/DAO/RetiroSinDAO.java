@@ -7,7 +7,13 @@ package DAO;
 import Conexion.IConexion;
 import DTO.RetiroSinDTO;
 import Entidades.SinCuenta;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Random;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -28,8 +34,26 @@ public class RetiroSinDAO implements IRetiroSinDAO {
     }
 
     @Override
-    public SinCuenta generarSinCuenta(RetiroSinDTO sin) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean generarSinCuenta(RetiroSinDTO sin, int num) {
+         String sentenciaSQL = "INSERT INTO sincuentas (folio,contraseña,idOperacion) VALUES (?,?,?)";
+
+        try ( Connection conexion = this.conexionBD.crearConexion();  PreparedStatement comandoSQL = conexion.prepareStatement(sentenciaSQL, Statement.RETURN_GENERATED_KEYS);) {
+            comandoSQL.setInt(1, sin.getFolio());
+            comandoSQL.setInt(2, sin.getContraseña());
+            comandoSQL.setInt(3, num);
+            int resultado = comandoSQL.executeUpdate();
+
+            LOG.log(Level.INFO, "se ha agregado {0}", resultado);
+
+            ResultSet res = comandoSQL.getGeneratedKeys();
+
+            res.next();
+
+        } catch (SQLException e) {
+            LOG.log(Level.SEVERE, "No se pudo agregar el retiro", e);
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -42,6 +66,25 @@ public class RetiroSinDAO implements IRetiroSinDAO {
     @Override
     public boolean actualizarEstado(int numCuenta) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    public int obtenerFolio(){
+        int idCliente = -1;
+        String sentenciaSQL = "SELECT MAX(folio) AS folio FROM sincuentas";
+        try ( Connection conexion = this.conexionBD.crearConexion();  PreparedStatement comandoSQL = conexion.prepareStatement(sentenciaSQL, Statement.RETURN_GENERATED_KEYS);) {
+           
+            
+            try (ResultSet resultado = comandoSQL.executeQuery()) {
+                // Si se encontró el cliente, obtener su ID
+                if (resultado.next()) {
+                    idCliente = resultado.getInt("folio");
+                }
+            }
+            
+        }catch(SQLException e) {
+            LOG.log(Level.SEVERE, "No se pudo obtener el folio", e);
+            
+        }
+        return idCliente;
     }
     
 }

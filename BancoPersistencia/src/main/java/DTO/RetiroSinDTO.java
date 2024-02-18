@@ -9,22 +9,23 @@ package DTO;
  * @author pc
  */
 public class RetiroSinDTO extends OperacionesDTO{
-    private String folio,estado;
+    private int folio;
+    private String estado;
     private int contraseña;
 
     // Constructor
-    public RetiroSinDTO(int idCuenta,String folio, int contraseña, String tipo, String fecha, float monto, String estado) {
+    public RetiroSinDTO(int idCuenta,int folio, int contraseña, String tipo, String fecha, float monto, String estado) {
         super(idCuenta,tipo, fecha, monto);
         this.folio = folio;
         this.contraseña = contraseña;
         this.estado = estado;
     }
 
-    public String getFolio() {
+    public int getFolio() {
         return folio;
     }
 
-    public void setFolio(String folio) {
+    public void setFolio(int folio) {
         this.folio = folio;
     }
 

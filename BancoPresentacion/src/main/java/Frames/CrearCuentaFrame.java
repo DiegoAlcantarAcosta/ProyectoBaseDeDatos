@@ -187,8 +187,6 @@ public class CrearCuentaFrame extends javax.swing.JFrame {
             int idCuenta = random.nextInt(maxDigits - minDigits + 1) + minDigits;
             Cuenta cuenta = new Cuenta(idCuenta,c.idUsuario(e.desencriptador(contraseñaTextField.getText()), usuarioTextField1.getText()), 0, formatoFecha.format(calendario.getTime()));
             c.crearCuentaNueva(cuenta,c.idUsuario(e.desencriptador(contraseñaTextField.getText()), usuarioTextField1.getText()), idCuenta);
-            MenuFrame menu = new MenuFrame();
-            menu.show();
             dispose();
         } else {
             JOptionPane o = new JOptionPane("No se pudo crear la cuenta");

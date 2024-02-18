@@ -14,6 +14,7 @@ import DTO.UsuariosDTO;
 import Entidades.Cliente;
 import Entidades.Cuenta;
 import Entidades.Direccion;
+import Entidades.Operaciones;
 import Entidades.SinCuenta;
 import Entidades.Usuario;
 import Excepciones.PersistenciaExcepcion;
@@ -52,7 +53,7 @@ public interface IControlador {
     List<OperacionesDTO> obtenerHistorialOperaciones(int numeroCuenta, Date desde, Date hasta);
     List<OperacionesDTO> obtenerHistorialOperaciones(int numeroCuenta, String tipo);
     public boolean autenticarCobro(String folio, int contraseña);
-    public SinCuenta generarSinCuenta(RetiroSinDTO sin);
+    public boolean generarSinCuenta(RetiroSinDTO sin,int num);
     public int generarContraseña();
     public boolean actualizarEstado(int numCuenta);
     TransferenciaDTO realizarTransferencia(TransferenciaDTO trans);
@@ -61,4 +62,7 @@ public interface IControlador {
     int idDireccion(String calle, String colonia, String numero);
     int idUsuario(String contraseña, String Usuario);
     public int idCuenta(int numCuenta);
+    public void agregarOperacion(Operaciones op);
+    public int idOperacion (String Fecha);
+    public int obtenerFolio();
 }

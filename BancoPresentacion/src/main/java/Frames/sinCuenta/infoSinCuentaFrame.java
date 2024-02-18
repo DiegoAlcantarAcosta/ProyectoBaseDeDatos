@@ -12,13 +12,18 @@ import Controlador.Controlador;
  */
 public class infoSinCuentaFrame extends javax.swing.JFrame {
 Controlador c = new Controlador();
+int contra;
+int folio;
     /**
      * Creates new form registradoFrame
      */
-    public infoSinCuentaFrame() {
+    public infoSinCuentaFrame(int folio,int contra) {
         initComponents();
-        String contra = ""+c.generarContraseña();
-        contraseñaTextField.setText(contra);
+        this.folio = folio;
+        this.contra = contra;
+        
+        folioTextField.setText(String.valueOf(folio));
+        contraseñaTextField.setText(String.valueOf(contra));
     }
 
     /**
