@@ -5,6 +5,9 @@
 package Frames;
 
 import Controlador.Controlador;
+import Validadores.NumberDocumentFilter;
+import Validadores.NumberInputVerifier;
+import javax.swing.text.AbstractDocument;
 
 /**
  *
@@ -139,7 +142,9 @@ public class DepositoFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_salirButtonActionPerformed
 
     private void depositarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depositarButtonActionPerformed
-       float monto = Float.parseFloat(montoTextField.getText());
+       montoTextField.setInputVerifier(new NumberInputVerifier());
+       ((AbstractDocument) montoTextField.getDocument()).setDocumentFilter(new NumberDocumentFilter());
+        float monto = Float.parseFloat(montoTextField.getText());
         c.depositar(num, monto);
         dispose();
     }//GEN-LAST:event_depositarButtonActionPerformed

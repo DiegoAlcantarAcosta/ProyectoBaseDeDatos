@@ -49,6 +49,7 @@ Frames\CancelarCuentaFrame.class
 Frames\TusDatosFrame$13.class
 Frames\IniciarFrame$4.class
 Frames\TusDatosFrame.class
+Validadores\NumberKeyListener.class
 Frames\CancelarCuentaFrame$3.class
 Frames\DepositoFrame$3.class
 Frames\SeleccionarCuentaFrame$3.class
@@ -61,9 +62,11 @@ Frames\CrearCuentaFrame$4.class
 Frames\HistorialFrame$1.class
 Frames\TusDatosFrame$5.class
 Frames\MenuFrame$4.class
+Validadores\NumberInputVerifier.class
 Frames\sinCuenta\sinCuentaFrame.class
 Frames\TusDatosFrame$2.class
 Frames\TransferirFrame$1.class
+Validadores\NumberDocumentFilter.class
 Frames\TusDatosFrame$12.class
 Frames\registrarseFrames\registradoFrame.class
 Frames\CrearCuentaFrame$1.class

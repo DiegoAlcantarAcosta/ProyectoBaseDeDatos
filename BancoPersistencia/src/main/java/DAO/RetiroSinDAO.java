@@ -33,13 +33,6 @@ public class RetiroSinDAO implements IRetiroSinDAO {
     }
 
     @Override
-    public String generarFolio() {
-       Random random = new Random();
-        String numero = String.format("%08d", random.nextInt(100000000));
-        return numero;
-    }
-
-    @Override
     public int generarContraseña() {
         Random random = new Random();
         int numero = 10000000 + random.nextInt(90000000);

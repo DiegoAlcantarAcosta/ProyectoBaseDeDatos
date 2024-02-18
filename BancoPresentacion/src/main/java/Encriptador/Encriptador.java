@@ -4,6 +4,9 @@
  */
 package Encriptador;
 
+import javax.swing.JComponent;
+import javax.swing.JTextField;
+
 /**
  *
  * @author lv1821
@@ -296,4 +299,9 @@ public class Encriptador {
         }  
         return Newstr;
     }  
+    public boolean verify(JComponent input) {
+        JTextField textField = (JTextField) input;
+        String text = textField.getText();
+        return text.matches("\\d+"); // Solo números
+    }
 }

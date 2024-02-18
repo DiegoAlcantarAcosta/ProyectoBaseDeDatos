@@ -14,7 +14,6 @@ import Entidades.SinCuenta;
 public interface IRetiroSinDAO {
     public boolean autenticarCobro(String folio, int contraseña);
     public SinCuenta generarSinCuenta(RetiroSinDTO sin);
-    public String generarFolio();
     public int generarContraseña();
     public boolean actualizarEstado(int numCuenta);
 }

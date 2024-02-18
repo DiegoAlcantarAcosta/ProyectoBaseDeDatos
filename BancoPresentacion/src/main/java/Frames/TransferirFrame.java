@@ -173,7 +173,8 @@ public class TransferirFrame extends javax.swing.JFrame {
         int numeroInt = Integer.parseInt(numCuentaTextField.getText());
         SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
         String fechaPerrona = formatoFecha.format(g.getTime());
-        TransferenciaDTO t = new TransferenciaDTO(idCliente, numeroInt, "TRANSFERENCIA", fechaPerrona, numeroFloat);
+        
+        TransferenciaDTO t = new TransferenciaDTO(c.idCuenta(idCliente), c.idCuenta(numeroInt), "TRANSFERENCIA", fechaPerrona, numeroFloat);
         c.realizarTransferencia(t);
         dispose();
         

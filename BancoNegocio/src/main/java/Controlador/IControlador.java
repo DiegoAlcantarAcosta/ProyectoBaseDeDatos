@@ -53,7 +53,6 @@ public interface IControlador {
     List<OperacionesDTO> obtenerHistorialOperaciones(int numeroCuenta, String tipo);
     public boolean autenticarCobro(String folio, int contraseña);
     public SinCuenta generarSinCuenta(RetiroSinDTO sin);
-    public String generarFolio();
     public int generarContraseña();
     public boolean actualizarEstado(int numCuenta);
     TransferenciaDTO realizarTransferencia(TransferenciaDTO trans);
@@ -61,4 +60,5 @@ public interface IControlador {
     int idCuenta(String Fecha);
     int idDireccion(String calle, String colonia, String numero);
     int idUsuario(String contraseña, String Usuario);
+    public int idCuenta(int numCuenta);
 }

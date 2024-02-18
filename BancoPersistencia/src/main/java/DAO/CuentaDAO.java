@@ -160,6 +160,25 @@ cuenta.setNumCuenta(num);
         return idCliente;
     }
     
+    public int idCuenta(int numCuenta) {
+        int idCliente = -1;
+        String sentenciaSQL = "SELECT idCuenta FROM Cuentas WHERE numCuenta = ?";
+        try ( Connection conexion = this.conexionBD.crearConexion();  PreparedStatement comandoSQL = conexion.prepareStatement(sentenciaSQL, Statement.RETURN_GENERATED_KEYS);) {
+            comandoSQL.setInt(1, numCuenta);
+            try (ResultSet resultado = comandoSQL.executeQuery()) {
+                // Si se encontró el cliente, obtener su ID
+                if (resultado.next()) {
+                    idCliente = resultado.getInt("idCuenta");
+                }
+            }
+            
+        }catch(SQLException e) {
+            LOG.log(Level.SEVERE, "No se pudo crear la cuenta", e);
+            
+        }
+        return idCliente;
+    }
+    
         
     }
     

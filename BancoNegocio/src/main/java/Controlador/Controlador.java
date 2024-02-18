@@ -191,11 +191,6 @@ public class Controlador implements IControlador {
         return s;
     }
 
-    @Override
-    public String generarFolio() {
-        String s = retiro.generarFolio();
-        return s;
-    }
 
     @Override
     public int generarContraseña() {
@@ -264,5 +259,11 @@ public class Controlador implements IControlador {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public int idCuenta(int numCuenta) {
+        int id = cuentaDAO.idCuenta(numCuenta);
+        return id;
     }
 }

@@ -17,7 +17,6 @@ Controlador c = new Controlador();
      */
     public infoSinCuentaFrame() {
         initComponents();
-        folioTextField.setText(c.generarFolio());
         String contra = ""+c.generarContraseña();
         contraseñaTextField.setText(contra);
     }

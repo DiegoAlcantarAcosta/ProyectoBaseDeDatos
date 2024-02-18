@@ -25,4 +25,5 @@ public interface ICuentaDAO {
 
     void sumarMonto(int cuenta,float monto);
     int idCuenta(String Fecha);
+    public int idCuenta(int numCuenta);
 }

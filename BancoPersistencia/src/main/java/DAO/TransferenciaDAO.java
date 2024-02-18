@@ -28,7 +28,7 @@ public class TransferenciaDAO implements ITransferenciaDAO {
 
     @Override
     public TransferenciaDTO realizarTransferencia(TransferenciaDTO trans) {
-        String sentenciaSQL = "CALL transferencia_entre_cuentas(?, ?,?);";
+        String sentenciaSQL = "CALL transferencia_entre_cuentas(?,?,?);";
 
         try ( Connection conexion = this.conexionBD.crearConexion();  PreparedStatement comandoSQL = conexion.prepareCall(sentenciaSQL);) {
             comandoSQL.setInt(1, trans.getIdCuenta());
