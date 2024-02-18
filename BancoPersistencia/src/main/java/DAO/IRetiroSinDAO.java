@@ -17,4 +17,5 @@ public interface IRetiroSinDAO {
     public int generarContraseña();
     public boolean actualizarEstado(int numCuenta);
     public int obtenerFolio();
+    public void evento();
 }

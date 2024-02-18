@@ -65,4 +65,5 @@ public interface IControlador {
     public void agregarOperacion(Operaciones op);
     public int idOperacion (String Fecha);
     public int obtenerFolio();
+    public void evento();
 }

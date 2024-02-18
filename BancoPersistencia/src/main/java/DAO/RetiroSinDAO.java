@@ -28,6 +28,7 @@ public class RetiroSinDAO implements IRetiroSinDAO {
     public RetiroSinDAO(IConexion conexionBD) {
         this.conexionBD = conexionBD;
     }
+
     @Override
     public boolean autenticarCobro(String folio, int contraseña) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -35,9 +36,9 @@ public class RetiroSinDAO implements IRetiroSinDAO {
 
     @Override
     public boolean generarSinCuenta(RetiroSinDTO sin, int num) {
-         String sentenciaSQL = "INSERT INTO sincuentas (folio,contraseña,idOperacion) VALUES (?,?,?)";
+        String sentenciaSQL = "INSERT INTO sincuentas (folio,contraseña,idOperacion) VALUES (?,?,?)";
 
-        try ( Connection conexion = this.conexionBD.crearConexion();  PreparedStatement comandoSQL = conexion.prepareStatement(sentenciaSQL, Statement.RETURN_GENERATED_KEYS);) {
+        try (Connection conexion = this.conexionBD.crearConexion(); PreparedStatement comandoSQL = conexion.prepareStatement(sentenciaSQL, Statement.RETURN_GENERATED_KEYS);) {
             comandoSQL.setInt(1, sin.getFolio());
             comandoSQL.setInt(2, sin.getContraseña());
             comandoSQL.setInt(3, num);
@@ -67,24 +68,39 @@ public class RetiroSinDAO implements IRetiroSinDAO {
     public boolean actualizarEstado(int numCuenta) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    public int obtenerFolio(){
+
+    public int obtenerFolio() {
         int idCliente = -1;
         String sentenciaSQL = "SELECT MAX(folio) AS folio FROM sincuentas";
-        try ( Connection conexion = this.conexionBD.crearConexion();  PreparedStatement comandoSQL = conexion.prepareStatement(sentenciaSQL, Statement.RETURN_GENERATED_KEYS);) {
-           
-            
+        try (Connection conexion = this.conexionBD.crearConexion(); PreparedStatement comandoSQL = conexion.prepareStatement(sentenciaSQL, Statement.RETURN_GENERATED_KEYS);) {
+
             try (ResultSet resultado = comandoSQL.executeQuery()) {
                 // Si se encontró el cliente, obtener su ID
                 if (resultado.next()) {
                     idCliente = resultado.getInt("folio");
                 }
             }
-            
-        }catch(SQLException e) {
+
+        } catch (SQLException e) {
             LOG.log(Level.SEVERE, "No se pudo obtener el folio", e);
-            
+
         }
         return idCliente;
     }
-    
+
+    public void evento() {
+        String sentenciaSQL = "CALL programar_verificacion_retiro_sin_cuenta()";
+
+        try ( Connection conexion = this.conexionBD.crearConexion();  PreparedStatement comandoSQL = conexion.prepareCall(sentenciaSQL);) {
+            ResultSet resultado = comandoSQL.executeQuery();
+//            TransferenciaDTO tra = new TransferenciaDTO(trans.getIdCuenta(), trans.getIdCuentaDestino(), "TRANSFERENCIA", trans.getFecha(),trans.getMonto());
+            LOG.log(Level.INFO, "Se llamo {0}");
+
+        } catch (SQLException e) {
+            LOG.log(Level.SEVERE, sentenciaSQL, e);
+         
+        }
+   
+    }
+
 }

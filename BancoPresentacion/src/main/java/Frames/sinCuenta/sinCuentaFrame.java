@@ -135,7 +135,6 @@ public class sinCuentaFrame extends javax.swing.JFrame {
         RetiroSinDTO retiro = new RetiroSinDTO(c.idCuenta(idCuenta), 1000, contra, "Procesando", fechaHoraString, Float.parseFloat(montoTextField.getText()), "RETIRO SIN CUENTA");
         c.agregarOperacion(operacion);
         c.generarSinCuenta(retiro,c.idOperacion(fechaHoraString));
-        
         infoSinCuentaFrame info = new infoSinCuentaFrame(c.obtenerFolio(),contra);
         info.show();
         dispose();

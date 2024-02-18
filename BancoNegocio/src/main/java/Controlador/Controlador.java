@@ -284,4 +284,7 @@ public class Controlador implements IControlador {
         int num = retiro.obtenerFolio();
         return num;
     }
+    public void evento(){
+        retiro.evento();
+    }
 }
