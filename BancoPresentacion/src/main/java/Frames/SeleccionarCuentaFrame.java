@@ -152,8 +152,6 @@ public class SeleccionarCuentaFrame extends javax.swing.JFrame {
 
     private void salirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirButtonActionPerformed
         dispose();
-        IniciarFrame i = new IniciarFrame();
-        i.show();
     }//GEN-LAST:event_salirButtonActionPerformed
 
     public void añadirAlComboBox() {

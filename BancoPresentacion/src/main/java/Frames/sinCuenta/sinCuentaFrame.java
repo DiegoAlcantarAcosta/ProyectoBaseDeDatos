@@ -8,8 +8,12 @@ import Controlador.Controlador;
 import DTO.RetiroSinDTO;
 import Entidades.Operaciones;
 import Frames.MenuFrame;
+import Validadores.NumberDocumentFilter;
+import Validadores.NumberInputVerifier;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import javax.swing.JOptionPane;
+import javax.swing.text.AbstractDocument;
 
 /**
  *
@@ -126,24 +130,29 @@ public class sinCuentaFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarButtonActionPerformed
+        montoTextField.setInputVerifier(new NumberInputVerifier());
+       ((AbstractDocument) montoTextField.getDocument()).setDocumentFilter(new NumberDocumentFilter());
+        if (!(montoTextField.getText().equalsIgnoreCase(""))) {
         int contra = 0;
         contra = c.generarContraseña();
         LocalDateTime fechaHora = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        String fechaHoraString = fechaHora.format(formatter);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            String fechaHoraString = fechaHora.format(formatter);
         Operaciones operacion = new Operaciones(c.idCuenta(idCuenta), "RETIRO SIN CUENTA", fechaHoraString, Float.parseFloat(montoTextField.getText()) );
         RetiroSinDTO retiro = new RetiroSinDTO(c.idCuenta(idCuenta), 1000, contra, "Procesando", fechaHoraString, Float.parseFloat(montoTextField.getText()), "RETIRO SIN CUENTA");
         c.agregarOperacion(operacion);
         c.generarSinCuenta(retiro,c.idOperacion(fechaHoraString));
         infoSinCuentaFrame info = new infoSinCuentaFrame(c.obtenerFolio(),contra);
         info.show();
+        JOptionPane.showMessageDialog(this, "Solicitud aceptada");
         dispose();
+        }else{
+            JOptionPane.showMessageDialog(this, "Algun registro esta vacio");
+        }
     }//GEN-LAST:event_aceptarButtonActionPerformed
 
     private void aceptarButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarButton1ActionPerformed
         dispose();
-        MenuFrame menu = new MenuFrame();
-        menu.show();
     }//GEN-LAST:event_aceptarButton1ActionPerformed
 
     /**

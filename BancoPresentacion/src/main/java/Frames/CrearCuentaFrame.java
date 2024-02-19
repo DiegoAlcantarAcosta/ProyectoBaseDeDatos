@@ -173,11 +173,12 @@ public class CrearCuentaFrame extends javax.swing.JFrame {
 
     private void salirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirButtonActionPerformed
         dispose();
-        MenuFrame m = new MenuFrame();
-        m.show();
     }//GEN-LAST:event_salirButtonActionPerformed
 
     private void crearCuentaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearCuentaButtonActionPerformed
+        if (!(usuarioTextField1.getText().equalsIgnoreCase("") || contraseñaTextField.getText().equalsIgnoreCase(""))) {
+            
+        
         if (contra.equals(contraseñaTextField.getText())) {
             Encriptador e = new Encriptador();
             SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
@@ -187,9 +188,13 @@ public class CrearCuentaFrame extends javax.swing.JFrame {
             int idCuenta = random.nextInt(maxDigits - minDigits + 1) + minDigits;
             Cuenta cuenta = new Cuenta(idCuenta,c.idUsuario(e.desencriptador(contraseñaTextField.getText()), usuarioTextField1.getText()), 0, formatoFecha.format(calendario.getTime()));
             c.crearCuentaNueva(cuenta,c.idUsuario(e.desencriptador(contraseñaTextField.getText()), usuarioTextField1.getText()), idCuenta);
+            JOptionPane.showMessageDialog(this, "Cuenta creada");
             dispose();
         } else {
-            JOptionPane o = new JOptionPane("No se pudo crear la cuenta");
+            JOptionPane.showMessageDialog(this, "Contraseña o usuario incorrectos");
+        }
+        }else{
+            JOptionPane.showMessageDialog(this, "Algun registro esta vacio");
         }
     }//GEN-LAST:event_crearCuentaButtonActionPerformed
 

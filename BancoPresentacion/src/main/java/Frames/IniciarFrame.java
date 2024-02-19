@@ -8,6 +8,7 @@ import Controlador.Controlador;
 import Encriptador.Encriptador;
 import Frames.registrarseFrames.RegistrarFrame;
 import Frames.sinCuenta.RetirarFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -42,6 +43,7 @@ public class IniciarFrame extends javax.swing.JFrame {
         registrarseButton = new javax.swing.JButton();
         cobrarSinTarjetaButton1 = new javax.swing.JButton();
         iniciarSesionButton1 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -109,19 +111,27 @@ public class IniciarFrame extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton1.setText("Salir");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(48, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addContainerGap(50, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(cobrarSinTarjetaButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(registrarseButton)
                         .addGap(18, 18, 18)
+                        .addComponent(registrarseButton)
+                        .addGap(28, 28, 28)
                         .addComponent(iniciarSesionButton1))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
@@ -131,6 +141,10 @@ public class IniciarFrame extends javax.swing.JFrame {
                             .addComponent(contraseñaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(usuarioTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(52, 52, 52))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(221, 221, 221)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(87, 87, 87)
@@ -154,7 +168,9 @@ public class IniciarFrame extends javax.swing.JFrame {
                     .addComponent(cobrarSinTarjetaButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(iniciarSesionButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(registrarseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addContainerGap(16, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(146, 146, 146)
@@ -186,13 +202,24 @@ public class IniciarFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_cobrarSinTarjetaButton1ActionPerformed
 
     private void iniciarSesionButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarSesionButton1ActionPerformed
-       int idUsuario = c.idUsuario(e.encriptador(contraseñaTextField.getText()), usuarioTextField1.getText());
+        if (! (usuarioTextField1.getText().equalsIgnoreCase("") || contraseñaTextField.getText().equalsIgnoreCase(""))) {
+        int idUsuario = c.idUsuario(e.encriptador(contraseñaTextField.getText()), usuarioTextField1.getText());
         if (c.autenticarUsuario(usuarioTextField1.getText(), e.encriptador(contraseñaTextField.getText()))){
             SeleccionarCuentaFrame i = new SeleccionarCuentaFrame(idUsuario, contraseñaTextField.getText());
             i.show();
+            JOptionPane.showMessageDialog(this, "BIENVENDIO!!");
             dispose();
+        }else{
+            JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos");
+        }
+        }else{
+            JOptionPane.showMessageDialog(this, "Algun campo esta vacio");
         }
     }//GEN-LAST:event_iniciarSesionButton1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -203,6 +230,7 @@ public class IniciarFrame extends javax.swing.JFrame {
     private javax.swing.JButton cobrarSinTarjetaButton1;
     private javax.swing.JTextField contraseñaTextField;
     private javax.swing.JButton iniciarSesionButton1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

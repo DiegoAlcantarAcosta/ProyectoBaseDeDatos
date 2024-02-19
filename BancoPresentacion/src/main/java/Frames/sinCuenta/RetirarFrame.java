@@ -39,11 +39,11 @@ public class RetirarFrame extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         folioTextField1 = new javax.swing.JTextField();
         contraseñaPasswordField = new javax.swing.JPasswordField();
+        cobrarButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 255));
-        jPanel1.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel1.setFont(new java.awt.Font("Bodoni MT", 0, 48)); // NOI18N
         jLabel1.setText("VVBA");
@@ -94,6 +94,14 @@ public class RetirarFrame extends javax.swing.JFrame {
             }
         });
 
+        cobrarButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        cobrarButton1.setText("Salir");
+        cobrarButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cobrarButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -106,13 +114,15 @@ public class RetirarFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(folioTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(contraseñaPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 75, Short.MAX_VALUE))
+                .addGap(0, 76, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(142, 142, 142))
             .addGroup(layout.createSequentialGroup()
-                .addGap(239, 239, 239)
+                .addGap(165, 165, 165)
+                .addComponent(cobrarButton1)
+                .addGap(79, 79, 79)
                 .addComponent(cobrarButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,7 +144,9 @@ public class RetirarFrame extends javax.swing.JFrame {
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(contraseñaPasswordField))
                 .addGap(44, 44, 44)
-                .addComponent(cobrarButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cobrarButton)
+                    .addComponent(cobrarButton1))
                 .addGap(34, 34, 34))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -155,13 +167,24 @@ public class RetirarFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_contraseñaPasswordFieldActionPerformed
 
     private void cobrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cobrarButtonActionPerformed
+        if (!(folioTextField1.getText().equalsIgnoreCase("") || contraseñaPasswordField.getText().equalsIgnoreCase(""))) {
+            
         if (c.autenticarCobro(Integer.parseInt(folioTextField1.getText()), Integer.parseInt(contraseñaPasswordField.getText()))) {
             c.actualizarEstado(c.idRetiro(Integer.parseInt(folioTextField1.getText()), Integer.parseInt(contraseñaPasswordField.getText())));
+            JOptionPane.showMessageDialog(this, "Cobrado con exito");
+            dispose();
         }else{
             JOptionPane.showMessageDialog(this, "No coincide con ningun retiro");
         }
-        dispose();
+        }else{
+            JOptionPane.showMessageDialog(this, "Algun registro esta vacio");
+        }
+        
     }//GEN-LAST:event_cobrarButtonActionPerformed
+
+    private void cobrarButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cobrarButton1ActionPerformed
+        dispose();
+    }//GEN-LAST:event_cobrarButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -170,6 +193,7 @@ public class RetirarFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cobrarButton;
+    private javax.swing.JButton cobrarButton1;
     private javax.swing.JPasswordField contraseñaPasswordField;
     private javax.swing.JTextField folioTextField1;
     private javax.swing.JLabel jLabel1;

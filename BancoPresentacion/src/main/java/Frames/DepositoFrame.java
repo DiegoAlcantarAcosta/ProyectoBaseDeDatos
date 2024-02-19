@@ -7,6 +7,7 @@ package Frames;
 import Controlador.Controlador;
 import Validadores.NumberDocumentFilter;
 import Validadores.NumberInputVerifier;
+import javax.swing.JOptionPane;
 import javax.swing.text.AbstractDocument;
 
 /**
@@ -142,11 +143,16 @@ public class DepositoFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_salirButtonActionPerformed
 
     private void depositarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depositarButtonActionPerformed
-       montoTextField.setInputVerifier(new NumberInputVerifier());
+        montoTextField.setInputVerifier(new NumberInputVerifier());
        ((AbstractDocument) montoTextField.getDocument()).setDocumentFilter(new NumberDocumentFilter());
+        if (!(montoTextField.getText().equalsIgnoreCase(""))) {
         float monto = Float.parseFloat(montoTextField.getText());
         c.depositar(num, monto);
         dispose();
+        JOptionPane.showMessageDialog(this, "Deposito Exitoso");
+        }else{
+            JOptionPane.showMessageDialog(this, "Monto vacio");
+        }
     }//GEN-LAST:event_depositarButtonActionPerformed
 
     /**

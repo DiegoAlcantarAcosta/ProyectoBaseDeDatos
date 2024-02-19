@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -335,6 +336,8 @@ public class RegistrarFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_codigoPostalTextFieldActionPerformed
 
     private void registrarseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarseButtonActionPerformed
+       if (!(usuarioTextField.getText().equalsIgnoreCase("") || nombreTextField.getText().equalsIgnoreCase("") || apellidoPaternoTextField.getText().equalsIgnoreCase("") || apellidoMaternoTextField.getText().equalsIgnoreCase("") || contraseñaTextField.getText().equalsIgnoreCase("") || calleTextField.getText().equalsIgnoreCase("") || coloniaTextField.getText().equalsIgnoreCase("") || numeroTextField.getText().equalsIgnoreCase("") || codigoPostalTextField.getText().equalsIgnoreCase("")|| fechaNacimientoDateChooser.getDateFormatString().equalsIgnoreCase(""))) {
+
         GregorianCalendar calendario = new GregorianCalendar();
         SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
         String fechaFormateada = formatoFecha.format(calendario.getTime());
@@ -356,10 +359,14 @@ public class RegistrarFrame extends javax.swing.JFrame {
             int idCliente = c.idCliente(nombreTextField.getText(), apellidoPaternoTextField.getText());
             registradoFrame registrado = new registradoFrame(idCuenta, contraseñaTextField.getText());
             registrado.show();
+            JOptionPane.showMessageDialog(this, "Registro Exitoso");
             dispose();
         } catch (PersistenciaExcepcion ex) {
             Logger.getLogger(RegistrarFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
+        }else{
+                    JOptionPane.showMessageDialog(this, "Algun registro esta vacio");
+                }
 
 
     }//GEN-LAST:event_registrarseButtonActionPerformed

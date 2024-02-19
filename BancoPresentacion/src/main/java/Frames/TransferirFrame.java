@@ -6,8 +6,12 @@ package Frames;
 
 import Controlador.Controlador;
 import DTO.TransferenciaDTO;
+import Validadores.NumberDocumentFilter;
+import Validadores.NumberInputVerifier;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
+import javax.swing.JOptionPane;
+import javax.swing.text.AbstractDocument;
 
 /**
  *
@@ -169,6 +173,9 @@ public class TransferirFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_salirButtonActionPerformed
 
     private void transferirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transferirButtonActionPerformed
+        montoTextField.setInputVerifier(new NumberInputVerifier());
+       ((AbstractDocument) montoTextField.getDocument()).setDocumentFilter(new NumberDocumentFilter());
+        if (!(numCuentaTextField.getText().equalsIgnoreCase("") || montoTextField.getText().equalsIgnoreCase(""))) {
         float numeroFloat = Float.parseFloat(montoTextField.getText());
         int numeroInt = Integer.parseInt(numCuentaTextField.getText());
         SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
@@ -176,8 +183,12 @@ public class TransferirFrame extends javax.swing.JFrame {
         
         TransferenciaDTO t = new TransferenciaDTO(c.idCuenta(idCliente), c.idCuenta(numeroInt), "TRANSFERENCIA", fechaPerrona, numeroFloat);
         c.realizarTransferencia(t);
+        JOptionPane.showMessageDialog(this, "Transferencia Exitosa");
         dispose();
         
+        }else{
+            JOptionPane.showMessageDialog(this, "Algun registro esta vacio");
+        }
     }//GEN-LAST:event_transferirButtonActionPerformed
 
     /**

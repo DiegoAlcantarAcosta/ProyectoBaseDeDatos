@@ -54,6 +54,7 @@ Frames\SeleccionarConsultaFrame$2.class
 Frames\ConsultaTransferenciaFrame$2.class
 Frames\TusDatosFrame$13.class
 Frames\IniciarFrame$4.class
+Frames\sinCuenta\RetirarFrame$4.class
 Frames\TusDatosFrame.class
 Validadores\NumberKeyListener.class
 Frames\CancelarCuentaFrame$3.class

@@ -144,13 +144,16 @@ import javax.swing.JOptionPane;
     }//GEN-LAST:event_salirButtonActionPerformed
 
     private void cancelarCuentaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarCuentaButtonActionPerformed
-      if(contra.equals(contraseñaTextField.getText())){
+        if (!(contraseñaTextField.getText().equalsIgnoreCase(""))) {
+        if(contra.equals(contraseñaTextField.getText())){
         c.actualizarEstadoCuenta(num);
-            System.out.println("Cancelada");
+            JOptionPane.showMessageDialog(this, "Cuenta cancelada");
         dispose();
         } else {
-            JOptionPane j = new JOptionPane("No se pudo cancelar la cuenta");
-            System.out.println("No se pudo cancelr");
+            JOptionPane.showMessageDialog(this, "Contraseña invalida");
+        }
+        }else{
+            JOptionPane.showMessageDialog(this, "Contraseña vacia");
         }
     }//GEN-LAST:event_cancelarCuentaButtonActionPerformed
 
