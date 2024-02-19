@@ -30,6 +30,14 @@ public class SinCuenta extends Operaciones {
         this.contraseña = contraseña;
     }
 
+    public SinCuenta(int folio, String estado, int idCuenta, String tipo, String fecha, float monto) {
+        super(idCuenta, tipo, fecha, monto);
+        this.folio = folio;
+        this.estado = estado;
+    }
+    
+    
+
     public SinCuenta() {
         super();
     }

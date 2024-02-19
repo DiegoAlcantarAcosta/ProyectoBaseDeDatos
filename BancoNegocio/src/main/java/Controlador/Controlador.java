@@ -45,7 +45,7 @@ public class Controlador implements IControlador {
 
     String cadenaConexion = "jdbc:mysql://localhost:3306/banco";
     String usuario = "root";
-    String contrasenia = "2608jlml";
+    String contrasenia = "2004";
     IConexion conexionBD = new Conexion(cadenaConexion, usuario, contrasenia);
     IClienteDAO clienteDAO = new ClienteDAO(conexionBD);
     ICuentaDAO cuentaDAO = new CuentaDAO(conexionBD);
@@ -252,8 +252,8 @@ public class Controlador implements IControlador {
     }
 
     @Override
-    public List<OperacionesDTO> obtenerHistorialOperaciones(int numeroCuenta, Date desde, Date hasta) {
-        List<OperacionesDTO> o = operacionesDAO.obtenerHistorialOperaciones(numeroCuenta, desde, hasta);
+    public List<OperacionesDTO> obtenerHistorialOperaciones(String tipo, Date desde, Date hasta) {
+        List<OperacionesDTO> o = operacionesDAO.obtenerHistorialOperaciones(tipo, desde, hasta);
         return o;
     }
     

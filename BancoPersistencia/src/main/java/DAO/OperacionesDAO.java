@@ -8,6 +8,7 @@ import Conexion.IConexion;
 import DTO.CuentaDTO;
 import DTO.OperacionesDTO;
 import Entidades.Operaciones;
+import Entidades.SinCuenta;
 import java.sql.Connection;
 import java.util.Date;
 import java.sql.PreparedStatement;
@@ -38,22 +39,29 @@ public class OperacionesDAO implements IOperacionesDAO {
     }
 
     @Override
-    public List<OperacionesDTO> obtenerHistorialOperaciones(int numeroCuenta, Date desde, Date hasta) {
-       String sentencia = "SELECT * FROM OPERACIONES WHERE idCuenta_origen = ?";
-        List<CuentaDTO> lista = new ArrayList<>();
+    public List<OperacionesDTO> obtenerHistorialOperaciones(String tipo, Date desde, Date hasta) {
+        String sentencia;
+        List<SinCuenta> lista = new ArrayList<>();
 
-        try ( Connection conexion = this.conexionBD.crearConexion();  PreparedStatement comandoSQL = conexion.prepareCall(sentencia);) {
-            comandoSQL.setInt(1, numeroCuenta);
+        switch (tipo) {
+            case "Sin cuenta":
+                sentencia = "SELECT O.idTransaccion, O.tipo, O.monto, S.folio"
+                        + "FROM OPERACIONES O"
+                        + "INNER JOIN SinCuentas S ON S.idOperacion = O.idTransaccion"
+                        + "WHERE fecha BETWEEN \"?\" AND \"?\"";
+                
+                 try ( Connection conexion = this.conexionBD.crearConexion();  PreparedStatement comandoSQL = conexion.prepareCall(sentencia);) {
+            comandoSQL.setDate(1, (java.sql.Date) desde);
+            comandoSQL.setDate(2, (java.sql.Date) hasta);
             ResultSet resultado = comandoSQL.executeQuery();
             while (resultado.next()) {
-                int numCuenta = resultado.getInt("idCuenta");
-                float saldo = resultado.getFloat("saldo");
-                String fechaApertura = resultado.getString("fechaApertura");
-                String estado = resultado.getString("estado");
-                int idClientela = resultado.getInt("idCliente");
+                int idTransaccion = resultado.getInt("O.idTransaccion");
+                String tipoXD = resultado.getString("O.tipo");
+                String estado = resultado.getString("S.estado");
+                float monto = resultado.getFloat("O.monto");
+                int folio = resultado.getInt("S.folio");
 
-                CuentaDTO cuenta = new CuentaDTO(saldo, fechaApertura, estado);
-
+                SinCuenta cuenta = new SinCuenta(folio, estado, idTransaccion, tipo, estado, monto);
                 lista.add(cuenta);
             }
 
@@ -64,9 +72,12 @@ public class OperacionesDAO implements IOperacionesDAO {
             LOG.log(Level.SEVERE, sentencia, e);
             return null;
         }
+        }
+
+       
     }
-    
-    public void agregarOperacion(Operaciones op){
+
+    public void agregarOperacion(Operaciones op) {
         String sentenciaSQL = "INSERT INTO Operaciones (idCuenta_origen,tipo,fecha,monto) VALUES (?,?,?,?)";
 
         try ( Connection conexion = this.conexionBD.crearConexion();  PreparedStatement comandoSQL = conexion.prepareStatement(sentenciaSQL, Statement.RETURN_GENERATED_KEYS);) {
@@ -85,29 +96,28 @@ public class OperacionesDAO implements IOperacionesDAO {
         } catch (SQLException e) {
             LOG.log(Level.SEVERE, "No se pudo agregar la operacion", e);
         }
-        
-        
+
     }
-    public int idOperacion (String Fecha){
-        
+
+    public int idOperacion(String Fecha) {
+
         int idCliente = -1;
         String sentenciaSQL = "SELECT idTransaccion FROM Operaciones WHERE fecha= ?";
         try ( Connection conexion = this.conexionBD.crearConexion();  PreparedStatement comandoSQL = conexion.prepareStatement(sentenciaSQL, Statement.RETURN_GENERATED_KEYS);) {
             comandoSQL.setString(1, Fecha);
-            
-            try (ResultSet resultado = comandoSQL.executeQuery()) {
+
+            try ( ResultSet resultado = comandoSQL.executeQuery()) {
                 // Si se encontró el cliente, obtener su ID
                 if (resultado.next()) {
                     idCliente = resultado.getInt("idTransaccion");
                 }
             }
-            
-        }catch(SQLException e) {
+
+        } catch (SQLException e) {
             LOG.log(Level.SEVERE, "No se pudo crear la cuenta", e);
-            
+
         }
         return idCliente;
     }
 
-    
 }

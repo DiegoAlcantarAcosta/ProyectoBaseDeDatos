@@ -50,7 +50,7 @@ public interface IControlador {
     DireccionDTO obtenerDireccion(int idDireccion);
     boolean actualizarDireccion(DireccionDTO direccion, int idDireccion);
     boolean registrarDireccion(Direccion direccion);
-    List<OperacionesDTO> obtenerHistorialOperaciones(int numeroCuenta, Date desde, Date hasta);
+    List<OperacionesDTO> obtenerHistorialOperaciones(String numeroCuenta, Date desde, Date hasta);
     List<OperacionesDTO> obtenerHistorialOperaciones(int numeroCuenta, String tipo);
     public boolean autenticarCobro(String folio, int contraseña);
     public boolean generarSinCuenta(RetiroSinDTO sin,int num);

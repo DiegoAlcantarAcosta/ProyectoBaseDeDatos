@@ -15,7 +15,7 @@ import java.util.List;
  */
 public interface IOperacionesDAO {
     
-    List<OperacionesDTO> obtenerHistorialOperaciones(int numeroCuenta, Date desde, Date hasta);
+    List<OperacionesDTO> obtenerHistorialOperaciones(String numeroCuenta, Date desde, Date hasta);
     List<OperacionesDTO> obtenerHistorialOperaciones(int numeroCuenta, String tipo);
    public void agregarOperacion(Operaciones op);
    public int idOperacion (String Fecha);
