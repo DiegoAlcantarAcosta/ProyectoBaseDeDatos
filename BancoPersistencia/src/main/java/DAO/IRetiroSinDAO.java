@@ -12,7 +12,7 @@ import Entidades.SinCuenta;
  * @author pc
  */
 public interface IRetiroSinDAO {
-    public boolean autenticarCobro(String folio, int contraseña);
+    public boolean autenticarCobro(int folio, int contraseña);
     public boolean generarSinCuenta(RetiroSinDTO sin,int num);
     public int generarContraseña();
     public boolean actualizarEstado(int numCuenta);

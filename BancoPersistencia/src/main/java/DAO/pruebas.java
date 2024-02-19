@@ -98,6 +98,10 @@ public class pruebas {
 //    RetiroSinDTO r = new RetiroSinDTO(1,1000,retiro.generarContraseña(),"RETIRO SIN CUENTA",fechaHoraString,50,"Procesando");
 //    int num = o.idOperacion(fechaHoraString);
 //    retiro.generarSinCuenta(r,num);
-    System.out.println(retiro.obtenerFolio());
+//    System.out.println(retiro.obtenerFolio());
+        if (retiro.autenticarCobro(1000, 48157110)) {
+            System.out.println("yeah");
+        }
+        System.out.println("nou");
 }
 }

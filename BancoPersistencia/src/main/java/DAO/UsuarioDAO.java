@@ -30,10 +30,11 @@ public class UsuarioDAO implements IUsuarioDAO {
 
     @Override
     public boolean autenticarUsuario(String usuario, String contraseña) {
-        String sentencia = "SELECT * FROM USUARIOS WHERE nombreUsuario = ?";
+        String sentencia = "SELECT * FROM USUARIOS WHERE nombreUsuario = ? and contraseña = ?";
 
         try ( Connection conexion = this.conexionBD.crearConexion();  PreparedStatement comandoSQL = conexion.prepareCall(sentencia);) {
             comandoSQL.setString(1, usuario);
+            comandoSQL.setString(2, contraseña);
             ResultSet resultado = comandoSQL.executeQuery();
             while (resultado.next()) {
                 String nombreUsuario = resultado.getString("nombreUsuario");

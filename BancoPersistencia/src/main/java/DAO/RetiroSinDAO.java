@@ -30,8 +30,26 @@ public class RetiroSinDAO implements IRetiroSinDAO {
     }
 
     @Override
-    public boolean autenticarCobro(String folio, int contraseña) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean autenticarCobro(int folio, int contraseña) {
+        String sentencia = "SELECT * FROM sincuentas WHERE folio = ? and contraseña = ?";
+
+        try ( Connection conexion = this.conexionBD.crearConexion();  PreparedStatement comandoSQL = conexion.prepareCall(sentencia);) {
+            comandoSQL.setInt(1, folio);
+            comandoSQL.setInt(2, contraseña);
+            ResultSet resultado = comandoSQL.executeQuery();
+            while (resultado.next()) {
+                int nombreUsuario = resultado.getInt("folio");
+                int contra = resultado.getInt("contraseña");
+
+                if (nombreUsuario == folio && contra == contraseña) {
+                    return true;
+                }
+            }
+
+        } catch (SQLException e) {
+            LOG.log(Level.SEVERE, sentencia, e);
+        }
+        return false;
     }
 
     @Override
