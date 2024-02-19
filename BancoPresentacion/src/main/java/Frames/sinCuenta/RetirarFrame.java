@@ -4,12 +4,17 @@
  */
 package Frames.sinCuenta;
 
+import Controlador.Controlador;
+import Controlador.IControlador;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author lv1821
  */
 public class RetirarFrame extends javax.swing.JFrame {
 
+        IControlador c = new Controlador();
     /**
      * Creates new form IniciarFrame
      */
@@ -150,6 +155,11 @@ public class RetirarFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_contraseñaPasswordFieldActionPerformed
 
     private void cobrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cobrarButtonActionPerformed
+        if (c.autenticarCobro(Integer.parseInt(folioTextField1.getText()), Integer.parseInt(contraseñaPasswordField.getText()))) {
+            c.actualizarEstado(c.idRetiro(Integer.parseInt(folioTextField1.getText()), Integer.parseInt(contraseñaPasswordField.getText())));
+        }else{
+            JOptionPane.showMessageDialog(this, "No coincide con ningun retiro");
+        }
         dispose();
     }//GEN-LAST:event_cobrarButtonActionPerformed
 

@@ -33,7 +33,7 @@ public class RetiroSinDAO implements IRetiroSinDAO {
     public boolean autenticarCobro(int folio, int contraseña) {
         String sentencia = "SELECT * FROM sincuentas WHERE folio = ? and contraseña = ?";
 
-        try ( Connection conexion = this.conexionBD.crearConexion();  PreparedStatement comandoSQL = conexion.prepareCall(sentencia);) {
+        try (Connection conexion = this.conexionBD.crearConexion(); PreparedStatement comandoSQL = conexion.prepareCall(sentencia);) {
             comandoSQL.setInt(1, folio);
             comandoSQL.setInt(2, contraseña);
             ResultSet resultado = comandoSQL.executeQuery();
@@ -83,8 +83,25 @@ public class RetiroSinDAO implements IRetiroSinDAO {
     }
 
     @Override
-    public boolean actualizarEstado(int numCuenta) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void actualizarEstado(int numCuenta) {
+        String sentenciaSQL = "UPDATE sincuentas SET estado = ? WHERE idSinCuentas = ? and estado = ?";
+
+        try (Connection conexion = this.conexionBD.crearConexion(); PreparedStatement comandoSQL = conexion.prepareStatement(sentenciaSQL, Statement.RETURN_GENERATED_KEYS);) {
+            comandoSQL.setString(1, "COBRADO");
+            comandoSQL.setInt(2, numCuenta);
+            comandoSQL.setString(3, "Procesando");
+            
+
+            int resultado = comandoSQL.executeUpdate();
+
+            LOG.log(Level.INFO, "Se ha actualizado {0}", resultado);
+
+            ResultSet res = comandoSQL.getGeneratedKeys();
+
+            res.next();
+        } catch (SQLException e) {
+            LOG.log(Level.SEVERE, "No se pudo actualizar el estado");
+        }
     }
 
     public int obtenerFolio() {
@@ -105,20 +122,41 @@ public class RetiroSinDAO implements IRetiroSinDAO {
         }
         return idCliente;
     }
+    public int idRetiro(int folio, int contraseña){
+        int idCliente = -1;
+        String sentenciaSQL = "SELECT idSinCuentas FROM sincuentas where folio = ? and contraseña = ?";
+        try (Connection conexion = this.conexionBD.crearConexion(); PreparedStatement comandoSQL = conexion.prepareStatement(sentenciaSQL, Statement.RETURN_GENERATED_KEYS);) {
+
+                comandoSQL.setInt(1, folio);
+                comandoSQL.setInt(2, contraseña);
+                
+            try (ResultSet resultado = comandoSQL.executeQuery()) {
+                // Si se encontró el cliente, obtener su ID
+                if (resultado.next()) {
+                    idCliente = resultado.getInt("idSinCuentas");
+                }
+            }
+
+        } catch (SQLException e) {
+            LOG.log(Level.SEVERE, "No se pudo obtener el folio", e);
+
+        }
+        return idCliente;
+    }
 
     public void evento() {
         String sentenciaSQL = "CALL programar_verificacion_retiro_sin_cuenta()";
 
-        try ( Connection conexion = this.conexionBD.crearConexion();  PreparedStatement comandoSQL = conexion.prepareCall(sentenciaSQL);) {
+        try (Connection conexion = this.conexionBD.crearConexion(); PreparedStatement comandoSQL = conexion.prepareCall(sentenciaSQL);) {
             ResultSet resultado = comandoSQL.executeQuery();
 //            TransferenciaDTO tra = new TransferenciaDTO(trans.getIdCuenta(), trans.getIdCuentaDestino(), "TRANSFERENCIA", trans.getFecha(),trans.getMonto());
             LOG.log(Level.INFO, "Se llamo {0}");
 
         } catch (SQLException e) {
             LOG.log(Level.SEVERE, sentenciaSQL, e);
-         
+
         }
-   
+
     }
 
 }

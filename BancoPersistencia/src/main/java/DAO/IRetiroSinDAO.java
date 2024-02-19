@@ -15,7 +15,8 @@ public interface IRetiroSinDAO {
     public boolean autenticarCobro(int folio, int contraseña);
     public boolean generarSinCuenta(RetiroSinDTO sin,int num);
     public int generarContraseña();
-    public boolean actualizarEstado(int numCuenta);
+    public void actualizarEstado(int numCuenta);
     public int obtenerFolio();
     public void evento();
+    public int idRetiro(int folio, int contraseña);
 }

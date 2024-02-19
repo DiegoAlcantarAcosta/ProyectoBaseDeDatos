@@ -45,7 +45,7 @@ public class Controlador implements IControlador {
 
     String cadenaConexion = "jdbc:mysql://localhost:3306/banco";
     String usuario = "root";
-    String contrasenia = "2004";
+    String contrasenia = "2608jlml";
     IConexion conexionBD = new Conexion(cadenaConexion, usuario, contrasenia);
     IClienteDAO clienteDAO = new ClienteDAO(conexionBD);
     ICuentaDAO cuentaDAO = new CuentaDAO(conexionBD);
@@ -194,11 +194,9 @@ public class Controlador implements IControlador {
     }
 
     @Override
-    public boolean actualizarEstado(int numCuenta) {
-        if (retiro.actualizarEstado(numCuenta)) {
-            return true;
-        }
-        return false;
+    public void actualizarEstado(int numCuenta) {
+        retiro.actualizarEstado(numCuenta);
+            
     }
 
     @Override
@@ -272,5 +270,11 @@ public class Controlador implements IControlador {
     }
     public void evento(){
         retiro.evento();
+    }
+
+    @Override
+    public int idRetiro(int folio, int contraseña) {
+        int num = retiro.idRetiro(folio, contraseña);
+        return num;
     }
 }

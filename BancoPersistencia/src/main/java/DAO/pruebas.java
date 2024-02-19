@@ -99,9 +99,12 @@ public class pruebas {
 //    int num = o.idOperacion(fechaHoraString);
 //    retiro.generarSinCuenta(r,num);
 //    System.out.println(retiro.obtenerFolio());
-        if (retiro.autenticarCobro(1000, 48157110)) {
-            System.out.println("yeah");
-        }
-        System.out.println("nou");
+//        if (retiro.autenticarCobro(1000, 48157110)) {
+//            System.out.println("yeah");
+//        }else{
+//            System.out.println("nou");
+//        }
+        System.out.println(retiro.idRetiro(1000, 48157110));
+        
 }
 }

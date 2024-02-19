@@ -53,7 +53,7 @@ public interface IControlador {
     public boolean autenticarCobro(int folio, int contraseña);
     public boolean generarSinCuenta(RetiroSinDTO sin,int num);
     public int generarContraseña();
-    public boolean actualizarEstado(int numCuenta);
+    public void actualizarEstado(int numCuenta);
     TransferenciaDTO realizarTransferencia(TransferenciaDTO trans);
     int idCliente(String nombre, String Paterno);
     int idCuenta(String Fecha);
@@ -64,4 +64,5 @@ public interface IControlador {
     public int idOperacion (String Fecha);
     public int obtenerFolio();
     public void evento();
+    public int idRetiro(int folio, int contraseña);
 }
