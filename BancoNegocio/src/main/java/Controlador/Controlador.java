@@ -171,7 +171,7 @@ public class Controlador implements IControlador {
     }
 
     @Override
-    public boolean autenticarCobro(String folio, int contraseña) {
+    public boolean autenticarCobro(int folio, int contraseña) {
         if (retiro.autenticarCobro(folio, contraseña)) {
             return true;
         }
