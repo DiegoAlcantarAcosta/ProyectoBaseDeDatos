@@ -16,6 +16,7 @@ import Entidades.Cuenta;
 import Entidades.Direccion;
 import Entidades.Operaciones;
 import Entidades.SinCuenta;
+import Entidades.Transferencia;
 import Entidades.Usuario;
 import Excepciones.PersistenciaExcepcion;
 import java.util.Date;
@@ -65,4 +66,10 @@ public interface IControlador {
     public int obtenerFolio();
     public void evento();
     public int idRetiro(int folio, int contraseña);
+    
+    
+    List<Transferencia> obtenerHistorialTransferencia(String desde, String hasta);
+    List<SinCuenta> obtenerHistorialSinCuenta(String desde, String hasta);
+    List<SinCuenta> obtenerTodaSInCuenta();
+   List<Transferencia> obtenerTodasTransferencia();
 }

@@ -17,9 +17,10 @@ import java.util.List;
  */
 public interface IOperacionesDAO {
     
-    List<Transferencia> obtenerHistorialTransferencia(String tipo, Date desde, Date hasta);
-    List<SinCuenta> obtenerHistorialSinCuenta(String tipo, Date desde, Date hasta);
-    List<SinCuenta> obtenerHistorialTodos(String tipo, Date desde, Date hasta);
+    List<Transferencia> obtenerHistorialTransferencia(String desde, String hasta);
+    List<SinCuenta> obtenerHistorialSinCuenta(String desde, String hasta);
+    List<SinCuenta> obtenerTodaSInCuenta();
    public void agregarOperacion(Operaciones op);
    public int idOperacion (String Fecha);
+   List<Transferencia> obtenerTodasTransferencia();
 }

@@ -42,6 +42,38 @@ public class SinCuenta extends Operaciones {
         super();
     }
 
+    public int getIdSinCuenta() {
+        return idSinCuenta;
+    }
+
+    public void setIdSinCuenta(int idSinCuenta) {
+        this.idSinCuenta = idSinCuenta;
+    }
+
+    public int getFolio() {
+        return folio;
+    }
+
+    public void setFolio(int folio) {
+        this.folio = folio;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public int getContraseña() {
+        return contraseña;
+    }
+
+    public void setContraseña(int contraseña) {
+        this.contraseña = contraseña;
+    }
+
     
 
     

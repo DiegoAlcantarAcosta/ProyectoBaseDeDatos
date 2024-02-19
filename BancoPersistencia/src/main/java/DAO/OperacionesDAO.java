@@ -78,27 +78,27 @@ public class OperacionesDAO implements IOperacionesDAO {
     }
 
     @Override
-    public List<Transferencia> obtenerHistorialTransferencia(String tipo, Date desde, Date hasta) {
-       String sentencia;
+    public List<Transferencia> obtenerHistorialTransferencia(String desde, String hasta) {
+        String sentencia;
         List<Transferencia> lista = new ArrayList<>();
 
-        sentencia = "SELECT O.idTransaccion, O.tipo, O.monto, S.folio"
-                + "FROM OPERACIONES O"
-                + "INNER JOIN SinCuentas S ON S.idOperacion = O.idTransaccion"
-                + "WHERE fecha BETWEEN \"?\" AND \"?\"";
+        sentencia = "SELECT  O.tipo, O.fecha, T.idTransferencia, T.idCuenta_destino, O.monto"
+                + " FROM OPERACIONES O"
+                + " INNER JOIN TRANSFERENCIA T ON T.idOperacion = O.idTransaccion"
+                + " WHERE fecha BETWEEN ? AND ?";
 
         try ( Connection conexion = this.conexionBD.crearConexion();  PreparedStatement comandoSQL = conexion.prepareCall(sentencia);) {
-            comandoSQL.setDate(1, (java.sql.Date) desde);
-            comandoSQL.setDate(2, (java.sql.Date) hasta);
+            comandoSQL.setString(1, desde);
+            comandoSQL.setString(2, hasta);
             ResultSet resultado = comandoSQL.executeQuery();
             while (resultado.next()) {
-                int idTransaccion = resultado.getInt("O.idTransaccion");
+                int idTransaccion = resultado.getInt("T.idTransferencia");
+                int idCuentaDestino = resultado.getInt("T.idCuenta_destino");
                 String tipoXD = resultado.getString("O.tipo");
-                String estado = resultado.getString("S.estado");
+                String fecha = resultado.getString("O.fecha");
                 float monto = resultado.getFloat("O.monto");
-                int folio = resultado.getInt("S.folio");
 
-                Transferencia cuenta = new Transferencia(folio, idTransaccion, tipo, estado, monto);
+                Transferencia cuenta = new Transferencia(idTransaccion, idCuentaDestino, tipoXD, fecha, monto);
                 lista.add(cuenta);
             }
 
@@ -112,27 +112,28 @@ public class OperacionesDAO implements IOperacionesDAO {
     }
 
     @Override
-    public List<SinCuenta> obtenerHistorialSinCuenta(String tipo, Date desde, Date hasta) {
+    public List<SinCuenta> obtenerHistorialSinCuenta(String desde, String hasta) {
         String sentencia;
         List<SinCuenta> lista = new ArrayList<>();
 
-        sentencia = "SELECT O.idTransaccion, O.tipo, O.monto, S.folio"
-                + "FROM OPERACIONES O"
-                + "INNER JOIN SinCuentas S ON S.idOperacion = O.idTransaccion"
-                + "WHERE fecha BETWEEN \"?\" AND \"?\"";
+        sentencia = "SELECT O.idTransaccion, O.tipo, S.estado, O.monto, S.folio, O.fecha"
+                + " FROM OPERACIONES O"
+                + " INNER JOIN SinCuentas S ON S.idOperacion = O.idTransaccion"
+                + " WHERE fecha BETWEEN ? AND ?";
 
         try ( Connection conexion = this.conexionBD.crearConexion();  PreparedStatement comandoSQL = conexion.prepareCall(sentencia);) {
-            comandoSQL.setDate(1, (java.sql.Date) desde);
-            comandoSQL.setDate(2, (java.sql.Date) hasta);
+            comandoSQL.setString(1, desde);
+            comandoSQL.setString(2, hasta);
             ResultSet resultado = comandoSQL.executeQuery();
             while (resultado.next()) {
                 int idTransaccion = resultado.getInt("O.idTransaccion");
                 String tipoXD = resultado.getString("O.tipo");
                 String estado = resultado.getString("S.estado");
+                String fecha = resultado.getString("O.fecha");
                 float monto = resultado.getFloat("O.monto");
                 int folio = resultado.getInt("S.folio");
 
-                SinCuenta cuenta = new SinCuenta(folio, estado, idTransaccion, tipo, estado, monto);
+                SinCuenta cuenta = new SinCuenta(folio, estado, idTransaccion, tipoXD, fecha, monto);
                 lista.add(cuenta);
             }
 
@@ -146,7 +147,65 @@ public class OperacionesDAO implements IOperacionesDAO {
     }
 
     @Override
-    public List<SinCuenta> obtenerHistorialTodos(String tipo, Date desde, Date hasta) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public List<Transferencia> obtenerTodasTransferencia() {
+        String sentencia;
+        List<Transferencia> lista = new ArrayList<>();
+
+        sentencia = "SELECT  O.tipo, O.fecha, T.idTransferencia, T.idCuenta_destino, O.monto\n"
+                + "FROM OPERACIONES O\n"
+                + "INNER JOIN TRANSFERENCIA T ON T.idOperacion = O.idTransaccion";
+
+        try ( Connection conexion = this.conexionBD.crearConexion();  PreparedStatement comandoSQL = conexion.prepareCall(sentencia);) {
+            ResultSet resultado = comandoSQL.executeQuery();
+            while (resultado.next()) {
+                int idTransaccion = resultado.getInt("T.idTransferencia");
+                int idCuentaDestino = resultado.getInt("T.idCuenta_destino");
+                String tipoXD = resultado.getString("O.tipo");
+                String fecha = resultado.getString("O.fecha");
+                float monto = resultado.getFloat("O.monto");
+
+                Transferencia cuenta = new Transferencia(idTransaccion, idCuentaDestino, tipoXD, fecha, monto);
+                lista.add(cuenta);
+            }
+
+            LOG.log(Level.INFO, "Se consultaron {0}", lista.size());
+            return lista;
+
+        } catch (SQLException e) {
+            LOG.log(Level.SEVERE, sentencia, e);
+            return null;
+        }
+    }
+
+    @Override
+    public List<SinCuenta> obtenerTodaSInCuenta() {
+        String sentencia;
+        List<SinCuenta> lista = new ArrayList<>();
+
+        sentencia = "SELECT O.idTransaccion, O.tipo, S.estado, O.monto, S.folio, O.fecha\n"
+                + "FROM OPERACIONES O\n"
+                + "INNER JOIN SinCuentas S ON S.idOperacion = O.idTransaccion";
+
+        try ( Connection conexion = this.conexionBD.crearConexion();  PreparedStatement comandoSQL = conexion.prepareCall(sentencia);) {
+            ResultSet resultado = comandoSQL.executeQuery();
+            while (resultado.next()) {
+                int idTransaccion = resultado.getInt("O.idTransaccion");
+                String tipoXD = resultado.getString("O.tipo");
+                String estado = resultado.getString("S.estado");
+                String fecha = resultado.getString("O.fecha");
+                float monto = resultado.getFloat("O.monto");
+                int folio = resultado.getInt("S.folio");
+
+                SinCuenta cuenta = new SinCuenta(folio, estado, idTransaccion, tipoXD, fecha, monto);
+                lista.add(cuenta);
+            }
+
+            LOG.log(Level.INFO, "Se consultaron {0}", lista.size());
+            return lista;
+
+        } catch (SQLException e) {
+            LOG.log(Level.SEVERE, sentencia, e);
+            return null;
+        }
     }
 }

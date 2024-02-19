@@ -4,7 +4,6 @@ Frames\IniciarFrame$2.class
 Frames\registrarseFrames\RegistrarFrame$4.class
 Frames\TransferirFrame$2.class
 Frames\TusDatosFrame$11.class
-Frames\HistorialFrame.class
 Frames\registrarseFrames\RegistrarFrame$1.class
 Frames\registrarseFrames\registradoFrame$2.class
 Frames\TusDatosFrame$6.class
@@ -15,13 +14,17 @@ Frames\CrearCuentaFrame$2.class
 Frames\TusDatosFrame$3.class
 Frames\SeleccionarCuentaFrame$1.class
 Frames\sinCuenta\infoSinCuentaFrame.class
+Frames\ConsultaSInCuentaFrame$1.class
 Frames\sinCuenta\RetirarFrame$2.class
-Frames\HistorialFrame$2.class
 Frames\TusDatosFrame$10.class
 Frames\IniciarFrame$1.class
+Frames\ConsultaTransferenciaFrame.class
+Frames\ConsultaSInCuentaFrame.class
+Frames\SeleccionarConsultaFrame$3.class
 Frames\CancelarCuentaFrame$1.class
 Frames\DepositoFrame$1.class
 Frames\TusDatosFrame$7.class
+Frames\ConsultaSInCuentaFrame$2.class
 Frames\DepositoFrame.class
 Frames\IniciarFrame$3.class
 Frames\sinCuenta\sinCuentaFrame$2.class
@@ -32,7 +35,7 @@ Frames\registrarseFrames\RegistrarFrame$2.class
 Frames\TusDatosFrame$4.class
 Frames\SeleccionarCuentaFrame.class
 Frames\TransferirFrame.class
-Frames\HistorialFrame$3.class
+Frames\ConsultaTransferenciaFrame$3.class
 Frames\registrarseFrames\RegistrarFrame$10.class
 Frames\MenuFrame$2.class
 Frames\sinCuenta\RetirarFrame$3.class
@@ -46,6 +49,9 @@ Frames\MenuFrame$1.class
 Frames\registrarseFrames\RegistrarFrame$9.class
 Frames\MenuFrame$5.class
 Frames\CancelarCuentaFrame.class
+Frames\ConsultaSInCuentaFrame$3.class
+Frames\SeleccionarConsultaFrame$2.class
+Frames\ConsultaTransferenciaFrame$2.class
 Frames\TusDatosFrame$13.class
 Frames\IniciarFrame$4.class
 Frames\TusDatosFrame.class
@@ -59,7 +65,7 @@ Frames\IniciarFrame.class
 Frames\TusDatosFrame$8.class
 Frames\TransferirFrame$3.class
 Frames\CrearCuentaFrame$4.class
-Frames\HistorialFrame$1.class
+Frames\SeleccionarConsultaFrame$1.class
 Frames\TusDatosFrame$5.class
 Frames\MenuFrame$4.class
 Validadores\NumberInputVerifier.class
@@ -76,6 +82,8 @@ Frames\MenuFrame.class
 Frames\sinCuenta\RetirarFrame.class
 Frames\CancelarCuentaFrame$2.class
 Encriptador\Encriptador.class
+Frames\ConsultaTransferenciaFrame$1.class
+Frames\SeleccionarConsultaFrame.class
 Frames\IniciarFrame$5.class
 Frames\test.class
 Frames\MenuFrame$7.class

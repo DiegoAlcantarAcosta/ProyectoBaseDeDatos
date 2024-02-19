@@ -32,6 +32,7 @@ import Entidades.Cuenta;
 import Entidades.Direccion;
 import Entidades.Operaciones;
 import Entidades.SinCuenta;
+import Entidades.Transferencia;
 import Entidades.Usuario;
 import Excepciones.PersistenciaExcepcion;
 import java.util.Date;
@@ -45,7 +46,7 @@ public class Controlador implements IControlador {
 
     String cadenaConexion = "jdbc:mysql://localhost:3306/banco";
     String usuario = "root";
-    String contrasenia = "2608jlml";
+    String contrasenia = "2004";
     IConexion conexionBD = new Conexion(cadenaConexion, usuario, contrasenia);
     IClienteDAO clienteDAO = new ClienteDAO(conexionBD);
     ICuentaDAO cuentaDAO = new CuentaDAO(conexionBD);
@@ -73,7 +74,7 @@ public class Controlador implements IControlador {
 
     @Override
     public boolean actualizarUsuario(UsuariosDTO usuario, int idUsuario) {
-        if(usuario2.actualizarUsuario(usuario, idUsuario)){
+        if (usuario2.actualizarUsuario(usuario, idUsuario)) {
             return true;
         }
         return false;
@@ -87,7 +88,7 @@ public class Controlador implements IControlador {
 
     @Override
     public boolean actualizarCliente(ClienteDTO cliente, int idCliente) throws PersistenciaExcepcion {
-        if(clienteDAO.actualizarCliente(cliente, idCliente)) {
+        if (clienteDAO.actualizarCliente(cliente, idCliente)) {
             return true;
         }
         return false;
@@ -128,8 +129,8 @@ public class Controlador implements IControlador {
     }
 
     @Override
-    public boolean crearCuenta(Cuenta cuenta,int num) {
-        if (cuentaDAO.crearCuenta(cuenta,num)) {
+    public boolean crearCuenta(Cuenta cuenta, int num) {
+        if (cuentaDAO.crearCuenta(cuenta, num)) {
             return true;
         }
         return false;
@@ -137,7 +138,7 @@ public class Controlador implements IControlador {
 
     @Override
     public boolean crearCuentaNueva(Cuenta cuenta, int id, int num) {
-        if(cuentaDAO.crearCuentaNueva(cuenta, id,num)){
+        if (cuentaDAO.crearCuentaNueva(cuenta, id, num)) {
             return true;
         }
         return false;
@@ -156,7 +157,7 @@ public class Controlador implements IControlador {
 
     @Override
     public boolean actualizarDireccion(DireccionDTO direccion, int idDireccion) {
-        if(this.direccion.actualizarDireccion(direccion, idDireccion)){
+        if (this.direccion.actualizarDireccion(direccion, idDireccion)) {
             return true;
         }
         return false;
@@ -179,13 +180,12 @@ public class Controlador implements IControlador {
     }
 
     @Override
-    public boolean generarSinCuenta(RetiroSinDTO sin,int num) {
-        if (retiro.generarSinCuenta(sin,num)) {
+    public boolean generarSinCuenta(RetiroSinDTO sin, int num) {
+        if (retiro.generarSinCuenta(sin, num)) {
             return true;
         }
         return false;
     }
-
 
     @Override
     public int generarContraseña() {
@@ -196,7 +196,7 @@ public class Controlador implements IControlador {
     @Override
     public void actualizarEstado(int numCuenta) {
         retiro.actualizarEstado(numCuenta);
-            
+
     }
 
     @Override
@@ -240,9 +240,9 @@ public class Controlador implements IControlador {
         int idClienteDireccion = clienteDAO.idClienteDireccion(idDireccion);
         return idClienteDireccion;
     }
-    
+
     public boolean depositar(int cuenta, float monto) {
-        if(transferencia.depositar(cuenta, monto)) {
+        if (transferencia.depositar(cuenta, monto)) {
             return true;
         }
         return false;
@@ -264,11 +264,15 @@ public class Controlador implements IControlador {
         int numero = operacionesDAO.idOperacion(Fecha);
         return numero;
     }
-    public int obtenerFolio(){
+
+    @Override
+    public int obtenerFolio() {
         int num = retiro.obtenerFolio();
         return num;
     }
-    public void evento(){
+
+    @Override
+    public void evento() {
         retiro.evento();
     }
 
@@ -276,5 +280,29 @@ public class Controlador implements IControlador {
     public int idRetiro(int folio, int contraseña) {
         int num = retiro.idRetiro(folio, contraseña);
         return num;
+    }
+
+    @Override
+    public List<Transferencia> obtenerHistorialTransferencia(String desde, String hasta) {
+        List<Transferencia> c = operacionesDAO.obtenerHistorialTransferencia(desde, hasta);
+        return c;
+    }
+
+    @Override
+    public List<SinCuenta> obtenerHistorialSinCuenta(String desde, String hasta) {
+         List<SinCuenta> c = operacionesDAO.obtenerHistorialSinCuenta(desde, hasta);
+        return c;
+    }
+
+    @Override
+    public List<SinCuenta> obtenerTodaSInCuenta() {
+        List<SinCuenta> c = operacionesDAO.obtenerTodaSInCuenta();
+        return c;
+    }
+
+    @Override
+    public List<Transferencia> obtenerTodasTransferencia() {
+        List<Transferencia> c = operacionesDAO.obtenerTodasTransferencia();
+        return c;
     }
 }

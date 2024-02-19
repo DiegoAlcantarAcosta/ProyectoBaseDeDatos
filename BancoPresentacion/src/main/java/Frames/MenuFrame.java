@@ -209,7 +209,7 @@ public class MenuFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_crearCuentaItemActionPerformed
 
     private void historialItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_historialItemActionPerformed
-        HistorialFrame i = new HistorialFrame();
+        SeleccionarConsultaFrame i = new SeleccionarConsultaFrame();
         i.show();
     }//GEN-LAST:event_historialItemActionPerformed
 
