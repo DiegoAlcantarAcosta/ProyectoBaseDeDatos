@@ -6,6 +6,8 @@ package DAO;
 
 import DTO.OperacionesDTO;
 import Entidades.Operaciones;
+import Entidades.SinCuenta;
+import Entidades.Transferencia;
 import java.util.Date;
 import java.util.List;
 
@@ -15,8 +17,9 @@ import java.util.List;
  */
 public interface IOperacionesDAO {
     
-    List<OperacionesDTO> obtenerHistorialOperaciones(String numeroCuenta, Date desde, Date hasta);
-    List<OperacionesDTO> obtenerHistorialOperaciones(int numeroCuenta, String tipo);
+    List<Transferencia> obtenerHistorialTransferencia(String tipo, Date desde, Date hasta);
+    List<SinCuenta> obtenerHistorialSinCuenta(String tipo, Date desde, Date hasta);
+    List<SinCuenta> obtenerHistorialTodos(String tipo, Date desde, Date hasta);
    public void agregarOperacion(Operaciones op);
    public int idOperacion (String Fecha);
 }

@@ -170,14 +170,6 @@ public class Controlador implements IControlador {
         return false;
     }
 
-    
-
-    @Override
-    public List<OperacionesDTO> obtenerHistorialOperaciones(int numeroCuenta, String tipo) {
-        List<OperacionesDTO> o = operacionesDAO.obtenerHistorialOperaciones(numeroCuenta, tipo);
-        return o;
-    }
-
     @Override
     public boolean autenticarCobro(String folio, int contraseña) {
         if (retiro.autenticarCobro(folio, contraseña)) {
@@ -249,12 +241,6 @@ public class Controlador implements IControlador {
     public int idClienteDireccion(int idDireccion) {
         int idClienteDireccion = clienteDAO.idClienteDireccion(idDireccion);
         return idClienteDireccion;
-    }
-
-    @Override
-    public List<OperacionesDTO> obtenerHistorialOperaciones(String tipo, Date desde, Date hasta) {
-        List<OperacionesDTO> o = operacionesDAO.obtenerHistorialOperaciones(tipo, desde, hasta);
-        return o;
     }
     
     public boolean depositar(int cuenta, float monto) {
