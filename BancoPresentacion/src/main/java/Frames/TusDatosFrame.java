@@ -410,7 +410,7 @@ public class TusDatosFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_codigoPostalTextFieldActionPerformed
 
     private void actualizarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarButtonActionPerformed
-        if (!(usuarioTextField.getText().equalsIgnoreCase("") || nombreTextField.getText().equalsIgnoreCase("") || apellidoPaternoTextField.getText().equalsIgnoreCase("") || apellidoMaternoTextField.getText().equalsIgnoreCase("") || contraseñaTextField.getText().equalsIgnoreCase("") || calleTextField.getText().equalsIgnoreCase("") || coloniaTextField.getText().equalsIgnoreCase("") || numeroTextField.getText().equalsIgnoreCase("") || codigoPostalTextField.getText().equalsIgnoreCase("")|| fechaNacimientoDateChooser.getDateFormatString().equalsIgnoreCase(""))) {
+        if (!(usuarioTextField.getText().equalsIgnoreCase("") || nombreTextField.getText().equalsIgnoreCase("") || apellidoPaternoTextField.getText().equalsIgnoreCase("") || apellidoMaternoTextField.getText().equalsIgnoreCase("") || contraseñaTextField.getText().equalsIgnoreCase("") || calleTextField.getText().equalsIgnoreCase("") || coloniaTextField.getText().equalsIgnoreCase("") || numeroTextField.getText().equalsIgnoreCase("") || codigoPostalTextField.getText().equalsIgnoreCase("")|| fechaNacimientoDateChooser.getDate() == null)) {
         SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
         
         ClienteDTO cliente = new ClienteDTO(nombreTextField.getText(), apellidoPaternoTextField.getText(), apellidoMaternoTextField.getText(), formatoFecha.format(fechaNacimientoDateChooser.getDate()));

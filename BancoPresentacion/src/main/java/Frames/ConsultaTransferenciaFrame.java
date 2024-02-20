@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -203,7 +204,10 @@ public class ConsultaTransferenciaFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_salirButtonActionPerformed
 
     private void consultarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarButtonActionPerformed
-       DefaultTableModel modelo = new DefaultTableModel();
+        if (!(hastaDateChooser.getDate() == null || desdeDateChooser.getDate() == null)) {
+            
+        
+        DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("ID");
         modelo.addColumn("Destino");
         modelo.addColumn("Tipo");
@@ -241,6 +245,9 @@ public class ConsultaTransferenciaFrame extends javax.swing.JFrame {
             tabla.setModel(modelo);
         } catch (Exception e) {
             LOG.log(Level.SEVERE, "No se pudo mostrar la tabla");
+        }
+        }else{
+            JOptionPane.showMessageDialog(this, "Algun registro esta vacio");
         }
     }//GEN-LAST:event_consultarButtonActionPerformed
 
