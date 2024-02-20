@@ -56,6 +56,27 @@ public class TransferirFrame extends javax.swing.JFrame {
                 }
             }
         });
+        ((AbstractDocument) numCuentaTextField.getDocument()).setDocumentFilter(new DocumentFilter() {
+            @Override
+            public void replace(DocumentFilter.FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+                String newText = fb.getDocument().getText(0, fb.getDocument().getLength()) + text;
+                if (newText.matches("\\d*")) {
+                    super.replace(fb, offset, length, text, attrs);
+                } else {
+                    Toolkit.getDefaultToolkit().beep(); // Sonido de advertencia
+                }
+            }
+
+            @Override
+            public void insertString(DocumentFilter.FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+                String newText = fb.getDocument().getText(0, fb.getDocument().getLength()) + string;
+                if (newText.matches("\\d*")) {
+                    super.insertString(fb, offset, string, attr);
+                } else {
+                    Toolkit.getDefaultToolkit().beep(); // Sonido de advertencia
+                }
+            }
+        });
     }
 
     /**
