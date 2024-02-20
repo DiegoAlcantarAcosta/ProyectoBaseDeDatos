@@ -10,10 +10,14 @@ import Entidades.Operaciones;
 import Frames.MenuFrame;
 import Validadores.NumberDocumentFilter;
 import Validadores.NumberInputVerifier;
+import java.awt.Toolkit;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 import javax.swing.text.AbstractDocument;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DocumentFilter;
 
 /**
  *
@@ -31,7 +35,28 @@ public class sinCuentaFrame extends javax.swing.JFrame {
     public sinCuentaFrame(int num) {
         this.idCuenta = num;
         initComponents();
-        
+        ((AbstractDocument) montoTextField.getDocument()).setDocumentFilter(new DocumentFilter() {
+            @Override
+            public void replace(DocumentFilter.FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+                String newText = fb.getDocument().getText(0, fb.getDocument().getLength()) + text;
+                if (newText.matches("\\d*")) {
+                    super.replace(fb, offset, length, text, attrs);
+                } else {
+                    Toolkit.getDefaultToolkit().beep(); // Sonido de advertencia
+                }
+            }
+
+            @Override
+            public void insertString(DocumentFilter.FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+                String newText = fb.getDocument().getText(0, fb.getDocument().getLength()) + string;
+                if (newText.matches("\\d*")) {
+                    super.insertString(fb, offset, string, attr);
+                } else {
+                    Toolkit.getDefaultToolkit().beep(); // Sonido de advertencia
+                }
+            }
+        });
+
     }
 
     /**
@@ -131,22 +156,22 @@ public class sinCuentaFrame extends javax.swing.JFrame {
 
     private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarButtonActionPerformed
         montoTextField.setInputVerifier(new NumberInputVerifier());
-       ((AbstractDocument) montoTextField.getDocument()).setDocumentFilter(new NumberDocumentFilter());
+        ((AbstractDocument) montoTextField.getDocument()).setDocumentFilter(new NumberDocumentFilter());
         if (!(montoTextField.getText().equalsIgnoreCase(""))) {
-        int contra = 0;
-        contra = c.generarContraseña();
-        LocalDateTime fechaHora = LocalDateTime.now();
+            int contra = 0;
+            contra = c.generarContraseña();
+            LocalDateTime fechaHora = LocalDateTime.now();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             String fechaHoraString = fechaHora.format(formatter);
-        Operaciones operacion = new Operaciones(c.idCuenta(idCuenta), "RETIRO SIN CUENTA", fechaHoraString, Float.parseFloat(montoTextField.getText()) );
-        RetiroSinDTO retiro = new RetiroSinDTO(c.idCuenta(idCuenta), 1000, contra, "Procesando", fechaHoraString, Float.parseFloat(montoTextField.getText()), "RETIRO SIN CUENTA");
-        c.agregarOperacion(operacion);
-        c.generarSinCuenta(retiro,c.idOperacion(fechaHoraString));
-        infoSinCuentaFrame info = new infoSinCuentaFrame(c.obtenerFolio(),contra);
-        info.show();
-        JOptionPane.showMessageDialog(this, "Solicitud aceptada");
-        dispose();
-        }else{
+            Operaciones operacion = new Operaciones(c.idCuenta(idCuenta), "RETIRO SIN CUENTA", fechaHoraString, Float.parseFloat(montoTextField.getText()));
+            RetiroSinDTO retiro = new RetiroSinDTO(c.idCuenta(idCuenta), 1000, contra, "Procesando", fechaHoraString, Float.parseFloat(montoTextField.getText()), "RETIRO SIN CUENTA");
+            c.agregarOperacion(operacion);
+            c.generarSinCuenta(retiro, c.idOperacion(fechaHoraString));
+            infoSinCuentaFrame info = new infoSinCuentaFrame(c.obtenerFolio(), contra);
+            info.show();
+            JOptionPane.showMessageDialog(this, "Solicitud aceptada");
+            dispose();
+        } else {
             JOptionPane.showMessageDialog(this, "Algun registro esta vacio");
         }
     }//GEN-LAST:event_aceptarButtonActionPerformed

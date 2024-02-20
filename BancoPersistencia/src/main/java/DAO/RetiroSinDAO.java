@@ -15,6 +15,7 @@ import java.sql.Statement;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -83,7 +84,7 @@ public class RetiroSinDAO implements IRetiroSinDAO {
     }
 
     @Override
-    public void actualizarEstado(int numCuenta) {
+    public void actualizarEstado(int numCuenta) throws SQLException{
         String sentenciaSQL = "UPDATE sincuentas SET estado = ? WHERE idSinCuentas = ? and estado = ?";
 
         try (Connection conexion = this.conexionBD.crearConexion(); PreparedStatement comandoSQL = conexion.prepareStatement(sentenciaSQL, Statement.RETURN_GENERATED_KEYS);) {
@@ -100,8 +101,14 @@ public class RetiroSinDAO implements IRetiroSinDAO {
 
             res.next();
         } catch (SQLException e) {
-            LOG.log(Level.SEVERE, "No se pudo actualizar el estado");
+            if ("45000".equals(e.getSQLState())) {
+                // Capturar el error de fondos insuficientes
+                String mensajeError = e.getMessage();
+                JOptionPane.showMessageDialog(null, mensajeError, "Error", JOptionPane.ERROR_MESSAGE);
+                
+            }
         }
+        
     }
 
     public int obtenerFolio() {

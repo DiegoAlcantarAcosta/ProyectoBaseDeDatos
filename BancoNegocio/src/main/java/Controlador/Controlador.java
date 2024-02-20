@@ -35,8 +35,10 @@ import Entidades.SinCuenta;
 import Entidades.Transferencia;
 import Entidades.Usuario;
 import Excepciones.PersistenciaExcepcion;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -194,56 +196,119 @@ public class Controlador implements IControlador {
     }
 
     @Override
-    public void actualizarEstado(int numCuenta) {
-        retiro.actualizarEstado(numCuenta);
+    public void actualizarEstado(int numCuenta) throws SQLException {
+        try {
+            retiro.actualizarEstado(numCuenta);
+        } catch (SQLException e) {
+            if (e.getMessage().contains("El monto del depósito debe ser mínimo $1 y máximo $10,000.")) {
+                JOptionPane.showMessageDialog(null, "El monto del depósito debe ser mínimo $1 y máximo $10,000.", "Error de depósito", JOptionPane.ERROR_MESSAGE);
+               
+            } else if (e.getMessage().contains("Los depósitos mayores a $1 deben ser de $100 en $100.")) {
+                JOptionPane.showMessageDialog(null, "Los depósitos mayores a $1 deben ser de $100 en $100.", "Error de depósito", JOptionPane.ERROR_MESSAGE);
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "Ocurrió un error al realizar la transferencia o el depósito.", "Error", JOptionPane.ERROR_MESSAGE);
+                
+            }
+        }
+        }
 
-    }
+        @Override
+        public TransferenciaDTO realizarTransferencia
+        (TransferenciaDTO trans) throws SQLException
+        {
+            try {
+                TransferenciaDTO t = transferencia.realizarTransferencia(trans);
+                return t;
+            } catch (SQLException e) {
+                if (e.getMessage().contains("El monto del depósito debe ser mínimo $1 y máximo $10,000.")) {
+                    JOptionPane.showMessageDialog(null, "El monto del depósito debe ser mínimo $1 y máximo $10,000.", "Error de depósito", JOptionPane.ERROR_MESSAGE);
+                    return null;
+                } else if (e.getMessage().contains("Los depósitos mayores a $1 deben ser de $100 en $100.")) {
+                    JOptionPane.showMessageDialog(null, "Los depósitos mayores a $1 deben ser de $100 en $100.", "Error de depósito", JOptionPane.ERROR_MESSAGE);
+                    return null;
+                } else {
+                    JOptionPane.showMessageDialog(null, "Ocurrió un error al realizar la transferencia o el depósito.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return null;
+                }
+            }
+        }
 
-    @Override
-    public TransferenciaDTO realizarTransferencia(TransferenciaDTO trans) {
-        TransferenciaDTO t = transferencia.realizarTransferencia(trans);
-        return t;
-    }
-
-    @Override
-    public int idCliente(String nombre, String Paterno) {
+        @Override
+        public int idCliente
+        (String nombre, String Paterno
+        
+            ) {
         int idCliente = clienteDAO.idCliente(nombre, Paterno);
-        return idCliente;
-    }
+            return idCliente;
+        }
 
-    @Override
-    public int idCuenta(String Fecha) {
+        @Override
+        public int idCuenta
+        (String Fecha
+        
+            ) {
         int idCuenta = cuentaDAO.idCuenta(Fecha);
-        return idCuenta;
-    }
+            return idCuenta;
+        }
 
-    @Override
-    public int idDireccion(String calle, String colonia, String numero) {
+        @Override
+        public int idDireccion
+        (String calle, String colonia
+        , String numero
+        
+            ) {
         int idDireccion = direccion.idDireccion(calle, colonia, numero);
-        return idDireccion;
-    }
+            return idDireccion;
+        }
 
-    @Override
-    public int idUsuario(String contraseña, String Usuario) {
+        @Override
+        public int idUsuario
+        (String contraseña, String Usuario
+        
+            ) {
         int idUsuario = usuario2.idUsuario(contraseña, Usuario);
-        return idUsuario;
-    }
+            return idUsuario;
+        }
 
-    @Override
-    public int idClienteUsuario(int idUsuario) {
+        @Override
+        public int idClienteUsuario
+        (int idUsuario
+        
+            ) {
         int idClienteUsuario = clienteDAO.idClienteUsuario(idUsuario);
-        return idClienteUsuario;
-    }
+            return idClienteUsuario;
+        }
 
-    @Override
-    public int idClienteDireccion(int idDireccion) {
+        @Override
+        public int idClienteDireccion
+        (int idDireccion
+        
+            ) {
         int idClienteDireccion = clienteDAO.idClienteDireccion(idDireccion);
-        return idClienteDireccion;
-    }
+            return idClienteDireccion;
+        }
 
-    public boolean depositar(int cuenta, float monto) {
-        if (transferencia.depositar(cuenta, monto)) {
-            return true;
+    
+
+    public boolean depositar(int cuenta, float monto) throws SQLException {
+        try {
+            if (transferencia.depositar(cuenta, monto)) {
+                return true;
+            }
+
+        } catch (SQLException e) {
+            if (e.getMessage().contains("El monto del depósito debe ser mínimo $1 y máximo $10,000.")) {
+                JOptionPane.showMessageDialog(null, "El monto del depósito debe ser mínimo $1 y máximo $10,000.", "Error de depósito", JOptionPane.ERROR_MESSAGE);
+                return false;
+            } else if (e.getMessage().contains("Los depósitos mayores a $1 deben ser de $100 en $100.")) {
+                JOptionPane.showMessageDialog(null, "Los depósitos mayores a $1 deben ser de $100 en $100.", "Error de depósito", JOptionPane.ERROR_MESSAGE);
+                return false;
+            } else {
+                JOptionPane.showMessageDialog(null, "Ocurrió un error al realizar la transferencia o el depósito.", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+
         }
         return false;
     }
@@ -290,7 +355,7 @@ public class Controlador implements IControlador {
 
     @Override
     public List<SinCuenta> obtenerHistorialSinCuenta(String desde, String hasta) {
-         List<SinCuenta> c = operacionesDAO.obtenerHistorialSinCuenta(desde, hasta);
+        List<SinCuenta> c = operacionesDAO.obtenerHistorialSinCuenta(desde, hasta);
         return c;
     }
 

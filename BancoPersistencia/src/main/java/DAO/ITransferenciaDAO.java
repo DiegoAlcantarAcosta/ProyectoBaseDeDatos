@@ -5,6 +5,7 @@
 package DAO;
 
 import DTO.TransferenciaDTO;
+import java.sql.SQLException;
 
 
 /**
@@ -12,7 +13,7 @@ import DTO.TransferenciaDTO;
  * @author pc
  */
 public interface ITransferenciaDAO {
-    TransferenciaDTO realizarTransferencia(TransferenciaDTO trans);
-    boolean depositar(int cuenta, float monto);
+    TransferenciaDTO realizarTransferencia(TransferenciaDTO trans) throws SQLException;
+    boolean depositar(int cuenta, float monto) throws SQLException;
         
 }

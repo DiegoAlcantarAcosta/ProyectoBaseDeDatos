@@ -6,7 +6,13 @@ package Frames.sinCuenta;
 
 import Controlador.Controlador;
 import Controlador.IControlador;
+import java.awt.Toolkit;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DocumentFilter;
 
 /**
  *
@@ -14,12 +20,34 @@ import javax.swing.JOptionPane;
  */
 public class RetirarFrame extends javax.swing.JFrame {
 
-        IControlador c = new Controlador();
+    IControlador c = new Controlador();
+
     /**
      * Creates new form IniciarFrame
      */
     public RetirarFrame() {
         initComponents();
+        ((AbstractDocument) contraseñaPasswordField.getDocument()).setDocumentFilter(new DocumentFilter() {
+            @Override
+            public void replace(DocumentFilter.FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+                String newText = fb.getDocument().getText(0, fb.getDocument().getLength()) + text;
+                if (newText.matches("\\d*")) {
+                    super.replace(fb, offset, length, text, attrs);
+                } else {
+                    Toolkit.getDefaultToolkit().beep(); // Sonido de advertencia
+                }
+            }
+
+            @Override
+            public void insertString(DocumentFilter.FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+                String newText = fb.getDocument().getText(0, fb.getDocument().getLength()) + string;
+                if (newText.matches("\\d*")) {
+                    super.insertString(fb, offset, string, attr);
+                } else {
+                    Toolkit.getDefaultToolkit().beep(); // Sonido de advertencia
+                }
+            }
+        });
     }
 
     /**
@@ -167,19 +195,29 @@ public class RetirarFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_contraseñaPasswordFieldActionPerformed
 
     private void cobrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cobrarButtonActionPerformed
-        if (!(folioTextField1.getText().equalsIgnoreCase("") || contraseñaPasswordField.getText().equalsIgnoreCase(""))) {
-            
-        if (c.autenticarCobro(Integer.parseInt(folioTextField1.getText()), Integer.parseInt(contraseñaPasswordField.getText()))) {
-            c.actualizarEstado(c.idRetiro(Integer.parseInt(folioTextField1.getText()), Integer.parseInt(contraseñaPasswordField.getText())));
-            JOptionPane.showMessageDialog(this, "Cobrado con exito");
-            dispose();
-        }else{
-            JOptionPane.showMessageDialog(this, "No coincide con ningun retiro");
+        try {
+            if (!(folioTextField1.getText().equalsIgnoreCase("") || contraseñaPasswordField.getText().equalsIgnoreCase(""))) {
+
+                if (c.autenticarCobro(Integer.parseInt(folioTextField1.getText()), Integer.parseInt(contraseñaPasswordField.getText()))) {
+                    c.actualizarEstado(c.idRetiro(Integer.parseInt(folioTextField1.getText()), Integer.parseInt(contraseñaPasswordField.getText())));
+                    dispose();
+                } else {
+                    JOptionPane.showMessageDialog(this, "No coincide con ningun retiro");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Algun registro esta vacio");
+            }
+        } catch (SQLException e) {
+            if (e.getMessage().contains("El monto del depósito debe ser mínimo $1 y máximo $10,000.")) {
+                JOptionPane.showMessageDialog(null, "El monto del depósito debe ser mínimo $1 y máximo $10,000.", "Error de depósito", JOptionPane.ERROR_MESSAGE);
+            } else if (e.getMessage().contains("Los depósitos mayores a $1 deben ser de $100 en $100.")) {
+                JOptionPane.showMessageDialog(null, "Los depósitos mayores a $1 deben ser de $100 en $100.", "Error de depósito", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Ocurrió un error al realizar la transferencia o el depósito.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
         }
-        }else{
-            JOptionPane.showMessageDialog(this, "Algun registro esta vacio");
-        }
-        
+
     }//GEN-LAST:event_cobrarButtonActionPerformed
 
     private void cobrarButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cobrarButton1ActionPerformed
@@ -189,7 +227,6 @@ public class RetirarFrame extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cobrarButton;

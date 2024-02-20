@@ -6,12 +6,14 @@ package DAO;
 
 import Conexion.IConexion;
 import DTO.TransferenciaDTO;
+import static com.mysql.cj.conf.PropertyKey.logger;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -27,7 +29,7 @@ public class TransferenciaDAO implements ITransferenciaDAO {
     }
 
     @Override
-    public TransferenciaDTO realizarTransferencia(TransferenciaDTO trans) {
+    public TransferenciaDTO realizarTransferencia(TransferenciaDTO trans) throws SQLException{
         String sentenciaSQL = "CALL transferencia_entre_cuentas(?,?,?);";
 
         try ( Connection conexion = this.conexionBD.crearConexion();  PreparedStatement comandoSQL = conexion.prepareCall(sentenciaSQL);) {
@@ -41,13 +43,19 @@ public class TransferenciaDAO implements ITransferenciaDAO {
             return tra;
 
         } catch (SQLException e) {
-            LOG.log(Level.SEVERE, sentenciaSQL, e);
-            return null;
+            if ("45000".equals(e.getSQLState())) {
+                // Capturar el error de fondos insuficientes
+                String mensajeError = e.getMessage();
+                JOptionPane.showMessageDialog(null, mensajeError, "Error", JOptionPane.ERROR_MESSAGE);
+                return null;
+            }
         }
+        return null;
     }
 
     @Override
-    public boolean depositar(int cuenta, float monto) {
+    public boolean depositar(int cuenta, float monto) throws SQLException{
+        
         String sentenciaSQL = "CALL depositar_en_cuenta(?,?);";
 
         try ( Connection conexion = this.conexionBD.crearConexion();  PreparedStatement comandoSQL = conexion.prepareCall(sentenciaSQL);) {
@@ -57,11 +65,17 @@ public class TransferenciaDAO implements ITransferenciaDAO {
 
 //            TransferenciaDTO tra = new TransferenciaDTO(trans.getIdCuenta(), trans.getIdCuentaDestino(), "TRANSFERENCIA", trans.getFecha(),trans.getMonto());
             LOG.log(Level.INFO, "Se transfirieron {0}");
+             JOptionPane.showMessageDialog(null, "Deposito Exitoso");
             return true;
 
         } catch (SQLException e) {
-            LOG.log(Level.SEVERE, sentenciaSQL, e);
-            return false;
+            if ("45000".equals(e.getSQLState())) {
+                // Capturar el error de fondos insuficientes
+                String mensajeError = e.getMessage();
+                JOptionPane.showMessageDialog(null, mensajeError, "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
         }
+        return false;
     }
 }

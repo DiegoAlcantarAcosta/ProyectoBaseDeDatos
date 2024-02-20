@@ -19,6 +19,7 @@ import Entidades.SinCuenta;
 import Entidades.Transferencia;
 import Entidades.Usuario;
 import Excepciones.PersistenciaExcepcion;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
@@ -54,8 +55,8 @@ public interface IControlador {
     public boolean autenticarCobro(int folio, int contraseña);
     public boolean generarSinCuenta(RetiroSinDTO sin,int num);
     public int generarContraseña();
-    public void actualizarEstado(int numCuenta);
-    TransferenciaDTO realizarTransferencia(TransferenciaDTO trans);
+    public void actualizarEstado(int numCuenta) throws SQLException;
+    TransferenciaDTO realizarTransferencia(TransferenciaDTO trans)throws SQLException;
     int idCliente(String nombre, String Paterno);
     int idCuenta(String Fecha);
     int idDireccion(String calle, String colonia, String numero);
@@ -72,4 +73,5 @@ public interface IControlador {
     List<SinCuenta> obtenerHistorialSinCuenta(String desde, String hasta);
     List<SinCuenta> obtenerTodaSInCuenta();
    List<Transferencia> obtenerTodasTransferencia();
+   public boolean depositar(int cuenta, float monto) throws SQLException ;
 }

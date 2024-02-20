@@ -5,24 +5,57 @@
 package Frames;
 
 import Controlador.Controlador;
+import Controlador.IControlador;
 import Validadores.NumberDocumentFilter;
 import Validadores.NumberInputVerifier;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Toolkit;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.text.AbstractDocument;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DocumentFilter;
+import javax.swing.text.DocumentFilter.FilterBypass;
 
 /**
  *
  * @author lv1821
  */
 public class DepositoFrame extends javax.swing.JFrame {
-    Controlador c = new Controlador();
+
+    IControlador c = new Controlador();
     int num;
+
     /**
      * Creates new form IniciarFrame
      */
     public DepositoFrame(int id) {
         this.num = id;
         initComponents();
+        // Crear un filtro para permitir solo números
+        ((AbstractDocument) montoTextField.getDocument()).setDocumentFilter(new DocumentFilter() {
+            @Override
+            public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+                String newText = fb.getDocument().getText(0, fb.getDocument().getLength()) + text;
+                if (newText.matches("\\d*") && newText.length() <= 5) {
+                    super.replace(fb, offset, length, text, attrs);
+                } else {
+                    Toolkit.getDefaultToolkit().beep(); // Sonido de advertencia
+                }
+            }
+
+            @Override
+            public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+                String newText = fb.getDocument().getText(0, fb.getDocument().getLength()) + string;
+                if (newText.matches("\\d*")) {
+                    super.insertString(fb, offset, string, attr);
+                } else {
+                    Toolkit.getDefaultToolkit().beep(); // Sonido de advertencia
+                }
+            }
+        });
     }
 
     /**
@@ -143,23 +176,32 @@ public class DepositoFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_salirButtonActionPerformed
 
     private void depositarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depositarButtonActionPerformed
-        montoTextField.setInputVerifier(new NumberInputVerifier());
-       ((AbstractDocument) montoTextField.getDocument()).setDocumentFilter(new NumberDocumentFilter());
-        if (!(montoTextField.getText().equalsIgnoreCase(""))) {
-        float monto = Float.parseFloat(montoTextField.getText());
-        c.depositar(num, monto);
-        dispose();
-        JOptionPane.showMessageDialog(this, "Deposito Exitoso");
-        }else{
-            JOptionPane.showMessageDialog(this, "Monto vacio");
+        try {
+            montoTextField.setInputVerifier(new NumberInputVerifier());
+            ((AbstractDocument) montoTextField.getDocument()).setDocumentFilter(new NumberDocumentFilter());
+            if (!(montoTextField.getText().equalsIgnoreCase(""))) {
+                float monto = Float.parseFloat(montoTextField.getText());
+                c.depositar(num, monto);
+                dispose();
+               
+            } else {
+                JOptionPane.showMessageDialog(this, "Monto vacio");
+            }
+        } catch (SQLException e) {
+            if (e.getMessage().contains("El monto del depósito debe ser mínimo $1 y máximo $10,000.")) {
+                JOptionPane.showMessageDialog(null, "El monto del depósito debe ser mínimo $1 y máximo $10,000.", "Error de depósito", JOptionPane.ERROR_MESSAGE);
+            } else if (e.getMessage().contains("Los depósitos mayores a $1 deben ser de $100 en $100.")) {
+                JOptionPane.showMessageDialog(null, "Los depósitos mayores a $1 deben ser de $100 en $100.", "Error de depósito", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Ocurrió un error al realizar la transferencia o el depósito.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
         }
     }//GEN-LAST:event_depositarButtonActionPerformed
 
     /**
-     * @param args the command line arguments
-     */
-    
-
+         * @param args the command line arguments
+         */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton depositarButton;
     private javax.swing.JLabel jLabel1;
