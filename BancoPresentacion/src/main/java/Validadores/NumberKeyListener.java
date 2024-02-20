@@ -8,11 +8,20 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 /**
- *
- * @author pc
+ * Clase NumberKeyListener que implementa KeyListener para restringir la entrada
+ * en un componente de texto (JTextField) a caracteres numéricos, la tecla de
+ * retroceso (BACK_SPACE) y la tecla de suprimir (DELETE).
  */
-public class NumberKeyListener implements KeyListener{
+public class NumberKeyListener implements KeyListener {
 
+    /**
+     * Se llama cuando se ha detectado un carácter en el componente de texto.
+     * Verifica si el carácter es un dígito o si es una tecla permitida como
+     * retroceso o suprimir. Si no es así, consume el evento, evitando que el
+     * carácter no deseado se muestre en el componente de texto.
+     *
+     * @param e Evento KeyEvent generado al presionar una tecla.
+     */
     @Override
     public void keyTyped(KeyEvent e) {
         char c = e.getKeyChar();
@@ -21,10 +30,22 @@ public class NumberKeyListener implements KeyListener{
         }
     }
 
+    /**
+     * Se llama cuando una tecla ha sido presionada.
+     *
+     * @param e Evento KeyEvent generado al presionar una tecla.
+     */
     @Override
-    public void keyPressed(KeyEvent e) {}
+    public void keyPressed(KeyEvent e) {
+    }
 
+    /**
+     * Se llama cuando una tecla ha sido liberada.
+     *
+     * @param e Evento KeyEvent generado al liberar una tecla.
+     */
     @Override
-    public void keyReleased(KeyEvent e) {}
-    
+    public void keyReleased(KeyEvent e) {
+    }
+
 }

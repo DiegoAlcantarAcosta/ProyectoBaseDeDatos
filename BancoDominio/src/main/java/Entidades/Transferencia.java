@@ -4,54 +4,105 @@
  */
 package Entidades;
 
-import java.util.Objects;
-
 /**
- *
+ * La clase Transferencia extiende la clase Operaciones y representa una transferencia de fondos entre dos cuentas.
+ * Contiene información adicional como identificador de transferencia y cuenta de destino.
+ * Hereda atributos y métodos de la clase Operaciones.
+ * 
  * @author pc
  */
 public class Transferencia extends Operaciones{
     private int idTransferencia;
     private int cuentaDestino;
     
-    // Constructor con llave primaria
+    /**
+     * Constructor que crea un nuevo objeto Transferencia con todos los atributos.
+     *
+     * @param idTransferencia Identificador único de la transferencia.
+     * @param idCuenta        Identificador único de la cuenta de origen.
+     * @param idCuentaDestino Identificador único de la cuenta de destino.
+     * @param tipo            Tipo de la operación.
+     * @param fecha           Fecha de la operación en formato de cadena.
+     * @param monto           Monto de la operación.
+     */
     public Transferencia(int idTransferencia,int idCuenta, int idCuentaDestino, String tipo, String fecha, float monto) {
         super(idCuenta,tipo, fecha, monto);
         this.idTransferencia = idTransferencia;
         this.cuentaDestino = idCuentaDestino;
     }
 
-    // Constructor con datos y sin llave primaria
+
+    /**
+     * Constructor que crea un nuevo objeto Transferencia sin el identificador único de la transferencia.
+     *
+     * @param idCuenta        Identificador único de la cuenta de origen.
+     * @param idCuentaDestino Identificador único de la cuenta de destino.
+     * @param tipo            Tipo de la operación.
+     * @param fecha           Fecha de la operación en formato de cadena.
+     * @param monto           Monto de la operación.
+     */
     public Transferencia(int idCuenta, int idCuentaDestino, String tipo, String fecha, float monto) {
         super(idCuenta,tipo, fecha, monto);
         this.cuentaDestino = idCuentaDestino;
     }
     
+    /**
+     * Constructor que crea un nuevo objeto Transferencia con solo identificador de cuentas y monto.
+     *
+     * @param idCuenta        Identificador único de la cuenta de origen.
+     * @param idCuentaDestino Identificador único de la cuenta de destino.
+     * @param monto           Monto de la operación.
+     */
     public Transferencia(int idCuenta, int idCuentaDestino, float monto){
         
     }
 
-    // Constructor sin datos ni llave primaria
+    /**
+     * Constructor por defecto que crea un nuevo objeto Transferencia sin atributos inicializados.
+     */
     public Transferencia() {
         super();
     }
 
+    /**
+     * Obtiene el identificador único de la transferencia.
+     *
+     * @return El identificador único de la transferencia.
+     */
     public int getIdTransferencia() {
         return idTransferencia;
     }
 
+    /**
+     * Establece el identificador único de la transferencia.
+     *
+     * @param idTransferencia El identificador único de la transferencia.
+     */
     public void setIdTransferencia(int idTransferencia) {
         this.idTransferencia = idTransferencia;
     }
 
+    /**
+     * Obtiene el identificador de la cuenta de destino.
+     *
+     * @return El identificador de la cuenta de destino.
+     */
     public int getCuentaDestino() {
         return cuentaDestino;
     }
 
+    /**
+     * Establece el identificador de la cuenta de destino.
+     *
+     * @param cuentaDestino El identificador de la cuenta de destino.
+     */
     public void setCuentaDestino(int cuentaDestino) {
         this.cuentaDestino = cuentaDestino;
     }
 
+    /**
+     * No se documenta el método hashCode() ya que hereda de la clase Operaciones.
+     */
     @Override
     public int hashCode() {
         int hash = 5;
@@ -60,6 +111,9 @@ public class Transferencia extends Operaciones{
         return hash;
     }
 
+    /**
+     * No se documenta el método equals() ya que hereda de la clase Operaciones.
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -78,19 +132,13 @@ public class Transferencia extends Operaciones{
         return this.cuentaDestino == other.cuentaDestino;
     }
 
+    /**
+     * Retorna una representación de cadena del objeto Transferencia.
+     *
+     * @return Una cadena que representa la Transferencia, incluyendo sus atributos.
+     */
     @Override
     public String toString() {
         return "Transferencia{" + "idTransferencia=" + idTransferencia + ", cuentaDestino=" + cuentaDestino + '}';
     }
-
-   
-
-    
-
-    
-    
-    
-    
-    
-    
 }

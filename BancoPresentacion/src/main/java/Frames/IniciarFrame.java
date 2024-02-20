@@ -11,7 +11,8 @@ import Frames.sinCuenta.RetirarFrame;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Ventana para hacer un deposito
+ * Permite ingresar usuario y contraseña para el inicio de sesion
  * @author lv1821
  */
 public class IniciarFrame extends javax.swing.JFrame {
@@ -189,18 +190,30 @@ public class IniciarFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_usuarioTextField1ActionPerformed
 
+    /**
+     * Boton para registrar un cliente
+     * @param evt  evento
+     */
     private void registrarseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarseButtonActionPerformed
         RegistrarFrame i = new RegistrarFrame();
         i.show();
         dispose();
     }//GEN-LAST:event_registrarseButtonActionPerformed
 
+    /**
+     * Boton para hacer un cobro sin tarjeta
+     * @param evt  evento
+     */
     private void cobrarSinTarjetaButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cobrarSinTarjetaButton1ActionPerformed
         RetirarFrame i = new RetirarFrame();
         i.show();
        
     }//GEN-LAST:event_cobrarSinTarjetaButton1ActionPerformed
 
+    /**
+     * Boton para iniciar sesion
+     * @param evt  evento
+     */
     private void iniciarSesionButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarSesionButton1ActionPerformed
         if (! (usuarioTextField1.getText().equalsIgnoreCase("") || contraseñaTextField.getText().equalsIgnoreCase(""))) {
         int idUsuario = c.idUsuario(e.encriptador(contraseñaTextField.getText()), usuarioTextField1.getText());
@@ -217,15 +230,13 @@ public class IniciarFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_iniciarSesionButton1ActionPerformed
 
+    /**
+     * Boton para salir a la ventana anterior
+     * @param evt  evento
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cobrarSinTarjetaButton1;
     private javax.swing.JTextField contraseñaTextField;

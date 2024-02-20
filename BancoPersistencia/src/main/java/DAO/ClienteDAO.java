@@ -6,7 +6,6 @@ package DAO;
 
 import Conexion.IConexion;
 import DTO.ClienteDTO;
-import DTO.CuentaDTO;
 import Entidades.Cliente;
 import Entidades.Cuenta;
 import java.sql.CallableStatement;
@@ -21,7 +20,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Implementación de la interfaz IClienteDAO que proporciona operaciones de acceso
+ * a datos relacionadas con la entidad Cliente en la base de datos.
+ * 
  * @author lv1821
  */
 public class ClienteDAO implements IClienteDAO {
@@ -29,13 +30,27 @@ public class ClienteDAO implements IClienteDAO {
     IConexion conexionBD;
     private static final Logger LOG = Logger.getLogger(ClienteDAO.class.getName());
 
+    /**
+     * Constructor que acepta una instancia de IConexion para establecer la conexión a la base de datos.
+     * 
+     * @param conexionBD Instancia de IConexion para la conexión a la base de datos.
+     */
     public ClienteDAO(IConexion conexionBD) {
         this.conexionBD = conexionBD;
     }
 
+    /**
+     * Constructor predeterminado.
+     */
     public ClienteDAO() {
     }
 
+    /**
+     * Obtiene la información detallada de un cliente basado en su identificador único.
+     * 
+     * @param idCliente Identificador único del cliente.
+     * @return {@code ClienteDTO} que representa la información del cliente o {@code null} si no se encuentra.
+     */
     @Override
     public ClienteDTO obtenerCliente(int idCliente) {
         String sentencia = "SELECT * FROM CLIENTES WHERE idCliente = ?";
@@ -61,6 +76,13 @@ public class ClienteDAO implements IClienteDAO {
         return null;
     }
 
+    /**
+     * Actualiza la información de un cliente en la base de datos.
+     * 
+     * @param cliente Objeto {@code ClienteDTO} que contiene la nueva información del cliente.
+     * @param idCliente Identificador único del cliente que se va a actualizar.
+     * @return {@code true} si la actualización fue exitosa, {@code false} en caso contrario.
+     */
     @Override
     public boolean actualizarCliente(ClienteDTO cliente, int idCliente) {
         String sentenciaSQL = "UPDATE Clientes SET nombre = ?, apellidoPaterno = ?, apellidoMaterno = ?, fechaNacimiento = ? WHERE idCliente = ?";
@@ -88,6 +110,12 @@ public class ClienteDAO implements IClienteDAO {
         }
     }
 
+    /**
+     * Registra un nuevo cliente en la base de datos.
+     * 
+     * @param cliente Objeto {@code Cliente} que contiene la información del nuevo cliente.
+     * @return {@code true} si el registro fue exitoso, {@code false} en caso contrario.
+     */
     @Override
     public boolean registrarCliente(Cliente cliente) {
         String sentenciaSQL = "INSERT INTO CLIENTES (nombre,apellidoPaterno,apellidoMaterno,fechaNacimiento) VALUES (?,?,?,?)";
@@ -121,6 +149,12 @@ public class ClienteDAO implements IClienteDAO {
         }
     }
 
+    /**
+     * Obtiene la lista de cuentas asociadas a un cliente basado en su identificador único.
+     * 
+     * @param idCliente Identificador único del cliente.
+     * @return Lista de objetos {@code Cuenta} asociadas al cliente.
+     */
     @Override
     public List<Cuenta> obtenerCuentasCliente(int idCliente) {
         String sentencia = "SELECT * FROM CUENTAS WHERE idCliente = ? and estado = 'ACTIVO'";
@@ -150,6 +184,14 @@ public class ClienteDAO implements IClienteDAO {
             return lista;
         }
     }
+    
+    /**
+     * Obtiene el ID de un cliente basado en su nombre y apellido paterno.
+     * 
+     * @param nombre Nombre del cliente.
+     * @param Paterno Apellido paterno del cliente.
+     * @return El ID del cliente o -1 si no se encuentra.
+     */
     public int idCliente(String nombre, String Paterno){
         int idCliente = -1;
         String sentenciaSQL = "SELECT idCliente FROM CLIENTES WHERE nombre = ? and apellidoPaterno = ?";
@@ -170,6 +212,12 @@ public class ClienteDAO implements IClienteDAO {
         return idCliente;
     }
 
+    /**
+     * Obtiene el ID de un cliente basado en su ID de usuario.
+     * 
+     * @param idUsuario ID único del usuario asociado al cliente.
+     * @return El ID del cliente o -1 si no se encuentra.
+     */
     @Override
     public int idClienteUsuario(int idUsuario) {
         int idCliente = -1;
@@ -191,6 +239,12 @@ public class ClienteDAO implements IClienteDAO {
         return idCliente;
     }
 
+    /**
+     * Obtiene el ID de la dirección asociada a un cliente basado en su identificador único.
+     * 
+     * @param idCliente Identificador único del cliente.
+     * @return El ID de la dirección asociada al cliente o -1 si no se encuentra.
+     */
     @Override
     public int idClienteDireccion(int idCliente) {
         int x = -1;

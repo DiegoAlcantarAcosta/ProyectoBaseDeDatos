@@ -7,8 +7,9 @@ package Frames.sinCuenta;
 import Controlador.Controlador;
 
 /**
- *
- * @author Diego
+ * Ventana para hacer mostrar datos para el retiro sin cuenta
+ * 
+ * @author lv1821
  */
 public class infoSinCuentaFrame extends javax.swing.JFrame {
 Controlador c = new Controlador();
@@ -124,13 +125,13 @@ int folio;
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Boton para salir a la ventana anterior
+     * @param evt  evento
+     */
     private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarButtonActionPerformed
         dispose();
     }//GEN-LAST:event_aceptarButtonActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aceptarButton;

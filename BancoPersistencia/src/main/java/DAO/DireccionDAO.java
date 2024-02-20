@@ -5,7 +5,6 @@
 package DAO;
 
 import Conexion.IConexion;
-import DTO.CuentaDTO;
 import DTO.DireccionDTO;
 import Entidades.Direccion;
 import java.sql.Connection;
@@ -13,13 +12,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Implementación de la interfaz IDireccionDAO que proporciona operaciones de acceso
+ * a datos relacionadas con la entidad Direccion en la base de datos.
+ * 
  * @author lv1821
  */
 public class DireccionDAO implements IDireccionDAO {
@@ -27,10 +26,21 @@ public class DireccionDAO implements IDireccionDAO {
     IConexion conexionBD;
     private static final Logger LOG = Logger.getLogger(ClienteDAO.class.getName());
 
+    /**
+     * Constructor que acepta una instancia de IConexion para establecer la conexión a la base de datos.
+     * 
+     * @param conexionBD Instancia de IConexion para la conexión a la base de datos.
+     */
     public DireccionDAO(IConexion conexionBD) {
         this.conexionBD = conexionBD;
     }
 
+    /**
+     * Obtiene los detalles de una dirección basándose en el ID de la dirección.
+     * 
+     * @param idDireccion ID de la dirección.
+     * @return DTO con los detalles de la dirección o null si no se encuentra.
+     */
     @Override
     public DireccionDTO obtenerDireccion(int idDireccion) {
         String sentencia = "SELECT * FROM DIRECCIONES WHERE idDireccion = ?";
@@ -55,6 +65,13 @@ public class DireccionDAO implements IDireccionDAO {
         return null;
     }
 
+    /**
+     * Actualiza los detalles de una dirección basándose en el ID de la dirección.
+     * 
+     * @param direccion DTO con los nuevos detalles de la dirección.
+     * @param idDireccion ID de la dirección a actualizar.
+     * @return true si la actualización fue exitosa, false en caso contrario.
+     */
     @Override
     public boolean actualizarDireccion(DireccionDTO direccion, int idDireccion) {
         String sentenciaSQL = "UPDATE DIRECCIONES SET calle = ?, colonia = ?, numero = ?, codigoPostal = ? WHERE idDireccion = ?";
@@ -82,6 +99,12 @@ public class DireccionDAO implements IDireccionDAO {
         }
     }
 
+    /**
+     * Registra una nueva dirección en la base de datos.
+     * 
+     * @param direccion Instancia de la entidad Direccion a registrar.
+     * @return true si el registro fue exitoso, false en caso contrario.
+     */
     @Override
     public boolean registrarDireccion(Direccion direccion) {
         String sentenciaSQL = "INSERT INTO DIRECCIONES (calle,colonia,numero, codigoPostal) VALUES (?,?,?,?)";
@@ -109,6 +132,14 @@ public class DireccionDAO implements IDireccionDAO {
         }
     }
 
+    /**
+     * Obtiene el ID de una dirección basándose en la calle, colonia y número.
+     * 
+     * @param calle Nombre de la calle.
+     * @param colonia Nombre de la colonia.
+     * @param numero Número de la dirección.
+     * @return El ID de la dirección o -1 si no se encuentra.
+     */
     @Override
     public int idDireccion(String calle, String colonia, String numero) {
         int idCliente = -1;

@@ -10,20 +10,17 @@ import DTO.ClienteDTO;
 import DTO.DireccionDTO;
 import DTO.UsuariosDTO;
 import Encriptador.Encriptador;
-import Entidades.Cliente;
-import Entidades.Cuenta;
 import Excepciones.PersistenciaExcepcion;
-import Frames.registrarseFrames.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Ventana para hacer ingresar todos los datos para el nuevo cliente
+ * 
  * @author lv1821
  */
 public class TusDatosFrame extends javax.swing.JFrame {
@@ -409,6 +406,10 @@ public class TusDatosFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_codigoPostalTextFieldActionPerformed
 
+    /**
+     * Boton para actualizar los datos
+     * @param evt  evento
+     */
     private void actualizarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarButtonActionPerformed
         if (!(usuarioTextField.getText().equalsIgnoreCase("") || nombreTextField.getText().equalsIgnoreCase("") || apellidoPaternoTextField.getText().equalsIgnoreCase("") || apellidoMaternoTextField.getText().equalsIgnoreCase("") || contraseñaTextField.getText().equalsIgnoreCase("") || calleTextField.getText().equalsIgnoreCase("") || coloniaTextField.getText().equalsIgnoreCase("") || numeroTextField.getText().equalsIgnoreCase("") || codigoPostalTextField.getText().equalsIgnoreCase("")|| fechaNacimientoDateChooser.getDate() == null)) {
         SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
@@ -430,6 +431,10 @@ public class TusDatosFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_actualizarButtonActionPerformed
 
+    /**
+     * Boton para salir a la ventana anterior
+     * @param evt  evento
+     */
     private void salirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirButtonActionPerformed
         dispose();
         
@@ -439,6 +444,10 @@ public class TusDatosFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_numeroCuentaTextFieldActionPerformed
 
+    /**
+     * Boton para verificar credenciales
+     * @param evt  evento
+     */
     private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarButtonActionPerformed
         if (!(usuarioTextField.getText().equalsIgnoreCase("") || contraseñaTextField.getText().equalsIgnoreCase(""))) {
         idCliente = c.idClienteUsuario(c.idUsuario(e.encriptador(contraseñaTextField.getText()), usuarioTextField.getText()));
@@ -482,11 +491,6 @@ public class TusDatosFrame extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_aceptarButtonActionPerformed
-
-
-    /**
-     * @param args the command line arguments
-     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aceptarButton;

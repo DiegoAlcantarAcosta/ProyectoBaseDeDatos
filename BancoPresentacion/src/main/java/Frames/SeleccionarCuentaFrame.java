@@ -6,8 +6,6 @@ package Frames;
 
 import Controlador.Controlador;
 import Controlador.IControlador;
-import DAO.ClienteDAO;
-import DTO.CuentaDTO;
 import Entidades.Cuenta;
 import java.util.List;
 import java.util.logging.Level;
@@ -16,6 +14,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 /**
+ * Ventana para hacer seleccionar una cuenta
  *
  * @author lv1821
  */
@@ -150,10 +149,18 @@ public class SeleccionarCuentaFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Boton para salir a la ventana anterior
+     *
+     * @param evt evento
+     */
     private void salirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirButtonActionPerformed
         dispose();
     }//GEN-LAST:event_salirButtonActionPerformed
 
+    /**
+     * Metodo para rellenar los espacios en al tabla
+     */
     public void añadirAlComboBox() {
         try {
             List<Cuenta> cuenta = c.obtenerCuentasCliente(idUsuario);
@@ -170,6 +177,10 @@ public class SeleccionarCuentaFrame extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Boton para seleccionar una cuenta
+     * @param evt  evento
+     */
     private void seleccionarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seleccionarButtonActionPerformed
         int numCuenta = (int) cuentassComboBoxModel.getSelectedItem();
         if (numCuenta != 0) {
@@ -184,10 +195,6 @@ public class SeleccionarCuentaFrame extends javax.swing.JFrame {
     private void cuentassComboBoxModelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cuentassComboBoxModelActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cuentassComboBoxModelActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cuentassComboBoxModel;

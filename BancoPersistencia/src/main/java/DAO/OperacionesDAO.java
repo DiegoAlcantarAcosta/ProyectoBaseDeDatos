@@ -5,13 +5,10 @@
 package DAO;
 
 import Conexion.IConexion;
-import DTO.CuentaDTO;
-import DTO.OperacionesDTO;
 import Entidades.Operaciones;
 import Entidades.SinCuenta;
 import Entidades.Transferencia;
 import java.sql.Connection;
-import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,7 +19,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Clase que implementa la interfaz IOperacionesDAO y define las operaciones
+ * de acceso a datos relacionadas con las operaciones realizadas en el sistema.
+ * Proporciona métodos para agregar operaciones, obtener el identificador de una
+ * operación por fecha, obtener historiales de transferencias y sin cuenta, y
+ * obtener listas de todas las transferencias y sin cuentas.
+ * 
  * @author lv1821
  */
 public class OperacionesDAO implements IOperacionesDAO {
@@ -30,10 +32,21 @@ public class OperacionesDAO implements IOperacionesDAO {
     IConexion conexionBD;
     private static final Logger LOG = Logger.getLogger(ClienteDAO.class.getName());
 
+    /**
+     * Constructor que recibe una instancia de IConexion para establecer la conexión
+     * con la base de datos.
+     * 
+     * @param conexionBD Instancia de IConexion para la conexión con la base de datos.
+     */
     public OperacionesDAO(IConexion conexionBD) {
         this.conexionBD = conexionBD;
     }
 
+    /**
+     * Agrega una operación a la base de datos.
+     * 
+     * @param op Objeto de tipo Operaciones que contiene la información de la operación.
+     */
     public void agregarOperacion(Operaciones op) {
         String sentenciaSQL = "INSERT INTO Operaciones (idCuenta_origen,tipo,fecha,monto) VALUES (?,?,?,?)";
 
@@ -56,6 +69,12 @@ public class OperacionesDAO implements IOperacionesDAO {
 
     }
 
+    /**
+     * Obtiene el identificador único de una operación dado su fecha.
+     * 
+     * @param Fecha Fecha de la operación.
+     * @return Identificador único de la operación si se encuentra, -1 en caso contrario.
+     */
     public int idOperacion(String Fecha) {
 
         int idCliente = -1;
@@ -77,6 +96,13 @@ public class OperacionesDAO implements IOperacionesDAO {
         return idCliente;
     }
 
+    /**
+     * Obtiene el historial de transferencias realizadas entre las fechas especificadas.
+     * 
+     * @param desde Fecha de inicio del rango.
+     * @param hasta Fecha de fin del rango.
+     * @return Lista de objetos Transferencia que representan el historial de transferencias.
+     */
     @Override
     public List<Transferencia> obtenerHistorialTransferencia(String desde, String hasta) {
         String sentencia;
@@ -111,6 +137,13 @@ public class OperacionesDAO implements IOperacionesDAO {
         }
     }
 
+    /**
+     * Obtiene el historial de operaciones sin cuenta realizadas entre las fechas especificadas.
+     * 
+     * @param desde Fecha de inicio del rango.
+     * @param hasta Fecha de fin del rango.
+     * @return Lista de objetos SinCuenta que representan el historial de operaciones sin cuenta.
+     */
     @Override
     public List<SinCuenta> obtenerHistorialSinCuenta(String desde, String hasta) {
         String sentencia;
@@ -146,6 +179,11 @@ public class OperacionesDAO implements IOperacionesDAO {
         }
     }
 
+    /**
+     * Obtiene todas las transferencias registradas en el sistema.
+     * 
+     * @return Lista de objetos Transferencia que representan todas las transferencias.
+     */
     @Override
     public List<Transferencia> obtenerTodasTransferencia() {
         String sentencia;
@@ -177,6 +215,11 @@ public class OperacionesDAO implements IOperacionesDAO {
         }
     }
 
+    /**
+     * Obtiene todas las operaciones sin cuenta registradas en el sistema.
+     * 
+     * @return Lista de objetos SinCuenta que representan todas las operaciones sin cuenta.
+     */
     @Override
     public List<SinCuenta> obtenerTodaSInCuenta() {
         String sentencia;

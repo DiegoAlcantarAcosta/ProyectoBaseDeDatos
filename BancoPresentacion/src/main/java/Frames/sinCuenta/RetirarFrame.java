@@ -15,7 +15,8 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
 
 /**
- *
+ * Ventana para hacer un retiro sin cuenta
+ * 
  * @author lv1821
  */
 public class RetirarFrame extends javax.swing.JFrame {
@@ -215,6 +216,10 @@ public class RetirarFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_contraseñaPasswordFieldActionPerformed
 
+    /**
+     * Boton para cobrar una transaccion sin cuenta
+     * @param evt  evento
+     */
     private void cobrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cobrarButtonActionPerformed
         try {
             if (!(folioTextField1.getText().equalsIgnoreCase("") || contraseñaPasswordField.getText().equalsIgnoreCase(""))) {
@@ -241,13 +246,13 @@ public class RetirarFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_cobrarButtonActionPerformed
 
+    /**
+     * Boton para salir a la ventana anterior
+     * @param evt  evento
+     */
     private void cobrarButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cobrarButton1ActionPerformed
         dispose();
     }//GEN-LAST:event_cobrarButton1ActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cobrarButton;

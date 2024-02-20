@@ -6,10 +6,6 @@ package Frames.registrarseFrames;
 
 import Controlador.Controlador;
 import Controlador.IControlador;
-import DTO.ClienteDTO;
-import DTO.CuentaDTO;
-import DTO.DireccionDTO;
-import DTO.UsuariosDTO;
 import Encriptador.Encriptador;
 import Entidades.Cliente;
 import Entidades.Cuenta;
@@ -17,16 +13,15 @@ import Entidades.Direccion;
 import Entidades.Usuario;
 import Excepciones.PersistenciaExcepcion;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Ventana para hacer registrar un cliente
+ * 
  * @author lv1821
  */
 public class RegistrarFrame extends javax.swing.JFrame {
@@ -335,6 +330,10 @@ public class RegistrarFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_codigoPostalTextFieldActionPerformed
 
+    /**
+     * Boton para registrar al nuevo cliente
+     * @param evt  evento
+     */
     private void registrarseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarseButtonActionPerformed
        if (!(usuarioTextField.getText().equalsIgnoreCase("") || nombreTextField.getText().equalsIgnoreCase("") || apellidoPaternoTextField.getText().equalsIgnoreCase("") || apellidoMaternoTextField.getText().equalsIgnoreCase("") || contraseñaTextField.getText().equalsIgnoreCase("") || calleTextField.getText().equalsIgnoreCase("") || coloniaTextField.getText().equalsIgnoreCase("") || numeroTextField.getText().equalsIgnoreCase("") || codigoPostalTextField.getText().equalsIgnoreCase("")|| fechaNacimientoDateChooser.getDate() == null)) {
 
@@ -370,10 +369,6 @@ public class RegistrarFrame extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_registrarseButtonActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField apellidoMaternoTextField;

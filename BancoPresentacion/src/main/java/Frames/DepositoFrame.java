@@ -8,8 +8,6 @@ import Controlador.Controlador;
 import Controlador.IControlador;
 import Validadores.NumberDocumentFilter;
 import Validadores.NumberInputVerifier;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -20,7 +18,8 @@ import javax.swing.text.DocumentFilter;
 import javax.swing.text.DocumentFilter.FilterBypass;
 
 /**
- *
+ * Ventana para hacer un deposito
+ * Permite ingresar monto para el deposito
  * @author lv1821
  */
 public class DepositoFrame extends javax.swing.JFrame {
@@ -171,10 +170,18 @@ public class DepositoFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_montoTextFieldActionPerformed
 
+    /**
+     * Boton para salir a la ventana anterior
+     * @param evt  evento
+     */
     private void salirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirButtonActionPerformed
         dispose();
     }//GEN-LAST:event_salirButtonActionPerformed
 
+    /**
+     * Boton para depositar
+     * @param evt  evento
+     */
     private void depositarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depositarButtonActionPerformed
         try {
             montoTextField.setInputVerifier(new NumberInputVerifier());
@@ -199,9 +206,6 @@ public class DepositoFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_depositarButtonActionPerformed
 
-    /**
-         * @param args the command line arguments
-         */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton depositarButton;
     private javax.swing.JLabel jLabel1;

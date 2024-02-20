@@ -7,8 +7,9 @@ package Frames.registrarseFrames;
 import Frames.IniciarFrame;
 
 /**
- *
- * @author Diego
+ * Ventana para hacer que se muestre el numero de tarjeta y contraseña del cliente
+ * 
+ * @author lv1821
  */
 public class registradoFrame extends javax.swing.JFrame {
 
@@ -131,6 +132,10 @@ public class registradoFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Boton para ir a iniciar sesion
+     * @param evt  evento
+     */
     private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarButtonActionPerformed
 
         dispose();
@@ -141,10 +146,6 @@ public class registradoFrame extends javax.swing.JFrame {
     private void numCuentaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numCuentaTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_numCuentaTextFieldActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aceptarButton;

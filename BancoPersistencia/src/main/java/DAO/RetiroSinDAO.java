@@ -6,7 +6,6 @@ package DAO;
 
 import Conexion.IConexion;
 import DTO.RetiroSinDTO;
-import Entidades.SinCuenta;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,7 +17,13 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Clase que implementa la interfaz IRetiroSinDAO y define las operaciones
+ * de acceso a datos relacionadas con los retiros sin cuenta en el sistema.
+ * Proporciona métodos para autenticar el cobro, generar un retiro sin cuenta,
+ * generar una contraseña, actualizar el estado de una cuenta, obtener el último
+ * folio registrado y realizar un evento de programación para verificar retiros
+ * sin cuenta.
+ * 
  * @author pc
  */
 public class RetiroSinDAO implements IRetiroSinDAO {
@@ -26,10 +31,23 @@ public class RetiroSinDAO implements IRetiroSinDAO {
     IConexion conexionBD;
     private static final Logger LOG = Logger.getLogger(ClienteDAO.class.getName());
 
+    /**
+     * Constructor que recibe una instancia de IConexion para establecer la conexión
+     * con la base de datos.
+     * 
+     * @param conexionBD Instancia de IConexion para la conexión con la base de datos.
+     */
     public RetiroSinDAO(IConexion conexionBD) {
         this.conexionBD = conexionBD;
     }
 
+    /**
+     * Autentica el cobro de un retiro sin cuenta.
+     * 
+     * @param folio Folio del retiro sin cuenta.
+     * @param contraseña Contraseña asociada al retiro sin cuenta.
+     * @return True si la autenticación es exitosa, False en caso contrario.
+     */
     @Override
     public boolean autenticarCobro(int folio, int contraseña) {
         String sentencia = "SELECT * FROM sincuentas WHERE folio = ? and contraseña = ?";
@@ -53,6 +71,13 @@ public class RetiroSinDAO implements IRetiroSinDAO {
         return false;
     }
 
+    /**
+     * Genera un retiro sin cuenta y lo registra en la base de datos.
+     * 
+     * @param sin Objeto de tipo RetiroSinDTO que contiene la información del retiro sin cuenta.
+     * @param num Número asociado al retiro sin cuenta.
+     * @return True si el retiro sin cuenta se generó y registró correctamente, False en caso contrario.
+     */
     @Override
     public boolean generarSinCuenta(RetiroSinDTO sin, int num) {
         String sentenciaSQL = "INSERT INTO sincuentas (folio,contraseña,idOperacion) VALUES (?,?,?)";
@@ -76,6 +101,11 @@ public class RetiroSinDAO implements IRetiroSinDAO {
         return true;
     }
 
+    /**
+     * Genera una contraseña aleatoria para un retiro sin cuenta.
+     * 
+     * @return Contraseña generada.
+     */
     @Override
     public int generarContraseña() {
         Random random = new Random();
@@ -83,6 +113,12 @@ public class RetiroSinDAO implements IRetiroSinDAO {
         return numero;
     }
 
+    /**
+     * Actualiza el estado de un retiro sin cuenta en la base de datos.
+     * 
+     * @param numCuenta Número de cuenta asociado al retiro sin cuenta.
+     * @throws SQLException Si ocurre un error durante la actualización.
+     */
     @Override
     public void actualizarEstado(int numCuenta) throws SQLException{
         String sentenciaSQL = "UPDATE sincuentas SET estado = ? WHERE idSinCuentas = ? and estado = ?";
@@ -111,6 +147,11 @@ public class RetiroSinDAO implements IRetiroSinDAO {
         
     }
 
+    /**
+     * Obtiene el último folio registrado en la base de datos para retiros sin cuenta.
+     * 
+     * @return Último folio registrado.
+     */
     public int obtenerFolio() {
         int idCliente = -1;
         String sentenciaSQL = "SELECT MAX(folio) AS folio FROM sincuentas";
@@ -129,6 +170,14 @@ public class RetiroSinDAO implements IRetiroSinDAO {
         }
         return idCliente;
     }
+    
+    /**
+     * Obtiene el ID del retiro sin cuenta asociado a un folio y contraseña específicos.
+     * 
+     * @param folio Folio del retiro sin cuenta.
+     * @param contraseña Contraseña asociada al retiro sin cuenta.
+     * @return ID del retiro sin cuenta.
+     */
     public int idRetiro(int folio, int contraseña){
         int idCliente = -1;
         String sentenciaSQL = "SELECT idSinCuentas FROM sincuentas where folio = ? and contraseña = ?";
@@ -151,6 +200,9 @@ public class RetiroSinDAO implements IRetiroSinDAO {
         return idCliente;
     }
 
+    /**
+     * Realiza un evento de programación para verificar retiros sin cuenta.
+     */
     public void evento() {
         String sentenciaSQL = "CALL programar_verificacion_retiro_sin_cuenta()";
 

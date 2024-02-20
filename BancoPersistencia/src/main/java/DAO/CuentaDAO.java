@@ -6,7 +6,6 @@ package DAO;
 
 import Conexion.IConexion;
 import DTO.CuentaDTO;
-import DTO.DireccionDTO;
 import Entidades.Cuenta;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,7 +16,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Implementación de la interfaz ICuentaDAO que proporciona operaciones de acceso
+ * a datos relacionadas con la entidad Cuenta en la base de datos.
+ * 
  * @author lv1821
  */
 public class CuentaDAO implements ICuentaDAO {
@@ -25,10 +26,21 @@ public class CuentaDAO implements ICuentaDAO {
     IConexion conexionBD;
     private static final Logger LOG = Logger.getLogger(ClienteDAO.class.getName());
 
+    /**
+     * Constructor que acepta una instancia de IConexion para establecer la conexión a la base de datos.
+     * 
+     * @param conexionBD Instancia de IConexion para la conexión a la base de datos.
+     */
     public CuentaDAO(IConexion conexionBD) {
         this.conexionBD = conexionBD;
     }
-    
+
+    /**
+     * Obtiene los detalles de una cuenta basado en el número de cuenta.
+     * 
+     * @param numeroCuenta Número de cuenta.
+     * @return Objeto CuentaDTO que contiene los detalles de la cuenta o null si no se encuentra.
+     */
     @Override
     public CuentaDTO obtenerCuenta(int numeroCuenta) {
         String sentencia = "SELECT * FROM CUENTAS WHERE idCliente = ?";
@@ -52,11 +64,23 @@ public class CuentaDAO implements ICuentaDAO {
         return null;
     }
 
+    /**
+     * Obtiene el número de cuenta asociado a una cuenta.
+     * 
+     * @param cuenta Objeto Cuenta.
+     * @return El número de cuenta o -1 si no se encuentra.
+     */
     @Override
     public int numeroCuenta(Cuenta cuenta) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    
+    /**
+     * Actualiza el estado de una cuenta a 'CANCELADA' basado en el número de cuenta.
+     * 
+     * @param cuenta Número de cuenta.
+     * @return True si la actualización fue exitosa, False si falló.
+     */
     @Override
     public boolean actualizarEstadoCuenta(int cuenta) {
         String sentenciaSQL = "UPDATE CUENTAS SET estado = ? WHERE numCuenta = ?";
@@ -65,7 +89,6 @@ public class CuentaDAO implements ICuentaDAO {
             comandoSQL.setString(1, "CANCELADA");
             comandoSQL.setInt(2, cuenta);
 
-      
             int resultado = comandoSQL.executeUpdate();
 
             LOG.log(Level.INFO, "Se ha actualizado {0}", resultado);
@@ -82,12 +105,19 @@ public class CuentaDAO implements ICuentaDAO {
         }
     }
 
+    /**
+     * Crea una nueva cuenta con la información proporcionada.
+     * 
+     * @param cuenta Objeto Cuenta con la información para la nueva cuenta.
+     * @param num Número de cuenta a asignar.
+     * @return True si la creación fue exitosa, False si falló.
+     */
     @Override
-    public boolean crearCuenta(Cuenta cuenta,int num) {
+    public boolean crearCuenta(Cuenta cuenta, int num) {
         String sentenciaSQL = "INSERT INTO CUENTAS (numCuenta,saldo,fechaApertura,idCliente) VALUES (?,?,?,?)";
-cuenta.setNumCuenta(num);
+        cuenta.setNumCuenta(num);
         try ( Connection conexion = this.conexionBD.crearConexion();  PreparedStatement comandoSQL = conexion.prepareStatement(sentenciaSQL, Statement.RETURN_GENERATED_KEYS);) {
-            
+
             comandoSQL.setInt(1, num);
             comandoSQL.setFloat(2, cuenta.getSaldo());
             comandoSQL.setString(3, cuenta.getFechaApertura());
@@ -100,7 +130,6 @@ cuenta.setNumCuenta(num);
 
             res.next();
 
-            
             return true;
 
         } catch (SQLException e) {
@@ -109,6 +138,14 @@ cuenta.setNumCuenta(num);
         }
     }
 
+    /**
+     * Crea una nueva cuenta asociada a un cliente con la información proporcionada.
+     * 
+     * @param cuenta Objeto Cuenta con la información para la nueva cuenta.
+     * @param id ID del cliente asociado a la nueva cuenta.
+     * @param numCuenta Número de cuenta a asignar.
+     * @return True si la creación fue exitosa, False si falló.
+     */
     @Override
     public boolean crearCuentaNueva(Cuenta cuenta, int id, int numCuenta) {
         String sentenciaSQL = "INSERT INTO CUENTAS (numCuenta,saldo,fechaApertura,idCliente) VALUES (?,?,?,?)";
@@ -126,7 +163,6 @@ cuenta.setNumCuenta(num);
 
             res.next();
 
-            
             return true;
 
         } catch (SQLException e) {
@@ -135,51 +171,63 @@ cuenta.setNumCuenta(num);
         }
     }
 
+    /**
+     * Suma un monto específico al saldo de una cuenta.
+     * 
+     * @param cuenta Número de cuenta.
+     * @param monto Monto a sumar.
+     */
     @Override
     public void sumarMonto(int cuenta, float monto) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    /**
+     * Obtiene el ID de una cuenta basándose en la fecha de apertura.
+     * 
+     * @param Fecha Fecha de apertura de la cuenta.
+     * @return El ID de la cuenta o -1 si no se encuentra.
+     */
     @Override
     public int idCuenta(String Fecha) {
         int idCliente = -1;
         String sentenciaSQL = "SELECT idCuenta FROM Cuentas WHERE fechaApertura = ?";
         try ( Connection conexion = this.conexionBD.crearConexion();  PreparedStatement comandoSQL = conexion.prepareStatement(sentenciaSQL, Statement.RETURN_GENERATED_KEYS);) {
             comandoSQL.setString(1, Fecha);
-            try (ResultSet resultado = comandoSQL.executeQuery()) {
+            try ( ResultSet resultado = comandoSQL.executeQuery()) {
                 // Si se encontró el cliente, obtener su ID
                 if (resultado.next()) {
                     idCliente = resultado.getInt("numCuenta");
                 }
             }
-            
-        }catch(SQLException e) {
+
+        } catch (SQLException e) {
             LOG.log(Level.SEVERE, "No se pudo crear la cuenta", e);
-            
+
         }
         return idCliente;
     }
-    
+
+    /**
+     * Obtiene el ID de una cuenta basándose en el número de cuenta.
+     * 
+     * @param numCuenta Número de cuenta.
+     * @return El ID de la cuenta o -1 si no se encuentra.
+     */
     public int idCuenta(int numCuenta) {
         int idCliente = -1;
         String sentenciaSQL = "SELECT idCuenta FROM Cuentas WHERE numCuenta = ?";
         try ( Connection conexion = this.conexionBD.crearConexion();  PreparedStatement comandoSQL = conexion.prepareStatement(sentenciaSQL, Statement.RETURN_GENERATED_KEYS);) {
             comandoSQL.setInt(1, numCuenta);
-            try (ResultSet resultado = comandoSQL.executeQuery()) {
+            try ( ResultSet resultado = comandoSQL.executeQuery()) {
                 // Si se encontró el cliente, obtener su ID
                 if (resultado.next()) {
                     idCliente = resultado.getInt("idCuenta");
                 }
             }
-            
-        }catch(SQLException e) {
+        } catch (SQLException e) {
             LOG.log(Level.SEVERE, "No se pudo crear la cuenta", e);
-            
         }
         return idCliente;
     }
-    
-        
-    }
-    
-
+}

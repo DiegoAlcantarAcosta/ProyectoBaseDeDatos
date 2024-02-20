@@ -8,16 +8,24 @@ import Controlador.Controlador;
 import javax.swing.JOptionPane;
 
 /**
+ * Clase que representa la interfaz gráfica para cancelar una cuenta. Permite al
+ * usuario ingresar su contraseña y, si coincide con la contraseña de la cuenta,
+ * se procede a cancelar la cuenta llamando al método correspondiente del
+ * controlador.
  *
  * @author lv1821
  */
-    public class CancelarCuentaFrame extends javax.swing.JFrame {
+public class CancelarCuentaFrame extends javax.swing.JFrame {
 
-        Controlador c = new Controlador();
-        int num;
-        String contra;
+    Controlador c = new Controlador();
+    int num;
+    String contra;
+
     /**
-     * Creates new form IniciarFrame
+     * Constructor que recibe el número de cuenta y la contraseña asociada.
+     * 
+     * @param numCuenta Número de cuenta.
+     * @param contraseña Contraseña asociada a la cuenta.
      */
     public CancelarCuentaFrame(int numCuenta, String contraseña) {
         this.contra = contraseña;
@@ -139,28 +147,31 @@ import javax.swing.JOptionPane;
         // TODO add your handling code here:
     }//GEN-LAST:event_contraseñaTextFieldActionPerformed
 
+    /**
+     * Boton para salir a la ventana anterior
+     * @param evt  evento
+     */
     private void salirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirButtonActionPerformed
         dispose();
     }//GEN-LAST:event_salirButtonActionPerformed
-
+ 
+    /**
+     * Boton para cancelar cuenta de cliente
+     * @param evt  evento
+     */
     private void cancelarCuentaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarCuentaButtonActionPerformed
         if (!(contraseñaTextField.getText().equalsIgnoreCase(""))) {
-        if(contra.equals(contraseñaTextField.getText())){
-        c.actualizarEstadoCuenta(num);
-            JOptionPane.showMessageDialog(this, "Cuenta cancelada");
-        dispose();
+            if (contra.equals(contraseñaTextField.getText())) {
+                c.actualizarEstadoCuenta(num);
+                JOptionPane.showMessageDialog(this, "Cuenta cancelada");
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Contraseña invalida");
+            }
         } else {
-            JOptionPane.showMessageDialog(this, "Contraseña invalida");
-        }
-        }else{
             JOptionPane.showMessageDialog(this, "Contraseña vacia");
         }
     }//GEN-LAST:event_cancelarCuentaButtonActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelarCuentaButton;

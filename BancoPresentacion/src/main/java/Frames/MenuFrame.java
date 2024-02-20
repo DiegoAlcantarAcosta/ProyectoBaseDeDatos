@@ -7,7 +7,8 @@ package Frames;
 import Frames.sinCuenta.sinCuentaFrame;
 
 /**
- *
+ * Ventana para hacer acceder a todas las funcionalidades del programa
+ * 
  * @author lv1821
  */
 public class MenuFrame extends javax.swing.JFrame {
@@ -178,50 +179,79 @@ public class MenuFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Boton para entrar a hacer una transaccion sin cuenta
+     * @param evt  evento
+     */
     private void sinCuentaItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sinCuentaItemActionPerformed
         sinCuentaFrame i = new sinCuentaFrame(num);
         i.show();
     }//GEN-LAST:event_sinCuentaItemActionPerformed
 
+    /**
+     * Boton para transferir
+     * @param evt  evento
+     */
     private void transferirItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transferirItemActionPerformed
         TransferirFrame i = new TransferirFrame(num);
         i.show();
     }//GEN-LAST:event_transferirItemActionPerformed
 
+    /**
+     * Boton para hacer un deposito
+     * @param evt  evento
+     */
     private void depositoItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depositoItemActionPerformed
         DepositoFrame i = new DepositoFrame(num);
         i.show();
     }//GEN-LAST:event_depositoItemActionPerformed
 
+    /**
+     * Boton para consultar datos del cliente
+     * @param evt  evento
+     */
     private void tusDatosItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tusDatosItemActionPerformed
         TusDatosFrame i = new TusDatosFrame(num);
         i.show();
     }//GEN-LAST:event_tusDatosItemActionPerformed
 
+    /**
+     * Boton para cancelar la cuenta
+     * @param evt  evento
+     */
     private void cancelarCuentaItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarCuentaItemActionPerformed
         CancelarCuentaFrame i = new CancelarCuentaFrame(num, contra);
         i.show();
     }//GEN-LAST:event_cancelarCuentaItemActionPerformed
 
+    /**
+     * Boton para crear una cuenta
+     * @param evt  evento
+     */
     private void crearCuentaItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearCuentaItemActionPerformed
         CrearCuentaFrame i = new CrearCuentaFrame(num, contra);
         i.show();
     }//GEN-LAST:event_crearCuentaItemActionPerformed
 
+    /**
+     * Boton para consultar el historial
+     * 
+     * @param evt  evento
+     */
     private void historialItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_historialItemActionPerformed
         SeleccionarConsultaFrame i = new SeleccionarConsultaFrame();
         i.show();
     }//GEN-LAST:event_historialItemActionPerformed
 
+    /**
+     * Boton para salir a la ventana anterior
+     * @param evt  evento
+     */
     private void salirItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirItemActionPerformed
         IniciarFrame i = new IniciarFrame();
         i.show();
         dispose();
     }//GEN-LAST:event_salirItemActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem cancelarCuentaItem;

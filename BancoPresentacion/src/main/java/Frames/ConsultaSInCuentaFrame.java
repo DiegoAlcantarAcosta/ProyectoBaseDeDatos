@@ -5,14 +5,10 @@
 package Frames;
 
 import Controlador.Controlador;
-import DTO.TransferenciaDTO;
 import Entidades.SinCuenta;
-import Entidades.Transferencia;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAccessor;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -21,7 +17,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
+ * Ventana para consultar el historial de operaciones sin cuenta.
+ * Permite filtrar por fechas y mostrar todos los registros.
  * @author lv1821
  */
 public class ConsultaSInCuentaFrame extends javax.swing.JFrame {
@@ -194,10 +191,18 @@ public class ConsultaSInCuentaFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Boton para salir a la ventana anterior
+     * @param evt  evento
+     */
     private void salirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirButtonActionPerformed
         dispose();
     }//GEN-LAST:event_salirButtonActionPerformed
 
+    /**
+     * Boton para consultar los movimientos sin cuenta por fecha
+     * @param evt  evento
+     */
     private void consultarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarButtonActionPerformed
         if (!(desdeDateChooser.getDate() == null || hastaDateChooser.getDate() == null)) {
             
@@ -248,6 +253,10 @@ public class ConsultaSInCuentaFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_consultarButtonActionPerformed
 
+     /**
+     * Boton para consultar los movimientos sin cuenta
+     * @param evt  evento
+     */
     private void todosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_todosButtonActionPerformed
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("ID");
@@ -274,10 +283,6 @@ public class ConsultaSInCuentaFrame extends javax.swing.JFrame {
             LOG.log(Level.SEVERE, "No se pudo mostrar la tabla");
         }
     }//GEN-LAST:event_todosButtonActionPerformed
-
-        /**
-         * @param args the command line arguments
-         */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton consultarButton;

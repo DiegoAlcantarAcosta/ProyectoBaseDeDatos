@@ -7,7 +7,6 @@ package Frames.sinCuenta;
 import Controlador.Controlador;
 import DTO.RetiroSinDTO;
 import Entidades.Operaciones;
-import Frames.MenuFrame;
 import Validadores.NumberDocumentFilter;
 import Validadores.NumberInputVerifier;
 import java.awt.Toolkit;
@@ -20,8 +19,9 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
 
 /**
- *
- * @author Diego
+ * Ventana para hacer que se genere un retiro sin cuenta
+ * 
+ * @author lv1821
  */
 public class sinCuentaFrame extends javax.swing.JFrame {
 
@@ -154,6 +154,10 @@ public class sinCuentaFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Boton para generar un retiro sin cuenta
+     * @param evt  evento
+     */
     private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarButtonActionPerformed
         montoTextField.setInputVerifier(new NumberInputVerifier());
         ((AbstractDocument) montoTextField.getDocument()).setDocumentFilter(new NumberDocumentFilter());
@@ -176,13 +180,13 @@ public class sinCuentaFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_aceptarButtonActionPerformed
 
+    /**
+     * Boton para salir a la ventana anterior
+     * @param evt  evento
+     */
     private void aceptarButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarButton1ActionPerformed
         dispose();
     }//GEN-LAST:event_aceptarButton1ActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aceptarButton;

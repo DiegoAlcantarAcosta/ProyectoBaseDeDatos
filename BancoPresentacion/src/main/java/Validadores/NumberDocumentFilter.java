@@ -9,11 +9,22 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
 
 /**
+ * Clase para filtrar e ingresar solo números en un documento de texto.
  *
  * @author pc
  */
 public class NumberDocumentFilter extends DocumentFilter {
 
+    /**
+     * Inserta texto en el documento, permitiendo solo caracteres numéricos.
+     *
+     * @param fb el bypass del filtro
+     * @param offset la posición en la que se insertará el texto
+     * @param string el texto a insertar
+     * @param attr los atributos del texto
+     * @throws BadLocationException si ocurre un error al insertar el texto
+     *
+     */
     public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
         StringBuilder sb = new StringBuilder(string);
         for (int i = sb.length() - 1; i >= 0; i--) {
@@ -25,6 +36,16 @@ public class NumberDocumentFilter extends DocumentFilter {
         super.insertString(fb, offset, sb.toString(), attr);
     }
 
+    /**
+     * Reemplaza texto en el documento, permitiendo solo caracteres numéricos.
+     * 
+     * @param fb el bypass del filtro
+     * @param offset la posición en la que se reemplazará el texto
+     * @param length la longitud del texto a reemplazar
+     * @param text el nuevo texto a insertar
+     * @param attrs los atributos del texto
+     * @throws BadLocationException si ocurre un error al reemplazar el texto
+     */
     @Override
     public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
         if (text == null) {

@@ -4,13 +4,9 @@
  */
 package Frames;
 
-import Controlador.Controlador;
-import DTO.TransferenciaDTO;
-import java.text.SimpleDateFormat;
-import java.util.GregorianCalendar;
-
 /**
- *
+ * Ventana para hacer acceder a los dos tipos de consultas
+ * 
  * @author lv1821
  */
 public class SeleccionarConsultaFrame extends javax.swing.JFrame {
@@ -142,23 +138,31 @@ public class SeleccionarConsultaFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+     /**
+     * Boton para salir a la ventana anterior
+     * @param evt  evento
+     */
     private void salirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirButtonActionPerformed
         dispose();
     }//GEN-LAST:event_salirButtonActionPerformed
 
+     /**
+     * Boton para entrar a las consultas de transferencia
+     * @param evt  evento
+     */
     private void transferenciaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transferenciaButtonActionPerformed
         ConsultaTransferenciaFrame i = new ConsultaTransferenciaFrame();
         i.show();
     }//GEN-LAST:event_transferenciaButtonActionPerformed
 
+     /**
+     * Boton para entrar a las consultas sin cuenta
+     * @param evt  evento
+     */
     private void sinCunetaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sinCunetaButtonActionPerformed
         ConsultaSInCuentaFrame i = new ConsultaSInCuentaFrame();
         i.show();
     }//GEN-LAST:event_sinCunetaButtonActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

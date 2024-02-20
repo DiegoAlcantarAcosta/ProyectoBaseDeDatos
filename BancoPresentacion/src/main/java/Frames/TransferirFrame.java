@@ -20,6 +20,8 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
 
 /**
+ * Ventana para hacer acceder a los dos tipos de consultas Permite ingresar
+ * numero de cuenta y monto para hacer la transferencia
  *
  * @author lv1821
  */
@@ -216,31 +218,39 @@ public class TransferirFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_numCuentaTextFieldActionPerformed
 
+    /**
+     * Boton para salir a la ventana anterior
+     *
+     * @param evt evento
+     */
     private void salirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirButtonActionPerformed
         dispose();
     }//GEN-LAST:event_salirButtonActionPerformed
 
+    /**
+     * Boton para transferir a una cuenta
+     *
+     * @param evt evento
+     */
     private void transferirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transferirButtonActionPerformed
-        
-        try{
+
+        try {
             montoTextField.setInputVerifier(new NumberInputVerifier());
-        
-        ((AbstractDocument) montoTextField.getDocument()).setDocumentFilter(new NumberDocumentFilter());
-        if (!(numCuentaTextField.getText().equalsIgnoreCase("") || montoTextField.getText().equalsIgnoreCase(""))) {
-            float numeroFloat = Float.parseFloat(montoTextField.getText());
-            int numeroInt = Integer.parseInt(numCuentaTextField.getText());
-            SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
-            String fechaPerrona = formatoFecha.format(g.getTime());
 
-            TransferenciaDTO t = new TransferenciaDTO(c.idCuenta(idCliente), c.idCuenta(numeroInt), "TRANSFERENCIA", fechaPerrona, numeroFloat);
-            c.realizarTransferencia(t);
-            
-            
+            ((AbstractDocument) montoTextField.getDocument()).setDocumentFilter(new NumberDocumentFilter());
+            if (!(numCuentaTextField.getText().equalsIgnoreCase("") || montoTextField.getText().equalsIgnoreCase(""))) {
+                float numeroFloat = Float.parseFloat(montoTextField.getText());
+                int numeroInt = Integer.parseInt(numCuentaTextField.getText());
+                SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+                String fechaPerrona = formatoFecha.format(g.getTime());
 
-        } else {
-            JOptionPane.showMessageDialog(this, "Algun registro esta vacio");
-        }
-        }catch (SQLException e) {
+                TransferenciaDTO t = new TransferenciaDTO(c.idCuenta(idCliente), c.idCuenta(numeroInt), "TRANSFERENCIA", fechaPerrona, numeroFloat);
+                c.realizarTransferencia(t);
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Algun registro esta vacio");
+            }
+        } catch (SQLException e) {
             if (e.getMessage().contains("El monto del depósito debe ser mínimo $1 y máximo $10,000.")) {
                 JOptionPane.showMessageDialog(null, "El monto del depósito debe ser mínimo $1 y máximo $10,000.", "Error de depósito", JOptionPane.ERROR_MESSAGE);
             } else if (e.getMessage().contains("Los depósitos mayores a $1 deben ser de $100 en $100.")) {
@@ -252,10 +262,6 @@ public class TransferirFrame extends javax.swing.JFrame {
         }
         dispose();
     }//GEN-LAST:event_transferirButtonActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

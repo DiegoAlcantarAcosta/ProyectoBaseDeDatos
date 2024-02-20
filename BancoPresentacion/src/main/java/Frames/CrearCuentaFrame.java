@@ -5,7 +5,6 @@
 package Frames;
 
 import Controlador.Controlador;
-import DTO.CuentaDTO;
 import Encriptador.Encriptador;
 import Entidades.Cuenta;
 import java.text.SimpleDateFormat;
@@ -14,7 +13,8 @@ import java.util.Random;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Ventana para crear una nueva cuenta.
+ * Permite ingresar usuario y contraseña para la creación de la cuenta.
  * @author lv1821
  */
 public class CrearCuentaFrame extends javax.swing.JFrame {
@@ -170,10 +170,18 @@ public class CrearCuentaFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_contraseñaTextFieldActionPerformed
 
+    /**
+     * Boton para salir a la ventana anterior
+     * @param evt  evento
+     */
     private void salirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirButtonActionPerformed
         dispose();
     }//GEN-LAST:event_salirButtonActionPerformed
 
+    /**
+     * Boton para crear una cuenta a un cliente
+     * @param evt  evento
+     */
     private void crearCuentaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearCuentaButtonActionPerformed
         if (!(usuarioTextField1.getText().equalsIgnoreCase("") || contraseñaTextField.getText().equalsIgnoreCase(""))) {
             
@@ -200,10 +208,6 @@ public class CrearCuentaFrame extends javax.swing.JFrame {
     private void usuarioTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuarioTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_usuarioTextField1ActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField contraseñaTextField;
